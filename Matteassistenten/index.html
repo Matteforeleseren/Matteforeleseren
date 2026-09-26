@@ -1,152 +1,304 @@
-
 <!DOCTYPE html>
 <html lang="no">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matteassistenten</title>
+<title>Matteassistenten – Notater, oppgaver og ressurser</title>
 <style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
   :root {
-    --link: #003399;
-    --dark: #1a1a1a;
-    --muted: #555;
-    --border: #ddd;
-    --bg-light: #f7f9fc;
-
-    --c-ent3r:       #1F4E79;
-    --c-ingenior:    #006400;
-    --c-realfag:     #8B0000;
-    --c-laerer:      #4B0082;
-    --c-handout10:   #B8860B;
-    --c-handoutvgs:  #008080;
-    --c-cv:          #800020;
+    --lysegrønn: #6BBF59;
+    --mørkegrønn: #1E5F2E;
+    --tekst: #1a1a1a;
+    --muted: #6b7280;
+    --bg: #fafaf7;
+    --border: #e8e8e3;
   }
-  * { box-sizing: border-box; }
+
+  html, body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-    color: var(--dark);
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
-    background: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--tekst);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
   }
+
+  /* ---------- Meny ---------- */
   header {
-    border-bottom: 2px solid var(--border);
-    padding-bottom: 1.5rem;
-    margin-bottom: 2.5rem;
-    text-align: center;
-  }
-  h1 { font-size: 1.9rem; margin: 0 0 0.4rem; }
-  .subtitle { color: var(--muted); font-size: 1rem; margin: 0; }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.2rem;
-    margin-top: 1rem;
+    position: sticky;
+    top: 0;
+    background: rgba(250, 250, 247, 0.85);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
   }
 
-  .knapp {
-    display: block;
-    padding: 1.4rem 1.5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #fff;
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
-    border-left: 6px solid rgba(0,0,0,0.25);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  .nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .knapp:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-  }
-  .knapp .tittel {
+
+  .logo {
+    font-family: Georgia, serif;
     font-size: 1.15rem;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 0.25rem;
-  }
-  .knapp .undertittel {
-    font-size: 0.85rem;
-    opacity: 0.85;
-    display: block;
+    font-weight: 700;
+    color: var(--mørkegrønn);
+    letter-spacing: -0.01em;
+    text-decoration: none;
   }
 
-  .k-ent3r      { background: var(--c-ent3r); }
-  .k-ingenior   { background: var(--c-ingenior); }
-  .k-realfag    { background: var(--c-realfag); }
-  .k-laerer     { background: var(--c-laerer); }
-  .k-handout10  { background: var(--c-handout10); }
-  .k-handoutvgs { background: var(--c-handoutvgs); }
-  .k-cv         { background: var(--c-cv); }
+  .nav-lenker {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-lenker a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--tekst);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-lenker a:hover { color: var(--mørkegrønn); }
+  .nav-lenker a.cta { color: var(--mørkegrønn); font-weight: 600; }
 
-  footer {
-    margin-top: 3.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.85rem;
-    color: var(--muted);
+  /* ---------- Hero ---------- */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 72px 24px 48px;
     text-align: center;
   }
-  footer a {
-    color: var(--link);
+
+  .hero .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mørkegrønn);
+    background: #e8f5e4;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: Georgia, serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .hero h1 span {
+    color: var(--mørkegrønn);
+    font-style: italic;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: #4b5563;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Kort-grid ---------- */
+  .utforsk {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 24px 88px;
+  }
+
+  .kort-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .kort {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 24px;
     text-decoration: none;
-    border-bottom: 1px dotted var(--link);
+    color: var(--tekst);
+    transition: transform 0.2s, box-shadow 0.25s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kort::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--kort-farge, var(--lysegrønn));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .kort:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border-color: var(--kort-farge, var(--lysegrønn));
+  }
+  .kort:hover::before { opacity: 1; }
+
+  .kort .ikon { font-size: 1.6rem; margin-bottom: 8px; }
+  .kort h3 {
+    font-family: Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .kort p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+  .kort .pil {
+    margin-top: auto;
+    padding-top: 14px;
+    color: var(--kort-farge, var(--mørkegrønn));
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+  .kort:hover .pil { gap: 12px; }
+
+  /* Fargekoder for hver kategori */
+  .kort.ent3r      { --kort-farge: #1F4E79; }
+  .kort.mfi        { --kort-farge: #006400; }
+  .kort.mfr        { --kort-farge: #8B0000; }
+  .kort.mfl        { --kort-farge: #4B0082; }
+  .kort.mfs        { --kort-farge: #00796B; }
+  .kort.handout10  { --kort-farge: #B8860B; }
+  .kort.handoutvgs { --kort-farge: #008080; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 24px;
+    text-align: center;
+  }
+  footer p { color: var(--muted); font-size: 0.85rem; }
+  footer a {
+    color: var(--mørkegrønn);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  /* ---------- Mobil ---------- */
+  @media (max-width: 900px) {
+    .kort-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 1.9rem; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-lenker { gap: 16px; }
+    .nav-lenker a { font-size: 0.85rem; }
+    .hero h1 { font-size: 1.65rem; }
+    .kort-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Matteassistenten</h1>
-  <p class="subtitle">Notater, oppgaver og ressurser i matematikk</p>
-</header>
+  <header>
+    <nav class="nav">
+      <a href="../" class="logo">Matteforeleseren</a>
+      <ul class="nav-lenker">
+        <li><a href="../Ommeg/">Om meg</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<main>
-  <div class="grid">
+  <!-- Hero -->
+  <section class="hero">
+    <span class="eyebrow">Notater · Oppgaver · Ressurser</span>
+    <h1>Velkommen til <span>Matteassistenten</span>.</h1>
+    <p>
+      Her finner du matematikkressurser organisert etter kategori – for elever,
+      studenter og lærere. Velg kategorien du er interessert i.
+    </p>
+  </section>
 
-    <a class="knapp k-ent3r" href="ENT3R.html">
-      <span class="tittel">ENT3R</span>
-      <span class="undertittel">Matematikkhjelp for elever</span>
-    </a>
+  <!-- Kort-grid -->
+  <section class="utforsk">
+    <div class="kort-grid">
 
-    <a class="knapp k-ingenior" href="MFI.html">
-      <span class="tittel">Matematikk for ingeniører</span>
-      <span class="undertittel">Forelesningsnotater og oppgaver</span>
-    </a>
+      <a href="ENT3R/" class="kort ent3r">
+        <div class="ikon">📘</div>
+        <h3>ENT3R</h3>
+        <p>Matematikkhjelp for elever – veiledningshefter og ressurser.</p>
+        <span class="pil">Gå til ENT3R →</span>
+      </a>
 
-    <a class="knapp k-realfag" href="MFR.html">
-      <span class="tittel">Matematikk for realfagsstudenter</span>
-      <span class="undertittel">Notater og ressurser</span>
-    </a>
+      <a href="MFI/" class="kort mfi">
+        <div class="ikon">📗</div>
+        <h3>Matematikk for ingeniørstudenter</h3>
+        <p>Forelesningsnotater og oppgaver for ingeniørstudiet.</p>
+        <span class="pil">Gå til MFI →</span>
+      </a>
 
-    <a class="knapp k-laerer" href="MFL.html">
-      <span class="tittel">Matematikk for lærerstudenter</span>
-      <span class="undertittel">Fagdidaktikk og matematikk</span>
-    </a>
+      <a href="MFR/" class="kort mfr">
+        <div class="ikon">📕</div>
+        <h3>Matematikk for realfagsstudenter</h3>
+        <p>Notater og ressurser for deg som studerer realfag.</p>
+        <span class="pil">Gå til MFR →</span>
+      </a>
 
-    <a class="knapp k-handout10" href="handout10.html">
-      <span class="tittel">Handout-prosjekt</span>
-      <span class="undertittel">10. klasse</span>
-    </a>
+      <a href="MFL/" class="kort mfl">
+        <div class="ikon">📙</div>
+        <h3>Matematikk for lærerstudenter</h3>
+        <p>Fagdidaktikk og matematikk for deg som skal bli lærer.</p>
+        <span class="pil">Gå til MFL →</span>
+      </a>
 
-    <a class="knapp k-handoutvgs" href="handoutvgs.html">
-      <span class="tittel">Handout-prosjekt</span>
-      <span class="undertittel">Videregående skole</span>
-    </a>
+      <a href="MFS/" class="kort mfs">
+        <div class="ikon">💊</div>
+        <h3>Medikamentregning</h3>
+        <p>Regneoppgaver og ressurser for helsefaglige studier.</p>
+        <span class="pil">Gå til MFS →</span>
+      </a>
 
-    <a class="knapp k-cv" href="cv.html">
-      <span class="tittel">Min CV</span>
-      <span class="undertittel">Erfaring og bakgrunn</span>
-    </a>
+      <a href="Handout10klasse/" class="kort handout10">
+        <div class="ikon">📄</div>
+        <h3>Handout – 10. klasse</h3>
+        <p>Prosjektmateriell og oppgaver for 10. trinn.</p>
+        <span class="pil">Gå til Handout 10 →</span>
+      </a>
 
-  </div>
-</main>
+      <a href="HandoutVGS/" class="kort handoutvgs">
+        <div class="ikon">📄</div>
+        <h3>Handout – VGS</h3>
+        <p>Prosjektmateriell og oppgaver for videregående skole.</p>
+        <span class="pil">Gå til Handout VGS →</span>
+      </a>
 
-<footer>
-  <p>© Matteforeleseren · <a href="https://github.com/Matteforeleseren/Matteassistenten">GitHub</a></p>
-</footer>
+    </div>
+  </section>
+
+  <footer>
+    <p>© Matteforeleseren · <a href="https://github.com/Matteforeleseren/Matteforeleseren">GitHub</a></p>
+  </footer>
 
 </body>
 </html>
