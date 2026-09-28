@@ -1,1 +1,308 @@
 
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matematikk for lærerstudenter</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --lysegrønn: #6BBF59;
+    --mørkegrønn: #1E5F2E;
+    --tekst: #1a1a1a;
+    --muted: #6b7280;
+    --bg: #fafaf7;
+    --border: #e8e8e3;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--tekst);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    padding: 32px 20px 64px;
+  }
+
+  .container { max-width: 820px; margin: 0 auto; }
+
+  .tilbake {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 32px;
+    color: var(--mørkegrønn);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: gap 0.2s;
+  }
+  .tilbake:hover { gap: 10px; }
+
+  .hero { margin-bottom: 40px; }
+
+  .hero .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mørkegrønn);
+    background: #e8f5e4;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: Georgia, serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: #0f172a;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: #4b5563;
+    margin-bottom: 12px;
+  }
+
+  .innledning {
+    font-size: 1rem;
+    color: #4b5563;
+    margin-bottom: 32px;
+  }
+
+  .innledning p { margin-bottom: 14px; }
+
+  .punktliste {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 40px;
+  }
+
+  .punktliste li {
+    position: relative;
+    padding: 8px 0 8px 28px;
+    font-size: 1rem;
+    color: #334155;
+  }
+
+  .punktliste li::before {
+    content: "▪";
+    position: absolute;
+    left: 6px;
+    top: 8px;
+    color: var(--mørkegrønn);
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  section { margin-bottom: 48px; }
+
+  .seksjon-header {
+    margin-bottom: 20px;
+  }
+
+  .seksjon-header h2 {
+    font-family: Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: #0f172a;
+    margin-bottom: 6px;
+  }
+
+  .seksjon-header p {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .lenke-liste { list-style: none; }
+
+  .lenke-liste li {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0ec;
+  }
+  .lenke-liste li:last-child { border-bottom: none; }
+
+  .lenke-liste a {
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+    color: var(--mørkegrønn);
+  }
+  .lenke-liste a:hover { opacity: 0.7; }
+
+  .lenke-liste .beskrivelse {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 3px;
+    font-style: normal;
+  }
+
+  .sitater {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sitat {
+    margin-bottom: 32px;
+    padding-left: 20px;
+    border-left: 3px solid var(--lysegrønn);
+  }
+
+  .sitat-tekst {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #334155;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .sitat-forfatter {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--mørkegrønn);
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+    margin-top: 40px;
+  }
+  footer p { color: var(--muted); font-size: 0.85rem; }
+  footer a {
+    color: var(--mørkegrønn);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 1.65rem; }
+    .sitat-tekst { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <a href="../" class="tilbake">← Tilbake til Matteassistenten</a>
+
+    <!-- Hero -->
+    <div class="hero">
+      <span class="eyebrow">Fagdidaktikk · Formidling · Anvendelse</span>
+      <h1>Matematikk for lærerstudenter</h1>
+      <p>
+        Som lærerstudent lærer du ikke bare matematikk – du lærer å
+        <em>formidle</em> matematikk. Målet er å skape interesse for faget hos
+        neste generasjon.
+      </p>
+    </div>
+
+    <!-- Innledning -->
+    <div class="innledning">
+      <p>
+        Å kunne lære fra seg krever mer enn å kunne regne. Det handler om å
+        forstå faget så godt at du kan forklare det på flere måter, og å se
+        hvor matematikken lever i hverdagen og i andre fag.
+      </p>
+      <p>Derfor er det viktig å kunne:</p>
+      <ul class="punktliste">
+        <li>kunne faget og ha oversikt over sammenhenger</li>
+        <li>knytte faget til hverdagslivet</li>
+        <li>knytte faget til anvendelser i andre fag og yrker</li>
+      </ul>
+    </div>
+
+    <!-- Matematikk 1 -->
+    <section>
+      <div class="seksjon-header">
+        <h2>📘 Matematikk 1 (MGUMAT101)</h2>
+        <p>Emneside og informasjon om Matematikk 1 ved HVL.</p>
+      </div>
+
+      <ul class="lenke-liste">
+        <li>
+          <a href="https://www.hvl.no/studier/studieprogram/emne/2026/mguma101" target="_blank" rel="noopener">
+            Matematikk 1 (MGUMAT101)
+          </a>
+          <div class="beskrivelse">Emneside på HVL – studieåret 2026</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Matematikk 2 -->
+    <section>
+      <div class="seksjon-header">
+        <h2>📗 Matematikk 2 (MGUMAT102)</h2>
+        <p>Emneside og kompendium for Matematikk 2.</p>
+      </div>
+
+      <ul class="lenke-liste">
+        <li>
+          <a href="https://www.hvl.no/studier/studieprogram/emne/mgumat402/" target="_blank" rel="noopener">
+            Matematikk 2 (MGUMAT102)
+          </a>
+          <div class="beskrivelse">Emneside på HVL</div>
+        </li>
+        <li>
+          <a href="pdf/MFL-MGUMAT402.pdf" target="_blank">
+            Kompendium
+          </a>
+          <div class="beskrivelse">Kompendium knyttet til MGUMAT402 (PDF)</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Sitater -->
+    <div class="sitater">
+
+      <div class="sitat">
+        <div class="sitat-tekst">
+          «Å undervise er ikke en vitenskap, men en kunst.»
+        </div>
+        <div class="sitat-forfatter">George Pólya</div>
+      </div>
+
+      <div class="sitat">
+        <div class="sitat-tekst">
+          «Formålet med å undervise et barn er å gjøre det i stand til å klare
+          seg uten sin lærer.»
+        </div>
+        <div class="sitat-forfatter">Elbert Hubbard</div>
+      </div>
+
+      <div class="sitat">
+        <div class="sitat-tekst">
+          «Lær de unge hvordan de skal tenke, ikke hva de skal tenke.»
+        </div>
+        <div class="sitat-forfatter">Sidney Sugarman</div>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>© Matteforeleseren · <a href="https://github.com/Matteforeleseren/Matteforeleseren">GitHub</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>
