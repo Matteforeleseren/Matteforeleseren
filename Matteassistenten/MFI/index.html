@@ -31,6 +31,7 @@
 
   .container { max-width: 1080px; margin: 0 auto; }
 
+  /* Tilbake */
   .tilbake {
     display: inline-flex;
     align-items: center;
@@ -44,7 +45,8 @@
   }
   .tilbake:hover { gap: 10px; }
 
-  .hero { margin-bottom: 56px; }
+  /* Hero */
+  .hero { margin-bottom: 48px; }
 
   .hero .eyebrow {
     display: inline-block;
@@ -76,6 +78,7 @@
     margin-bottom: 12px;
   }
 
+  /* Seksjoner */
   section { margin-bottom: 48px; }
 
   .seksjon-header { margin-bottom: 20px; }
@@ -97,6 +100,15 @@
     color: var(--muted);
   }
 
+  /* Brødtekst i seksjoner */
+  .seksjon-tekst {
+    font-size: 1rem;
+    color: #4b5563;
+    max-width: 780px;
+    margin-bottom: 12px;
+  }
+
+  /* Ressurs-grid */
   .ressurs-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -174,13 +186,88 @@
     margin-top: 4px;
   }
 
+  /* Ikke-klikkbare kort (ekstra notater) */
+  .ressurs.statisk {
+    cursor: default;
+  }
+  .ressurs.statisk:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border);
+  }
+  .ressurs.statisk:hover::before { opacity: 0; }
+
+  /* Fargekoder */
   .ressurs.prog1  { --ressurs-farge: #1F4E79; }
   .ressurs.prog2  { --ressurs-farge: #2563eb; }
   .ressurs.notat  { --ressurs-farge: #6BBF59; }
-  .ressurs.bok1   { --ressurs-farge: #1F4E79; }
-  .ressurs.bok2   { --ressurs-farge: #006400; }
-  .ressurs.bok3   { --ressurs-farge: #00796B; }
 
+  /* Felles lærebok-lenke */
+  .bok-lenke {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px;
+    background: linear-gradient(135deg, #f0f9ec 0%, #ffffff 100%);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--mørkegrønn);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--tekst);
+    transition: transform 0.18s, box-shadow 0.22s, border-color 0.2s;
+  }
+  .bok-lenke:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 34px rgba(30, 95, 46, 0.12);
+    border-left-color: var(--lysegrønn);
+  }
+
+  .bok-lenke .bok-ikon {
+    font-size: 2.2rem;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .bok-lenke .bok-innhold {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .bok-lenke .bok-innhold h3 {
+    font-family: Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--tekst);
+  }
+
+  .bok-lenke .bok-innhold p {
+    font-size: 0.92rem;
+    color: #4b5563;
+    line-height: 1.5;
+  }
+
+  .bok-lenke .bok-innhold .meta {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mørkegrønn);
+    margin-top: 6px;
+  }
+
+  .bok-lenke .bok-pil {
+    font-size: 1.3rem;
+    color: var(--mørkegrønn);
+    font-weight: 600;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .bok-lenke:hover .bok-pil { transform: translateX(4px); }
+
+  /* Info-boks */
   .info-boks {
     padding: 20px 24px;
     background: #f0f9ec;
@@ -192,6 +279,7 @@
   }
   .info-boks strong { color: var(--mørkegrønn); }
 
+  /* Footer */
   footer {
     border-top: 1px solid var(--border);
     padding: 32px 24px;
@@ -205,6 +293,7 @@
   }
   footer a:hover { text-decoration: underline; }
 
+  /* Mobil */
   @media (max-width: 900px) {
     .ressurs-grid.tre-kolonner { grid-template-columns: repeat(2, 1fr); }
   }
@@ -214,6 +303,8 @@
     .ressurs-grid,
     .ressurs-grid.tre-kolonner { grid-template-columns: 1fr; }
     .ressurs { padding: 18px; }
+    .bok-lenke { padding: 20px; gap: 14px; }
+    .bok-lenke .bok-ikon { font-size: 1.8rem; }
   }
 </style>
 </head>
@@ -222,6 +313,7 @@
 
     <a href="../" class="tilbake">← Tilbake til Matteassistenten</a>
 
+    <!-- Hero -->
     <div class="hero">
       <span class="eyebrow">Bokprosjekt · Notater · Programmering</span>
       <h1>Matematikk for ingeniørstudenter</h1>
@@ -242,47 +334,24 @@
       eller skrive dem ut etter behov.
     </div>
 
+    <!-- Om bokprosjektet -->
     <section>
       <div class="seksjon-header">
-        <h2>📚 Matematikk for ingeniørutdanning</h2>
-        <p>Bokserien som brukes i emnene Matematikk 1, 2 og 3.</p>
+        <h2>✏️ Om bokprosjektet</h2>
       </div>
-
-      <div class="ressurs-grid tre-kolonner">
-
-        <a href="https://fagbokforlaget.no/produkt/9788245052114-matematikk-for-ingeniorutdanning"
-           target="_blank" rel="noopener" class="ressurs bok1">
-          <div class="ressurs-ikon">📘</div>
-          <div class="ressurs-innhold">
-            <h3>Matematikk 1</h3>
-            <p>Grunnleggende matematikk for ingeniørstudenter.</p>
-            <span class="meta">Fagbokforlaget →</span>
-          </div>
-        </a>
-
-        <a href="https://fagbokforlaget.no/produkt/9788245052114-matematikk-for-ingeniorutdanning"
-           target="_blank" rel="noopener" class="ressurs bok2">
-          <div class="ressurs-ikon">📗</div>
-          <div class="ressurs-innhold">
-            <h3>Matematikk 2</h3>
-            <p>Videre temaer – lineær algebra, flervariabel analyse m.m.</p>
-            <span class="meta">Fagbokforlaget →</span>
-          </div>
-        </a>
-
-        <a href="https://fagbokforlaget.no/produkt/9788245052114-matematikk-for-ingeniorutdanning"
-           target="_blank" rel="noopener" class="ressurs bok3">
-          <div class="ressurs-ikon">📙</div>
-          <div class="ressurs-innhold">
-            <h3>Matematikk 3</h3>
-            <p>Differensialligninger, Fourier og videre anvendelser.</p>
-            <span class="meta">Fagbokforlaget →</span>
-          </div>
-        </a>
-
-      </div>
+      <p class="seksjon-tekst">
+        Bokprosjektet <em>Matematikk for ingeniørstudenter</em> er et pågående
+        arbeid som samler teori, eksempler og oppgaver tilpasset
+        ingeniørutdanningen. Målet er å gi studentene et helhetlig og
+        tilgjengelig læremiddel som bygger bro mellom matematikk og anvendelser.
+      </p>
+      <p class="seksjon-tekst">
+        Notatene og programmeringsheftene på denne siden er en del av prosjektet
+        og deles åpent med studenter og kolleger.
+      </p>
     </section>
 
+    <!-- Programmeringshefter -->
     <section>
       <div class="seksjon-header">
         <h2>💻 Programmeringshefter</h2>
@@ -312,58 +381,65 @@
       </div>
     </section>
 
+    <!-- Ekstra notater (bare titler, ingen lenker) -->
     <section>
       <div class="seksjon-header">
         <h2>📄 Ekstra notater for Matematikk 2</h2>
         <p>Utfyllende notater som støtter emnene i Matematikk 2.</p>
       </div>
 
-      <div class="ressurs-grid">
+      <div class="ressurs-grid tre-kolonner">
 
-        <a href="pdf/Notat-Interpolasjon.pdf" target="_blank" class="ressurs notat">
+        <div class="ressurs notat statisk">
           <div class="ressurs-ikon">📐</div>
           <div class="ressurs-innhold">
             <h3>Interpolasjon</h3>
             <p>Notat om interpolasjon og tilnærming av funksjoner.</p>
-            <span class="meta">Notat · PDF</span>
+            <span class="meta">Notat</span>
           </div>
-        </a>
+        </div>
 
-        <a href="pdf/ODE-Difflign-Likevekt.pdf" target="_blank" class="ressurs notat">
+        <div class="ressurs notat statisk">
           <div class="ressurs-ikon">📈</div>
           <div class="ressurs-innhold">
             <h3>ODE – Diff.lign. og likevekt</h3>
             <p>Differensialligninger og likevektsanalyse.</p>
-            <span class="meta">Notat · PDF</span>
+            <span class="meta">Notat</span>
           </div>
-        </a>
+        </div>
 
-        <a href="pdf/Diffusjon-PDE-MAT201.pdf" target="_blank" class="ressurs notat">
+        <div class="ressurs notat statisk">
           <div class="ressurs-ikon">🌊</div>
           <div class="ressurs-innhold">
-            <h3>Diffusjon – PDE (MAT201)</h3>
+            <h3>Diffusjon – PDE</h3>
             <p>Innføring i partielle differensialligninger og diffusjon.</p>
-            <span class="meta">MAT201 · PDF</span>
+            <span class="meta">Notat</span>
           </div>
-        </a>
+        </div>
 
       </div>
     </section>
 
+    <!-- Matematikk for ingeniørutdanning – felles lærebok -->
     <section>
       <div class="seksjon-header">
-        <h2>✏️ Om bokprosjektet</h2>
+        <h2>📚 Matematikk for ingeniørutdanning</h2>
+        <p>Bokserien som brukes i emnene Matematikk 1, 2 og 3.</p>
       </div>
-      <p style="font-size: 1rem; color: #4b5563; max-width: 780px;">
-        Bokprosjektet <em>Matematikk for ingeniørstudenter</em> er et pågående
-        arbeid som samler teori, eksempler og oppgaver tilpasset
-        ingeniørutdanningen. Målet er å gi studentene et helhetlig og
-        tilgjengelig læremiddel som bygger bro mellom matematikk og anvendelser.
-      </p>
-      <p style="font-size: 1rem; color: #4b5563; max-width: 780px; margin-top: 12px;">
-        Notatene og programmeringsheftene på denne siden er en del av prosjektet
-        og deles åpent med studenter og kolleger.
-      </p>
+
+      <a href="https://fagbokforlaget.no/produkt/9788245052114-matematikk-for-ingeniorutdanning"
+         target="_blank" rel="noopener" class="bok-lenke">
+        <div class="bok-ikon">📘</div>
+        <div class="bok-innhold">
+          <h3>Matematikk for ingeniørutdanning</h3>
+          <p>
+            Felles lærebok for Matematikk 1, 2 og 3 – teori, eksempler og
+            oppgaver tilpasset ingeniørstudiet.
+          </p>
+          <span class="meta">Fagbokforlaget</span>
+        </div>
+        <div class="bok-pil">→</div>
+      </a>
     </section>
 
     <footer>
