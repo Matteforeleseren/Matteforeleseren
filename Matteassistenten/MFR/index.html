@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -16,11 +15,12 @@
     --bg: #fafaf7;
     --border: #e8e8e3;
 
-    --f-bla:     #1F4E79;   /* blå – Matematikk i praksis + Innholdsliste */
-    --f-forkurs: #B8860B;   /* gull */
-    --f-mat101:  #C2185B;   /* bringebær */
-    --f-mat102:  #B71C1C;   /* rød */
-    --f-realfag: #006400;   /* mørkegrønn */
+    --f-laerebok:      #B71C1C;   /* rød */
+    --f-innholdsliste: #6B2FA0;   /* lilla */
+    --f-forkurs:       #B8860B;   /* gull */
+    --f-mat101:        #C2185B;   /* bringebær */
+    --f-oppgaver:      #1F4E79;   /* mørk blå */
+    --f-mat102:        #B71C1C;   /* rød */
   }
 
   html { scroll-behavior: smooth; }
@@ -140,7 +140,6 @@
     color: var(--muted);
   }
 
-  /* Underseksjon */
   .underseksjon { margin-top: 24px; }
   .underseksjon:first-of-type { margin-top: 0; }
 
@@ -188,11 +187,12 @@
   }
 
   /* Fargeklasser */
-  .f-bla       { color: var(--f-bla); }
-  .f-forkurs   { color: var(--f-forkurs); }
-  .f-mat101    { color: var(--f-mat101); }
-  .f-mat102    { color: var(--f-mat102); }
-  .f-realfag   { color: var(--f-realfag); }
+  .f-laerebok       { color: var(--f-laerebok); }
+  .f-innholdsliste  { color: var(--f-innholdsliste); }
+  .f-forkurs        { color: var(--f-forkurs); }
+  .f-mat101         { color: var(--f-mat101); }
+  .f-oppgaver       { color: var(--f-oppgaver); }
+  .f-mat102         { color: var(--f-mat102); }
 
   /* Info-boks */
   .info-boks {
@@ -242,15 +242,14 @@
       </p>
     </div>
 
-    <!-- Oversikt -->
+    <!-- Oversikt – kun 4 ord -->
     <nav class="oversikt" aria-label="Oversikt">
       <div class="oversikt-tittel">Oversikt</div>
       <ul class="oversikt-liste">
-        <li><a href="#matematikk-i-praksis" class="f-bla">Matematikk i praksis</a></li>
-        <li><a href="#forkurs" class="f-forkurs">Forkurs</a></li>
-        <li><a href="#mat101" class="f-mat101">Brukerkurs i matematikk I</a></li>
-        <li><a href="#mat102" class="f-mat102">Brukerkurs i matematikk II</a></li>
-        <li><a href="#realfag" class="f-realfag">Matematikk for realfagsstudenter</a></li>
+        <li><a href="https://www.universitetsforlaget.no/matematikk-i-praksis-3" target="_blank" rel="noopener" class="f-laerebok">Matematikk i praksis</a></li>
+        <li><a href="pdf/Forkurs-UiB-h24.pdf" target="_blank" class="f-forkurs">Forkurs</a></li>
+        <li><a href="pdf/MFR-MAT101-h25.pdf" target="_blank" class="f-mat101">Brukerkurs i matematikk I</a></li>
+        <li><a href="pdf/MiP-Programmeringsdel.pdf" target="_blank" class="f-mat102">Brukerkurs i matematikk II</a></li>
       </ul>
     </nav>
 
@@ -259,8 +258,8 @@
       lenker til eksterne sider (Universitetsforlaget og Issuu).
     </div>
 
-    <!-- Matematikk i praksis + Innholdsliste (begge blå) -->
-    <section id="matematikk-i-praksis">
+    <!-- Matematikk i praksis + Innholdsliste -->
+    <section>
       <div class="seksjon-header">
         <h2>📚 Matematikk i praksis</h2>
         <p>Hovedboken som brukes i begge brukerkursene.</p>
@@ -268,13 +267,13 @@
 
       <ul class="lenke-liste">
         <li>
-          <a href="https://www.universitetsforlaget.no/matematikk-i-praksis-3" target="_blank" rel="noopener" class="f-bla">
+          <a href="https://www.universitetsforlaget.no/matematikk-i-praksis-3" target="_blank" rel="noopener" class="f-laerebok">
             Matematikk i praksis (7. utgave)
           </a>
           <div class="beskrivelse">Tor H. Gulliksen, Arne Hole, Amir M. Hashemi – Universitetsforlaget</div>
         </li>
         <li>
-          <a href="https://issuu.com/universitetsforlaget/docs/sider_fra_9788215062778_gullksen_matematikk_i_prak" target="_blank" rel="noopener" class="f-bla">
+          <a href="https://issuu.com/universitetsforlaget/docs/sider_fra_9788215062778_gullksen_matematikk_i_prak" target="_blank" rel="noopener" class="f-innholdsliste">
             Innholdsliste
           </a>
           <div class="beskrivelse">Forhåndsvisning av bokens innhold (Issuu)</div>
@@ -283,7 +282,7 @@
     </section>
 
     <!-- Forkurs -->
-    <section id="forkurs">
+    <section>
       <div class="seksjon-header">
         <h2>🎓 Forkurs</h2>
         <p>Oppfriskningskurs for nye studenter.</p>
@@ -300,7 +299,7 @@
     </section>
 
     <!-- Brukerkurs matematikk I (MAT101) -->
-    <section id="mat101">
+    <section>
       <div class="seksjon-header">
         <h2>📘 Brukerkurs matematikk I (MAT101)</h2>
       </div>
@@ -328,13 +327,13 @@
         <div class="meta">Eldre versjon (2005–2025)</div>
         <ul class="lenke-liste">
           <li>
-            <a href="pdf/Hefte-Kontrolloppgaver-MiP-ufasit.pdf" target="_blank" class="f-bla">
+            <a href="pdf/Hefte-Kontrolloppgaver-MiP-ufasit.pdf" target="_blank" class="f-oppgaver">
               Oppgavesamling (kontrolloppgaver uten fasit)
             </a>
             <div class="beskrivelse">Kontrolloppgaver knyttet til Matematikk i praksis</div>
           </li>
           <li>
-            <a href="pdf/Hefte-Kontrolloppgaver-Mip-mfasit.pdf" target="_blank" class="f-bla">
+            <a href="pdf/Hefte-kontrolloppgaver-MP-mfasit.pdf" target="_blank" class="f-oppgaver">
               Oppgavesamling (kontrolloppgaver med fasit)
             </a>
             <div class="beskrivelse">Samme oppgaver, med fasit</div>
@@ -344,7 +343,7 @@
     </section>
 
     <!-- Brukerkurs matematikk II (MAT102) -->
-    <section id="mat102">
+    <section>
       <div class="seksjon-header">
         <h2>📕 Brukerkurs matematikk II (MAT102)</h2>
       </div>
@@ -366,29 +365,6 @@
           </li>
         </ul>
       </div>
-    </section>
-
-    <!-- Matematikk for realfagsstudenter -->
-    <section id="realfag">
-      <div class="seksjon-header">
-        <h2>📗 Matematikk for realfagsstudenter</h2>
-        <p>Støttehefter for emnene i Matematikk 1.</p>
-      </div>
-
-      <ul class="lenke-liste">
-        <li>
-          <a href="pdf/MFR-MAT101-h25.pdf" target="_blank" class="f-realfag">
-            Matematikk for realfagsstudenter (hefte uten fasit)
-          </a>
-          <div class="beskrivelse">Hefte til bruk i undervisningen – uten fasit</div>
-        </li>
-        <li>
-          <a href="pdf/MFR-h25.pdf" target="_blank" class="f-realfag">
-            Matematikk for realfagsstudenter (hefte med fasit)
-          </a>
-          <div class="beskrivelse">Samme hefte, med fasit</div>
-        </li>
-      </ul>
     </section>
 
     <footer>
