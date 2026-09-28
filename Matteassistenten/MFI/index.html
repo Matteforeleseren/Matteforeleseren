@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -31,7 +30,6 @@
 
   .container { max-width: 1080px; margin: 0 auto; }
 
-  /* Tilbake */
   .tilbake {
     display: inline-flex;
     align-items: center;
@@ -45,7 +43,6 @@
   }
   .tilbake:hover { gap: 10px; }
 
-  /* Hero */
   .hero { margin-bottom: 48px; }
 
   .hero .eyebrow {
@@ -78,7 +75,6 @@
     margin-bottom: 12px;
   }
 
-  /* Seksjoner */
   section { margin-bottom: 48px; }
 
   .seksjon-header { margin-bottom: 20px; }
@@ -100,7 +96,6 @@
     color: var(--muted);
   }
 
-  /* Brødtekst i seksjoner */
   .seksjon-tekst {
     font-size: 1rem;
     color: #4b5563;
@@ -108,7 +103,6 @@
     margin-bottom: 12px;
   }
 
-  /* Ressurs-grid */
   .ressurs-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -186,10 +180,7 @@
     margin-top: 4px;
   }
 
-  /* Ikke-klikkbare kort (ekstra notater) */
-  .ressurs.statisk {
-    cursor: default;
-  }
+  .ressurs.statisk { cursor: default; }
   .ressurs.statisk:hover {
     transform: none;
     box-shadow: none;
@@ -197,12 +188,10 @@
   }
   .ressurs.statisk:hover::before { opacity: 0; }
 
-  /* Fargekoder */
   .ressurs.prog1  { --ressurs-farge: #1F4E79; }
   .ressurs.prog2  { --ressurs-farge: #2563eb; }
   .ressurs.notat  { --ressurs-farge: #6BBF59; }
 
-  /* Felles lærebok-lenke */
   .bok-lenke {
     display: flex;
     align-items: center;
@@ -267,7 +256,6 @@
   }
   .bok-lenke:hover .bok-pil { transform: translateX(4px); }
 
-  /* Info-boks */
   .info-boks {
     padding: 20px 24px;
     background: #f0f9ec;
@@ -279,7 +267,6 @@
   }
   .info-boks strong { color: var(--mørkegrønn); }
 
-  /* Footer */
   footer {
     border-top: 1px solid var(--border);
     padding: 32px 24px;
@@ -293,7 +280,6 @@
   }
   footer a:hover { text-decoration: underline; }
 
-  /* Mobil */
   @media (max-width: 900px) {
     .ressurs-grid.tre-kolonner { grid-template-columns: repeat(2, 1fr); }
   }
@@ -313,7 +299,6 @@
 
     <a href="../" class="tilbake">← Tilbake til Matteassistenten</a>
 
-    <!-- Hero -->
     <div class="hero">
       <span class="eyebrow">Bokprosjekt · Notater · Programmering</span>
       <h1>Matematikk for ingeniørstudenter</h1>
@@ -360,7 +345,7 @@
 
       <div class="ressurs-grid">
 
-        <a href="pdf/MAT110-programmeringshefte.pdf" target="_blank" class="ressurs prog1">
+        <a href="pdf/MAT110-Programmeringshefte.pdf" target="_blank" class="ressurs prog1">
           <div class="ressurs-ikon">💻</div>
           <div class="ressurs-innhold">
             <h3>Programmeringshefte – Matematikk 1</h3>
@@ -369,7 +354,7 @@
           </div>
         </a>
 
-        <a href="pdf/MAT202-programmeringshefte.pdf" target="_blank" class="ressurs prog2">
+        <a href="pdf/MAT202-Programmeringshefte.pdf" target="_blank" class="ressurs prog2">
           <div class="ressurs-ikon">💻</div>
           <div class="ressurs-innhold">
             <h3>Programmeringshefte – Matematikk 2</h3>
@@ -381,7 +366,7 @@
       </div>
     </section>
 
-    <!-- Ekstra notater (bare titler, ingen lenker) -->
+    <!-- Ekstra notater -->
     <section>
       <div class="seksjon-header">
         <h2>📄 Ekstra notater for Matematikk 2</h2>
@@ -420,7 +405,7 @@
       </div>
     </section>
 
-    <!-- Matematikk for ingeniørutdanning – felles lærebok -->
+    <!-- Matematikk for ingeniørutdanning -->
     <section>
       <div class="seksjon-header">
         <h2>📚 Matematikk for ingeniørutdanning</h2>
