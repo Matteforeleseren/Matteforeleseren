@@ -1,1 +1,340 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matematikk for ingeniørstudenter – Matteassistenten</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --lysegrønn: #6BBF59;
+    --mørkegrønn: #1E5F2E;
+    --tekst: #1a1a1a;
+    --muted: #6b7280;
+    --bg: #fafaf7;
+    --border: #e8e8e3;
+    --kort-bg: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--tekst);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    padding: 32px 20px 64px;
+  }
+
+  .container { max-width: 1080px; margin: 0 auto; }
+
+  /* Tilbake */
+  .tilbake {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 32px;
+    color: var(--mørkegrønn);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: gap 0.2s;
+  }
+  .tilbake:hover { gap: 10px; }
+
+  /* Hero */
+  .hero {
+    margin-bottom: 56px;
+  }
+
+  .hero .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mørkegrønn);
+    background: #e8f5e4;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: Georgia, serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: #0f172a;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: #4b5563;
+    max-width: 680px;
+    margin-bottom: 12px;
+  }
+
+  /* Seksjoner */
+  section {
+    margin-bottom: 48px;
+  }
+
+  .seksjon-header {
+    margin-bottom: 20px;
+  }
+
+  .seksjon-header h2 {
+    font-family: Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: #0f172a;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .seksjon-header p {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  /* Ressurs-grid */
+  .ressurs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .ressurs {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 22px;
+    background: var(--kort-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--tekst);
+    transition: transform 0.18s, box-shadow 0.22s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .ressurs::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+    background: var(--ressurs-farge, var(--lysegrønn));
+    opacity: 0;
+    transition: opacity 0.22s;
+  }
+  .ressurs:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    border-color: var(--ressurs-farge, var(--lysegrønn));
+  }
+  .ressurs:hover::before { opacity: 1; }
+
+  .ressurs-ikon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .ressurs-innhold {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .ressurs h3 {
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--tekst);
+  }
+
+  .ressurs p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .ressurs .meta {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ressurs-farge, var(--mørkegrønn));
+    margin-top: 4px;
+  }
+
+  /* Fargekoder per kategori */
+  .ressurs.prog1 { --ressurs-farge: #1F4E79; }
+  .ressurs.prog2 { --ressurs-farge: #2563eb; }
+  .ressurs.notat { --ressurs-farge: #6BBF59; }
+
+  /* Info-boks */
+  .info-boks {
+    padding: 20px 24px;
+    background: #f0f9ec;
+    border-left: 4px solid var(--lysegrønn);
+    border-radius: 10px;
+    margin-bottom: 40px;
+    font-size: 0.95rem;
+    color: #2c4a2c;
+  }
+  .info-boks strong { color: var(--mørkegrønn); }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  footer p { color: var(--muted); font-size: 0.85rem; }
+  footer a {
+    color: var(--mørkegrønn);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  /* Mobil */
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 1.7rem; }
+    .ressurs-grid { grid-template-columns: 1fr; }
+    .ressurs { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <a href="../" class="tilbake">← Tilbake til Matteassistenten</a>
+
+    <!-- Hero -->
+    <div class="hero">
+      <span class="eyebrow">Bokprosjekt · Notater · Programmering</span>
+      <h1>Matematikk for ingeniørstudenter</h1>
+      <p>
+        Her finner du notater og programmeringshefter jeg har utviklet gjennom
+        mange år som foreleser i matematikk for ingeniørstudenter. Materialet
+        er ment å støtte undervisningen og gi studentene et godt grunnlag for
+        videre studier.
+      </p>
+      <p>
+        Bokprosjektet samler teori, eksempler og programmeringsoppgaver – med
+        vekt på forståelse og anvendelse.
+      </p>
+    </div>
+
+    <!-- Info -->
+    <div class="info-boks">
+      <strong>Tips:</strong> Alle PDF-ene åpnes i en ny fane. Du kan laste dem ned
+      eller skrive dem ut etter behov.
+    </div>
+
+    <!-- Programmeringshefter -->
+    <section>
+      <div class="seksjon-header">
+        <h2>📘 Programmeringshefter</h2>
+        <p>Praktiske hefter med programmering knyttet til matematikkemnene.</p>
+      </div>
+
+      <div class="ressurs-grid">
+
+        <a href="pdf/MAT110-programmeringshefte.pdf" target="_blank" class="ressurs prog1">
+          <div class="ressurs-ikon">💻</div>
+          <div class="ressurs-innhold">
+            <h3>Programmeringshefte – Matematikk 1</h3>
+            <p>Innføring i programmering knyttet til temaene i MAT110.</p>
+            <span class="meta">MAT110 · PDF</span>
+          </div>
+        </a>
+
+        <a href="pdf/MAT202-programmeringshefte.pdf" target="_blank" class="ressurs prog2">
+          <div class="ressurs-ikon">💻</div>
+          <div class="ressurs-innhold">
+            <h3>Programmeringshefte – Matematikk 2</h3>
+            <p>Programmering og numeriske metoder knyttet til MAT202.</p>
+            <span class="meta">MAT202 · PDF</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Ekstra notater -->
+    <section>
+      <div class="seksjon-header">
+        <h2>📄 Ekstra notater for Matematikk 2</h2>
+        <p>Utfyllende notater som støtter emnene i Matematikk 2.</p>
+      </div>
+
+      <div class="ressurs-grid">
+
+        <a href="pdf/Notat-Interpolasjon.pdf" target="_blank" class="ressurs notat">
+          <div class="ressurs-ikon">📐</div>
+          <div class="ressurs-innhold">
+            <h3>Interpolasjon</h3>
+            <p>Notat om interpolasjon og tilnærming av funksjoner.</p>
+            <span class="meta">Notat · PDF</span>
+          </div>
+        </a>
+
+        <a href="pdf/ODE-Difflign-Likevekt.pdf" target="_blank" class="ressurs notat">
+          <div class="ressurs-ikon">📈</div>
+          <div class="ressurs-innhold">
+            <h3>ODE – Diff.lign. og likevekt</h3>
+            <p>Differensialligninger og likevektsanalyse.</p>
+            <span class="meta">Notat · PDF</span>
+          </div>
+        </a>
+
+        <a href="pdf/Diffusjon-PDE-MAT201.pdf" target="_blank" class="ressurs notat">
+          <div class="ressurs-ikon">🌊</div>
+          <div class="ressurs-innhold">
+            <h3>Diffusjon – PDE (MAT201)</h3>
+            <p>Innføring i partielle differensialligninger og diffusjon.</p>
+            <span class="meta">MAT201 · PDF</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Om prosjektet -->
+    <section>
+      <div class="seksjon-header">
+        <h2>✏️ Om bokprosjektet</h2>
+      </div>
+      <p style="font-size: 1rem; color: #4b5563; max-width: 780px;">
+        Bokprosjektet <em>Matematikk for ingeniørstudenter</em> er et pågående
+        arbeid som samler teori, eksempler og oppgaver tilpasset
+        ingeniørutdanningen. Målet er å gi studentene et helhetlig og
+        tilgjengelig læremiddel som bygger bro mellom matematikk og anvendelser.
+      </p>
+      <p style="font-size: 1rem; color: #4b5563; max-width: 780px; margin-top: 12px;">
+        Notatene og programmeringsheftene på denne siden er en del av prosjektet
+        og deles åpent med studenter og kolleger.
+      </p>
+    </section>
+
+    <footer>
+      <p>© Matteforeleseren · <a href="https://github.com/Matteforeleseren/Matteforeleseren">GitHub</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>
