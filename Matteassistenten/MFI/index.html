@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="no">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matematikk for ingeniørstudenter – Matteassistenten</title>
+<title>Matematikk for ingeniørstudenter</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -30,7 +31,6 @@
 
   .container { max-width: 1080px; margin: 0 auto; }
 
-  /* Tilbake */
   .tilbake {
     display: inline-flex;
     align-items: center;
@@ -44,10 +44,7 @@
   }
   .tilbake:hover { gap: 10px; }
 
-  /* Hero */
-  .hero {
-    margin-bottom: 56px;
-  }
+  .hero { margin-bottom: 56px; }
 
   .hero .eyebrow {
     display: inline-block;
@@ -79,14 +76,9 @@
     margin-bottom: 12px;
   }
 
-  /* Seksjoner */
-  section {
-    margin-bottom: 48px;
-  }
+  section { margin-bottom: 48px; }
 
-  .seksjon-header {
-    margin-bottom: 20px;
-  }
+  .seksjon-header { margin-bottom: 20px; }
 
   .seksjon-header h2 {
     font-family: Georgia, serif;
@@ -105,11 +97,14 @@
     color: var(--muted);
   }
 
-  /* Ressurs-grid */
   .ressurs-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+  }
+
+  .ressurs-grid.tre-kolonner {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .ressurs {
@@ -179,12 +174,13 @@
     margin-top: 4px;
   }
 
-  /* Fargekoder per kategori */
-  .ressurs.prog1 { --ressurs-farge: #1F4E79; }
-  .ressurs.prog2 { --ressurs-farge: #2563eb; }
-  .ressurs.notat { --ressurs-farge: #6BBF59; }
+  .ressurs.prog1  { --ressurs-farge: #1F4E79; }
+  .ressurs.prog2  { --ressurs-farge: #2563eb; }
+  .ressurs.notat  { --ressurs-farge: #6BBF59; }
+  .ressurs.bok1   { --ressurs-farge: #1F4E79; }
+  .ressurs.bok2   { --ressurs-farge: #006400; }
+  .ressurs.bok3   { --ressurs-farge: #00796B; }
 
-  /* Info-boks */
   .info-boks {
     padding: 20px 24px;
     background: #f0f9ec;
@@ -196,7 +192,6 @@
   }
   .info-boks strong { color: var(--mørkegrønn); }
 
-  /* Footer */
   footer {
     border-top: 1px solid var(--border);
     padding: 32px 24px;
@@ -210,10 +205,14 @@
   }
   footer a:hover { text-decoration: underline; }
 
-  /* Mobil */
+  @media (max-width: 900px) {
+    .ressurs-grid.tre-kolonner { grid-template-columns: repeat(2, 1fr); }
+  }
+
   @media (max-width: 720px) {
     .hero h1 { font-size: 1.7rem; }
-    .ressurs-grid { grid-template-columns: 1fr; }
+    .ressurs-grid,
+    .ressurs-grid.tre-kolonner { grid-template-columns: 1fr; }
     .ressurs { padding: 18px; }
   }
 </style>
@@ -223,7 +222,6 @@
 
     <a href="../" class="tilbake">← Tilbake til Matteassistenten</a>
 
-    <!-- Hero -->
     <div class="hero">
       <span class="eyebrow">Bokprosjekt · Notater · Programmering</span>
       <h1>Matematikk for ingeniørstudenter</h1>
@@ -239,16 +237,55 @@
       </p>
     </div>
 
-    <!-- Info -->
     <div class="info-boks">
       <strong>Tips:</strong> Alle PDF-ene åpnes i en ny fane. Du kan laste dem ned
       eller skrive dem ut etter behov.
     </div>
 
-    <!-- Programmeringshefter -->
     <section>
       <div class="seksjon-header">
-        <h2>📘 Programmeringshefter</h2>
+        <h2>📚 Matematikk for ingeniørutdanning</h2>
+        <p>Bokserien som brukes i emnene Matematikk 1, 2 og 3.</p>
+      </div>
+
+      <div class="ressurs-grid tre-kolonner">
+
+        <a href="https://fagbokforlaget.no/produkt/9788245052114-matematikk-for-ingeniorutdanning"
+           target="_blank" rel="noopener" class="ressurs bok1">
+          <div class="ressurs-ikon">📘</div>
+          <div class="ressurs-innhold">
+            <h3>Matematikk 1</h3>
+            <p>Grunnleggende matematikk for ingeniørstudenter.</p>
+            <span class="meta">Fagbokforlaget →</span>
+          </div>
+        </a>
+
+        <a href="https://fagbokforlaget.no/produkt/9788245052114-matematikk-for-ingeniorutdanning"
+           target="_blank" rel="noopener" class="ressurs bok2">
+          <div class="ressurs-ikon">📗</div>
+          <div class="ressurs-innhold">
+            <h3>Matematikk 2</h3>
+            <p>Videre temaer – lineær algebra, flervariabel analyse m.m.</p>
+            <span class="meta">Fagbokforlaget →</span>
+          </div>
+        </a>
+
+        <a href="https://fagbokforlaget.no/produkt/9788245052114-matematikk-for-ingeniorutdanning"
+           target="_blank" rel="noopener" class="ressurs bok3">
+          <div class="ressurs-ikon">📙</div>
+          <div class="ressurs-innhold">
+            <h3>Matematikk 3</h3>
+            <p>Differensialligninger, Fourier og videre anvendelser.</p>
+            <span class="meta">Fagbokforlaget →</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="seksjon-header">
+        <h2>💻 Programmeringshefter</h2>
         <p>Praktiske hefter med programmering knyttet til matematikkemnene.</p>
       </div>
 
@@ -275,7 +312,6 @@
       </div>
     </section>
 
-    <!-- Ekstra notater -->
     <section>
       <div class="seksjon-header">
         <h2>📄 Ekstra notater for Matematikk 2</h2>
@@ -314,7 +350,6 @@
       </div>
     </section>
 
-    <!-- Om prosjektet -->
     <section>
       <div class="seksjon-header">
         <h2>✏️ Om bokprosjektet</h2>
