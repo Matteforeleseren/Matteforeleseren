@@ -1,29 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="no">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Handout-prosjekt – 10. klasse</title>
+<title>Handout – VGS</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: #f0f4f8;
-    color: #1a1a1a;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    padding: 32px 20px 64px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e6f0fa;
+    color: #1a2b4a;
+    padding: 40px 20px 64px;
+    min-height: 100vh;
   }
 
-  .container { max-width: 1200px; margin: 0 auto; }
-
-  /* Tilbake */
+  /* Tilbake-lenke */
   .tilbake {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     color: #1E5F2E;
     text-decoration: none;
     font-weight: 500;
@@ -32,87 +30,87 @@
   }
   .tilbake:hover { gap: 10px; }
 
-  /* Hero */
-  .hero { margin-bottom: 40px; }
-
-  .hero .eyebrow {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #1E5F2E;
-    background: #e8f5e4;
-    padding: 6px 14px;
-    border-radius: 999px;
-    margin-bottom: 16px;
-  }
-
-  .hero h1 {
-    font-family: Georgia, serif;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    margin-bottom: 12px;
-    color: #0f172a;
-  }
-
-  .hero p {
-    font-size: 1rem;
-    color: #4b5563;
-    max-width: 680px;
-  }
-
-  /* Knappe-grid */
-  .knappe-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-top: 32px;
-  }
-
-  .knapp {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  h1 {
     text-align: center;
-    padding: 22px 20px;
-    border-radius: 10px;
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-    min-height: 64px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 50px;
+    color: #1a2b4a;
   }
-  .knapp:hover {
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 30px 25px;
+    flex: 1 1 300px;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+    color: #1a2b4a;
+  }
+
+  .course {
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    cursor: pointer;
+  }
+
+  .course:last-child { margin-bottom: 0; }
+
+  .course:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     filter: brightness(1.06);
   }
 
-  /* Farger – matcher vedlegget */
-  .k-algebra         { background: #2563EB; }  /* blå */
-  .k-polynomer       { background: #16A34A; }  /* grønn */
-  .k-ligningssett    { background: #D97706; }  /* oransje-brun */
-  .k-funksjoner      { background: #EF4444; }  /* rød */
-  .k-lineare         { background: #0D9488; }  /* teal */
-  .k-eksponential    { background: #1E293B; }  /* mørk blå */
-  .k-programmering   { background: #9333EA; }  /* lilla */
-  .k-modellering     { background: #22C55E; }  /* grønn */
-  .k-okonomi         { background: #B91C1C; }  /* mørk rød */
-  .k-statistikk      { background: #0E7490; }  /* mørk teal */
-  .k-datamodellering { background: #6B7280; }  /* grå */
-  .k-geometri        { background: #F59E0B; }  /* gul-oransje */
+  /* Farger */
+  .blue   { background-color: #1f6fd6; }
+  .green  { background-color: #1a9e5c; }
+  .orange { background-color: #d97b00; }
+
+  .purple { background-color: #8e44ad; }
+  .red    { background-color: #c0392b; }
+
+  .teal   { background-color: #1a9e8a; }
+  .dark   { background-color: #2c3e50; }
+
+  .brown  { background-color: #8b5a2b; }
+  .pink   { background-color: #c2185b; }
+  .indigo { background-color: #3f51b5; }
+  .cyan   { background-color: #0097a7; }
 
   /* Footer */
   footer {
     margin-top: 64px;
     padding-top: 24px;
-    border-top: 1px solid #d1d9e0;
+    border-top: 1px solid #cbd8e6;
     text-align: center;
     font-size: 0.85rem;
     color: #6b7280;
@@ -124,89 +122,97 @@
   }
   footer a:hover { text-decoration: underline; }
 
-  /* Responsivt */
-  @media (max-width: 1024px) {
-    .knappe-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 720px) {
-    .knappe-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .hero h1 { font-size: 1.6rem; }
-    .knapp { padding: 18px 14px; font-size: 0.92rem; min-height: 56px; }
-  }
-  @media (max-width: 420px) {
-    .knappe-grid { grid-template-columns: 1fr; }
+  /* Mobil */
+  @media (max-width: 700px) {
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+    }
+    .card { padding: 20px; }
+    .card h2 { font-size: 1.3rem; }
+    .course {
+      font-size: 1rem;
+      padding: 14px 16px;
+    }
   }
 </style>
 </head>
 <body>
+
+  <div style="max-width: 1400px; margin: 0 auto;">
+    <a href="../" class="tilbake">← Tilbake til Matteassistenten</a>
+  </div>
+
+  <h1>Handout for matematikkfagene</h1>
+
   <div class="container">
 
-    <a href="../" class="tilbake">← Tilbake til Matteassistenten</a>
+    <!-- ============ MATEMATIKK FØRST ============ -->
 
-    <div class="hero">
-      <span class="eyebrow">Handout-prosjekt · 10. trinn</span>
-      <h1>Handout-prosjekt – 10. klasse</h1>
-      <p>
-        Prosjektmateriell og oppgaver for 10. trinn. Velg temaet du vil jobbe med.
-      </p>
+    <!-- Kolonne 1: Matematikk Vg1 -->
+    <div class="card">
+      <h2>Matematikk Vg1</h2>
+      <a href="pdf/Matematikk-1P.pdf" target="_blank" class="course blue">Matematikk 1P</a>
+      <a href="pdf/Matematikk-1T.pdf" target="_blank" class="course green">Matematikk 1T</a>
+      <a href="pdf/Matematikk-1P-Y.pdf" target="_blank" class="course orange">Matematikk 1P-Y</a>
     </div>
 
-    <div class="knappe-grid">
-
-      <a href="pdf/Algebra-10Trinn.pdf" target="_blank" class="knapp k-algebra">
-        Algebra
-      </a>
-
-      <a href="pdf/Polynomer-10Trinn.pdf" target="_blank" class="knapp k-polynomer">
-        Polynomer
-      </a>
-
-      <a href="pdf/Ligningssett-10Trinn.pdf" target="_blank" class="knapp k-ligningssett">
-        Ligningssett
-      </a>
-
-      <a href="pdf/Funksjoner-10Trinn.pdf" target="_blank" class="knapp k-funksjoner">
-        Funksjoner
-      </a>
-
-      <a href="pdf/Linearefunksjoner-10Trinn.pdf" target="_blank" class="knapp k-lineare">
-        Lineare funksjoner
-      </a>
-
-      <a href="pdf/Eksponentialfunksjoner-10Trinn.pdf" target="_blank" class="knapp k-eksponential">
-        Eksponentialfunksjoner
-      </a>
-
-      <a href="pdf/Programmering-10Trinn.pdf" target="_blank" class="knapp k-programmering">
-        Programmering
-      </a>
-
-      <a href="pdf/Modellering-10Trinn.pdf" target="_blank" class="knapp k-modellering">
-        Modellering
-      </a>
-
-      <a href="pdf/Økonomi-10Trinn.pdf" target="_blank" class="knapp k-okonomi">
-        Økonomi
-      </a>
-
-      <a href="pdf/Statistikk-10Trinn.pdf" target="_blank" class="knapp k-statistikk">
-        Statistikk
-      </a>
-
-      <a href="pdf/Datamodellering-10Trinn.pdf" target="_blank" class="knapp k-datamodellering">
-        Datamodellering
-      </a>
-
-      <a href="pdf/Geometri-10Trinn.pdf" target="_blank" class="knapp k-geometri">
-        Geometri
-      </a>
-
+    <!-- Kolonne 2: Realfag -->
+    <div class="card">
+      <h2>Realfag</h2>
+      <a href="pdf/Matematikk-R1.pdf" target="_blank" class="course purple">Matematikk R1</a>
+      <a href="pdf/Matematikk-R2.pdf" target="_blank" class="course red">Matematikk R2</a>
     </div>
 
-    <footer>
-      <p>© Matteforeleseren · <a href="https://github.com/Matteforeleseren/Matteforeleseren">GitHub</a></p>
-    </footer>
+    <!-- Kolonne 3: Samfunnsfaglig -->
+    <div class="card">
+      <h2>Samfunnsfaglig</h2>
+      <a href="pdf/Matematikk-S1.pdf" target="_blank" class="course teal">Matematikk S1</a>
+      <a href="pdf/Matematikk-S2.pdf" target="_blank" class="course dark">Matematikk S2</a>
+    </div>
+
+    <!-- ============ REALFAGENE UNDER ============ -->
+
+    <!-- Kolonne 4: Fysikk og kjemi -->
+    <div class="card">
+      <h2>Fysikk og kjemi</h2>
+      <a href="pdf/Fysikk-1.pdf" target="_blank" class="course indigo">Fysikk 1</a>
+      <a href="pdf/Fysikk-2.pdf" target="_blank" class="course indigo">Fysikk 2</a>
+      <a href="pdf/Kjemi-1.pdf" target="_blank" class="course brown">Kjemi 1</a>
+      <a href="pdf/Kjemi-2.pdf" target="_blank" class="course brown">Kjemi 2</a>
+    </div>
+
+    <!-- Kolonne 5: Biologi og geofag -->
+    <div class="card">
+      <h2>Biologi og geofag</h2>
+      <a href="pdf/Biologi-1.pdf" target="_blank" class="course green">Biologi 1</a>
+      <a href="pdf/Biologi-2.pdf" target="_blank" class="course green">Biologi 2</a>
+      <a href="pdf/Geofag-1.pdf" target="_blank" class="course orange">Geofag 1</a>
+      <a href="pdf/Geofag-2.pdf" target="_blank" class="course orange">Geofag 2</a>
+    </div>
+
+    <!-- Kolonne 6: Teknologi og informatikk -->
+    <div class="card">
+      <h2>Teknologi og informatikk</h2>
+      <a href="pdf/Teknologi-og-forskningslaere-1.pdf" target="_blank" class="course cyan">Teknologi og forskningslære 1</a>
+      <a href="pdf/Teknologi-og-forskningslaere-2.pdf" target="_blank" class="course cyan">Teknologi og forskningslære 2</a>
+      <a href="pdf/Informasjonsteknologi-1.pdf" target="_blank" class="course dark">Informasjonsteknologi 1</a>
+      <a href="pdf/Informasjonsteknologi-2.pdf" target="_blank" class="course dark">Informasjonsteknologi 2</a>
+      <a href="pdf/Programmering-og-modellering-1.pdf" target="_blank" class="course pink">Programmering og modellering 1</a>
+      <a href="pdf/Programmering-og-modellering-2.pdf" target="_blank" class="course pink">Programmering og modellering 2</a>
+    </div>
+
+    <!-- Kolonne 7: Naturfag Vg1 -->
+    <div class="card">
+      <h2>Naturfag Vg1</h2>
+      <a href="pdf/Naturfag.pdf" target="_blank" class="course blue">Naturfag</a>
+    </div>
 
   </div>
+
+  <footer>
+    <p>© Matteforeleseren · <a href="https://github.com/Matteforeleseren/Matteforeleseren">GitHub</a></p>
+  </footer>
+
 </body>
 </html>
