@@ -1,1 +1,400 @@
 
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matematikk for realfagsstudenter</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --lysegrønn: #6BBF59;
+    --mørkegrønn: #1E5F2E;
+    --tekst: #1a1a1a;
+    --muted: #6b7280;
+    --bg: #fafaf7;
+    --border: #e8e8e3;
+
+    --f-bla:     #1F4E79;   /* blå – Matematikk i praksis + Innholdsliste */
+    --f-forkurs: #B8860B;   /* gull */
+    --f-mat101:  #C2185B;   /* bringebær */
+    --f-mat102:  #B71C1C;   /* rød */
+    --f-realfag: #006400;   /* mørkegrønn */
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--tekst);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    padding: 32px 20px 64px;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; }
+
+  .tilbake {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 32px;
+    color: var(--mørkegrønn);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: gap 0.2s;
+  }
+  .tilbake:hover { gap: 10px; }
+
+  .hero { margin-bottom: 40px; }
+
+  .hero .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mørkegrønn);
+    background: #e8f5e4;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: Georgia, serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: #0f172a;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: #4b5563;
+    max-width: 680px;
+    margin-bottom: 12px;
+  }
+
+  /* Oversikt */
+  .oversikt {
+    padding: 24px 28px;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 48px;
+  }
+
+  .oversikt-tittel {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .oversikt-liste {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    list-style: none;
+  }
+
+  .oversikt-liste a {
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+  .oversikt-liste a:hover { opacity: 0.7; }
+
+  /* Seksjoner */
+  section { margin-bottom: 48px; }
+
+  .seksjon-header {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .seksjon-header h2 {
+    font-family: Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: #0f172a;
+    margin-bottom: 4px;
+  }
+
+  .seksjon-header p {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  /* Underseksjon */
+  .underseksjon { margin-top: 24px; }
+  .underseksjon:first-of-type { margin-top: 0; }
+
+  .underseksjon-tittel {
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+  }
+  .underseksjon .meta {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+
+  /* Lenkeliste */
+  .lenke-liste { list-style: none; }
+
+  .lenke-liste li {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0ec;
+    font-size: 0.95rem;
+  }
+  .lenke-liste li:last-child { border-bottom: none; }
+
+  .lenke-liste a {
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+  .lenke-liste a:hover { opacity: 0.7; }
+
+  .lenke-liste .beskrivelse {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 3px;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    font-style: normal;
+  }
+
+  /* Fargeklasser */
+  .f-bla       { color: var(--f-bla); }
+  .f-forkurs   { color: var(--f-forkurs); }
+  .f-mat101    { color: var(--f-mat101); }
+  .f-mat102    { color: var(--f-mat102); }
+  .f-realfag   { color: var(--f-realfag); }
+
+  /* Info-boks */
+  .info-boks {
+    padding: 20px 24px;
+    background: #f0f9ec;
+    border-left: 4px solid var(--lysegrønn);
+    border-radius: 10px;
+    margin-bottom: 40px;
+    font-size: 0.95rem;
+    color: #2c4a2c;
+  }
+  .info-boks strong { color: var(--mørkegrønn); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  footer p { color: var(--muted); font-size: 0.85rem; }
+  footer a {
+    color: var(--mørkegrønn);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 1.7rem; }
+    .oversikt-liste { gap: 8px 18px; }
+    .oversikt-liste a { font-size: 0.92rem; }
+    .lenke-liste a { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <a href="../" class="tilbake">← Tilbake til Matteassistenten</a>
+
+    <div class="hero">
+      <span class="eyebrow">Realfag · Notater · Støttelitteratur</span>
+      <h1>Matematikk for realfagsstudenter</h1>
+      <p>
+        Støttemateriell til brukerkursene i matematikk ved Universitetet i Bergen.
+        Her finner du lenker til læreboken <em>Matematikk i praksis</em>,
+        innholdslisten og heftene som brukes i undervisningen.
+      </p>
+    </div>
+
+    <!-- Oversikt -->
+    <nav class="oversikt" aria-label="Oversikt">
+      <div class="oversikt-tittel">Oversikt</div>
+      <ul class="oversikt-liste">
+        <li><a href="#matematikk-i-praksis" class="f-bla">Matematikk i praksis</a></li>
+        <li><a href="#forkurs" class="f-forkurs">Forkurs</a></li>
+        <li><a href="#mat101" class="f-mat101">Brukerkurs i matematikk I</a></li>
+        <li><a href="#mat102" class="f-mat102">Brukerkurs i matematikk II</a></li>
+        <li><a href="#realfag" class="f-realfag">Matematikk for realfagsstudenter</a></li>
+      </ul>
+    </nav>
+
+    <div class="info-boks">
+      <strong>Tips:</strong> Alle PDF-ene åpnes i en ny fane. Læreboken og innholdslisten
+      lenker til eksterne sider (Universitetsforlaget og Issuu).
+    </div>
+
+    <!-- Matematikk i praksis + Innholdsliste (begge blå) -->
+    <section id="matematikk-i-praksis">
+      <div class="seksjon-header">
+        <h2>📚 Matematikk i praksis</h2>
+        <p>Hovedboken som brukes i begge brukerkursene.</p>
+      </div>
+
+      <ul class="lenke-liste">
+        <li>
+          <a href="https://www.universitetsforlaget.no/matematikk-i-praksis-3" target="_blank" rel="noopener" class="f-bla">
+            Matematikk i praksis (7. utgave)
+          </a>
+          <div class="beskrivelse">Tor H. Gulliksen, Arne Hole, Amir M. Hashemi – Universitetsforlaget</div>
+        </li>
+        <li>
+          <a href="https://issuu.com/universitetsforlaget/docs/sider_fra_9788215062778_gullksen_matematikk_i_prak" target="_blank" rel="noopener" class="f-bla">
+            Innholdsliste
+          </a>
+          <div class="beskrivelse">Forhåndsvisning av bokens innhold (Issuu)</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Forkurs -->
+    <section id="forkurs">
+      <div class="seksjon-header">
+        <h2>🎓 Forkurs</h2>
+        <p>Oppfriskningskurs for nye studenter.</p>
+      </div>
+
+      <ul class="lenke-liste">
+        <li>
+          <a href="pdf/Forkurs-UiB-h24.pdf" target="_blank" class="f-forkurs">
+            Forkurs (oppfriskningskurs kompendium)
+          </a>
+          <div class="beskrivelse">Repetisjon av grunnleggende matematikk før studiestart</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Brukerkurs matematikk I (MAT101) -->
+    <section id="mat101">
+      <div class="seksjon-header">
+        <h2>📘 Brukerkurs matematikk I (MAT101)</h2>
+      </div>
+
+      <div class="underseksjon">
+        <div class="underseksjon-tittel">Støttelitteratur (2025)</div>
+        <ul class="lenke-liste">
+          <li>
+            <a href="pdf/MFR-MAT101-h25.pdf" target="_blank" class="f-mat101">
+              Matematikk for realfagsstudenter (hefte uten fasit)
+            </a>
+            <div class="beskrivelse">Støttehefte til bruk i undervisningen</div>
+          </li>
+          <li>
+            <a href="pdf/MFR-h25.pdf" target="_blank" class="f-mat101">
+              Matematikk for realfagsstudenter (hefte med fasit)
+            </a>
+            <div class="beskrivelse">Samme hefte, med fasit</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="underseksjon">
+        <div class="underseksjon-tittel">Oppgavesamling</div>
+        <div class="meta">Eldre versjon (2005–2025)</div>
+        <ul class="lenke-liste">
+          <li>
+            <a href="pdf/Hefte-Kontrolloppgaver-MiP-ufasit.pdf" target="_blank" class="f-bla">
+              Oppgavesamling (kontrolloppgaver uten fasit)
+            </a>
+            <div class="beskrivelse">Kontrolloppgaver knyttet til Matematikk i praksis</div>
+          </li>
+          <li>
+            <a href="pdf/Hefte-Kontrolloppgaver-Mip-mfasit.pdf" target="_blank" class="f-bla">
+              Oppgavesamling (kontrolloppgaver med fasit)
+            </a>
+            <div class="beskrivelse">Samme oppgaver, med fasit</div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Brukerkurs matematikk II (MAT102) -->
+    <section id="mat102">
+      <div class="seksjon-header">
+        <h2>📕 Brukerkurs matematikk II (MAT102)</h2>
+      </div>
+
+      <div class="underseksjon">
+        <div class="underseksjon-tittel">Støttelitteratur</div>
+        <ul class="lenke-liste">
+          <li>
+            <a href="pdf/MiP-Programmeringsdel.pdf" target="_blank" class="f-mat102">
+              MAT102 – Programmering med Python
+            </a>
+            <div class="beskrivelse">Innføring i programmering knyttet til Matematikk i praksis</div>
+          </li>
+          <li>
+            <span style="font-family: Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--f-mat102);">
+              Med fasit for programmeringsdel i læreboken
+            </span>
+            <div class="beskrivelse">Fasit finnes bakerst i læreboken</div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Matematikk for realfagsstudenter -->
+    <section id="realfag">
+      <div class="seksjon-header">
+        <h2>📗 Matematikk for realfagsstudenter</h2>
+        <p>Støttehefter for emnene i Matematikk 1.</p>
+      </div>
+
+      <ul class="lenke-liste">
+        <li>
+          <a href="pdf/MFR-MAT101-h25.pdf" target="_blank" class="f-realfag">
+            Matematikk for realfagsstudenter (hefte uten fasit)
+          </a>
+          <div class="beskrivelse">Hefte til bruk i undervisningen – uten fasit</div>
+        </li>
+        <li>
+          <a href="pdf/MFR-h25.pdf" target="_blank" class="f-realfag">
+            Matematikk for realfagsstudenter (hefte med fasit)
+          </a>
+          <div class="beskrivelse">Samme hefte, med fasit</div>
+        </li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>© Matteforeleseren · <a href="https://github.com/Matteforeleseren/Matteforeleseren">GitHub</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>
