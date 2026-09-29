@@ -1,1 +1,156 @@
 
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Handout – Matematikk R2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #e6f0fa;
+    color: #1a2b4a;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding: 40px 20px 64px;
+    min-height: 100vh;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* Tilbake */
+  .tilbake {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 24px;
+    color: #1E5F2E;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: gap 0.2s;
+  }
+  .tilbake:hover { gap: 10px; }
+
+  /* Tittel */
+  h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 50px;
+    color: #1a2b4a;
+    letter-spacing: -0.02em;
+  }
+
+  /* Knappe-grid – 2 kolonner */
+  .knappe-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .knapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    min-height: 58px;
+  }
+  .knapp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.2);
+    filter: brightness(1.06);
+  }
+
+  /* Farger – matcher vedlegget */
+  .k-1 { background: #1f6fd6; }   /* blå */
+  .k-2 { background: #1a9e5c; }   /* grønn */
+  .k-3 { background: #d97b00; }   /* oransje-brun */
+  .k-4 { background: #8e44ad; }   /* lilla */
+  .k-5 { background: #e74c3c; }   /* rød */
+  .k-6 { background: #16a085; }   /* teal */
+
+  /* Footer */
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid #cbd8e6;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #6b7280;
+  }
+  footer a {
+    color: #1E5F2E;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  /* Mobil */
+  @media (max-width: 700px) {
+    h1 { font-size: 1.7rem; margin-bottom: 32px; }
+    .knappe-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .knapp { font-size: 0.95rem; padding: 16px 20px; min-height: 52px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="container">
+
+    <a href="../../HandoutVGS/" class="tilbake">← Tilbake til Handout VGS</a>
+
+    <h1>Handout for matematikk R2</h1>
+
+    <div class="knappe-grid">
+
+      <a href="pdf/Handout-R2-Folger-og-rekker.pdf" target="_blank" class="knapp k-1">
+        1 Følger og rekker
+      </a>
+
+      <a href="pdf/Handout-R2-Integrasjon.pdf" target="_blank" class="knapp k-2">
+        2 Integrasjon
+      </a>
+
+      <a href="pdf/Handout-R2-Trigonometri.pdf" target="_blank" class="knapp k-3">
+        3 Trigonometri
+      </a>
+
+      <a href="pdf/Handout-R2-Modeller.pdf" target="_blank" class="knapp k-4">
+        4 Modeller
+      </a>
+
+      <a href="pdf/Handout-R2-Romgeometri.pdf" target="_blank" class="knapp k-5">
+        5 Romgeometri
+      </a>
+
+      <a href="pdf/Handout-R2-Oppgavesamling.pdf" target="_blank" class="knapp k-6">
+        6 Oppgavesamling
+      </a>
+
+    </div>
+
+    <footer>
+      <p>© Matteforeleseren · <a href="https://github.com/Matteforeleseren/Matteforeleseren">GitHub</a></p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
