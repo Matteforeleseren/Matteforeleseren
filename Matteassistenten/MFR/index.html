@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -15,12 +16,15 @@
     --bg: #fafaf7;
     --border: #e8e8e3;
 
-    --f-laerebok:      #B71C1C;   /* rød */
-    --f-innholdsliste: #6B2FA0;   /* lilla */
-    --f-forkurs:       #B8860B;   /* gull */
-    --f-mat101:        #C2185B;   /* bringebær */
-    --f-oppgaver:      #1F4E79;   /* mørk blå */
-    --f-mat102:        #B71C1C;   /* rød */
+    /* Hovedfarger – matcher topp-ordene */
+    --f-mip:       #1a9e5c;   /* grønn – Matematikk i praksis */
+    --f-forkurs:   #d97b00;   /* gull – Forkurs */
+    --f-mat101:    #1f6fd6;   /* blå – Brukerkurs matematikk I */
+    --f-mat102:    #e67e22;   /* oransje – Brukerkurs matematikk II */
+
+    /* Sekundærfarger */
+    --f-innholdsliste: #6B2FA0;   /* lilla – Innholdsliste */
+    --f-oppgaver:      #6B7280;   /* grå – Oppgavesamling */
   }
 
   html { scroll-behavior: smooth; }
@@ -186,13 +190,13 @@
     font-style: normal;
   }
 
-  /* Fargeklasser */
-  .f-laerebok       { color: var(--f-laerebok); }
-  .f-innholdsliste  { color: var(--f-innholdsliste); }
+  /* Fargeklasser – matcher topp-ordene */
+  .f-mip            { color: var(--f-mip); }
   .f-forkurs        { color: var(--f-forkurs); }
   .f-mat101         { color: var(--f-mat101); }
-  .f-oppgaver       { color: var(--f-oppgaver); }
   .f-mat102         { color: var(--f-mat102); }
+  .f-innholdsliste  { color: var(--f-innholdsliste); }
+  .f-oppgaver       { color: var(--f-oppgaver); }
 
   /* Info-boks */
   .info-boks {
@@ -242,11 +246,11 @@
       </p>
     </div>
 
-    <!-- Oversikt – kun 4 ord -->
+    <!-- Oversikt -->
     <nav class="oversikt" aria-label="Oversikt">
       <div class="oversikt-tittel">Oversikt</div>
       <ul class="oversikt-liste">
-        <li><a href="https://www.universitetsforlaget.no/matematikk-i-praksis-3" target="_blank" rel="noopener" class="f-laerebok">Matematikk i praksis</a></li>
+        <li><a href="https://www.universitetsforlaget.no/matematikk-i-praksis-3" target="_blank" rel="noopener" class="f-mip">Matematikk i praksis</a></li>
         <li><a href="pdf/Forkurs-UiB-h24.pdf" target="_blank" class="f-forkurs">Forkurs</a></li>
         <li><a href="pdf/MFR-MAT101-h25.pdf" target="_blank" class="f-mat101">Brukerkurs i matematikk I</a></li>
         <li><a href="pdf/MiP-Programmeringsdel.pdf" target="_blank" class="f-mat102">Brukerkurs i matematikk II</a></li>
@@ -267,7 +271,7 @@
 
       <ul class="lenke-liste">
         <li>
-          <a href="https://www.universitetsforlaget.no/matematikk-i-praksis-3" target="_blank" rel="noopener" class="f-laerebok">
+          <a href="https://www.universitetsforlaget.no/matematikk-i-praksis-3" target="_blank" rel="noopener" class="f-mip">
             Matematikk i praksis (7. utgave)
           </a>
           <div class="beskrivelse">Tor H. Gulliksen, Arne Hole, Amir M. Hashemi – Universitetsforlaget</div>
