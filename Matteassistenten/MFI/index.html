@@ -180,17 +180,10 @@
     margin-top: 4px;
   }
 
-  .ressurs.statisk { cursor: default; }
-  .ressurs.statisk:hover {
-    transform: none;
-    box-shadow: none;
-    border-color: var(--border);
-  }
-  .ressurs.statisk:hover::before { opacity: 0; }
-
-  .ressurs.prog1  { --ressurs-farge: #1F4E79; }
-  .ressurs.prog2  { --ressurs-farge: #2563eb; }
-  .ressurs.notat  { --ressurs-farge: #6BBF59; }
+  /* Fargekoder per kategori */
+  .ressurs.prog1  { --ressurs-farge: #1F4E79; }   /* mørk blå */
+  .ressurs.prog2  { --ressurs-farge: #2563eb; }   /* blå */
+  .ressurs.notat  { --ressurs-farge: #6BBF59; }   /* lysegrønn */
 
   .bok-lenke {
     display: flex;
@@ -366,7 +359,7 @@
       </div>
     </section>
 
-    <!-- Ekstra notater -->
+    <!-- Ekstra notater – klikkbare -->
     <section>
       <div class="seksjon-header">
         <h2>📄 Ekstra notater for Matematikk 2</h2>
@@ -375,32 +368,32 @@
 
       <div class="ressurs-grid tre-kolonner">
 
-        <div class="ressurs notat statisk">
+        <a href="pdf/Notat-Interpolasjon.pdf" target="_blank" class="ressurs notat">
           <div class="ressurs-ikon">📐</div>
           <div class="ressurs-innhold">
             <h3>Interpolasjon</h3>
             <p>Notat om interpolasjon og tilnærming av funksjoner.</p>
-            <span class="meta">Notat</span>
+            <span class="meta">Notat · PDF</span>
           </div>
-        </div>
+        </a>
 
-        <div class="ressurs notat statisk">
+        <a href="pdf/ODE-Difflign-Likevekt.pdf" target="_blank" class="ressurs notat">
           <div class="ressurs-ikon">📈</div>
           <div class="ressurs-innhold">
             <h3>ODE – Diff.lign. og likevekt</h3>
             <p>Differensialligninger og likevektsanalyse.</p>
-            <span class="meta">Notat</span>
+            <span class="meta">Notat · PDF</span>
           </div>
-        </div>
+        </a>
 
-        <div class="ressurs notat statisk">
+        <a href="pdf/Diffusjon-PDE-MAT201.pdf" target="_blank" class="ressurs notat">
           <div class="ressurs-ikon">🌊</div>
           <div class="ressurs-innhold">
             <h3>Diffusjon – PDE</h3>
             <p>Innføring i partielle differensialligninger og diffusjon.</p>
-            <span class="meta">Notat</span>
+            <span class="meta">Notat · PDF</span>
           </div>
-        </div>
+        </a>
 
       </div>
     </section>
