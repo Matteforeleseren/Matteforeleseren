@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -31,7 +30,6 @@
     cursor: none;
   }
 
-  /* ---------- Klokke som følger musen ---------- */
   .klokke {
     position: fixed;
     top: 0;
@@ -49,7 +47,6 @@
     height: 100%;
     overflow: visible;
     filter: drop-shadow(0 6px 18px rgba(30, 95, 46, 0.18));
-    transition: filter 0.3s;
   }
 
   /* ---------- Meny ---------- */
@@ -361,7 +358,7 @@
 </head>
 <body>
 
-  <!-- Klokke som følger musen -->
+  <!-- Klokke som følger musen – fleksibel organisk form -->
   <div class="klokke" id="klokke">
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -504,7 +501,9 @@
   </footer>
 
   <script>
-    // ---------- Klokke som følger musen – fleksibel organisk form ----------
+    // =====================================================
+    // KLOKKE SOM FØLGER MUSEN – MED FLEKSIBEL LUKKET KURVE
+    // =====================================================
     const klokke = document.getElementById('klokke');
     const urskive = document.getElementById('urskive');
     const timeviser = document.getElementById('timeviser');
@@ -519,11 +518,19 @@
     let klokkeY = musY;
     let dratt = false;
 
-    const ANTALL_PUNKTER = 64;
+    const ANTALL_PUNKTER = 72;      // mange punkter for jevn organisk kurve
     const BASIS_RADIUS = 92;
+
+    // To lag med forskyvninger:
+    // - "draw" for den store, organiske deformasjonen (når man drar)
+    // - "myk" for en subtil bølge som gjør kanten levende
     let forskyvninger = new Array(ANTALL_PUNKTER).fill(0);
     let maalforskyvninger = new Array(ANTALL_PUNKTER).fill(0);
 
+    // Støy for organisk form
+    let t = 0;
+
+    // Mus
     document.addEventListener('mousemove', (e) => {
       forrigeMusX = musX;
       forrigeMusY = musY;
@@ -534,15 +541,20 @@
     document.addEventListener('mousedown', () => { dratt = true; });
     document.addEventListener('mouseup', () => { dratt = false; });
 
+    document.addEventListener('touchstart', () => { dratt = true; }, { passive: true });
+    document.addEventListener('touchend', () => { dratt = false; }, { passive: true });
+
     document.addEventListener('touchmove', (e) => {
       if (e.touches[0]) {
         forrigeMusX = musX;
         forrigeMusY = musY;
         musX = e.touches[0].clientX;
         musY = e.touches[0].clientY;
+        dratt = true;
       }
     }, { passive: true });
 
+    // Bygg en jevn, lukket Bézier-kurve fra punktene
     function byggJevnPath(punkter) {
       if (punkter.length < 3) return '';
       const n = punkter.length;
@@ -563,30 +575,60 @@
       return d + 'Z';
     }
 
+    // Enkel støy-funksjon for organisk krumning
+    function stoy(vinkel, tid) {
+      return (
+        Math.sin(vinkel * 2 + tid * 1.3) * 0.55 +
+        Math.sin(vinkel * 3 + tid * 0.9) * 0.30 +
+        Math.sin(vinkel * 5 + tid * 0.6) * 0.15
+      );
+    }
+
     function animer() {
+      t += 0.016;
+
+      // Klokken glir mot musen
       const smootheness = 0.12;
       klokkeX += (musX - klokkeX) * smootheness;
       klokkeY += (musY - klokkeY) * smootheness;
       klokke.style.transform = `translate(${klokkeX}px, ${klokkeY}px) translate(-50%, -50%)`;
 
+      // Musebevegelsens retning og hastighet
       const dx = musX - forrigeMusX;
       const dy = musY - forrigeMusY;
       const hastighet = Math.min(Math.sqrt(dx * dx + dy * dy), 40);
       const retning = Math.atan2(dy, dx);
 
+      // Hvor mye skal deformeres?
+      // Når man IKKE drar: 0 (bare en svak pustende bølge)
+      // Når man drar:     opptil ca. 25-30 px i bevegelsesretningen
       for (let i = 0; i < ANTALL_PUNKTER; i++) {
         const vinkel = (i / ANTALL_PUNKTER) * Math.PI * 2;
+
         if (dratt && hastighet > 0.5) {
+          // Retningsbasert deformasjon: punkter som peker "med" musen strekkes ut
           const samsvar = Math.cos(vinkel - retning);
-          const bolge = Math.sin(vinkel * 3 + Date.now() * 0.003) * 0.15;
-          const deformasjon = (samsvar + bolge) * hastighet * 1.1;
+
+          // Vi bruker en myk "kube"-funksjon for å gi en jevn klump
+          const jevn = Math.sign(samsvar) * Math.pow(Math.abs(samsvar), 1.6);
+
+          // Legg til organisk støy (gjør at kanten ikke blir perfekt symmetrisk)
+          const stoyVerdi = stoy(vinkel, t) * 0.9;
+
+          // Total deformasjon
+          const deformasjon = (jevn * hastighet * 1.6) + stoyVerdi * hastighet * 0.15;
           maalforskyvninger[i] = deformasjon;
         } else {
-          maalforskyvninger[i] = 0;
+          // Rolig sirkel – bare en veldig subtil pust
+          const pust = stoy(vinkel, t) * 0.15;
+          maalforskyvninger[i] = pust;
         }
-        forskyvninger[i] += (maalforskyvninger[i] - forskyvninger[i]) * 0.12;
+
+        // Myk overgang mellom nåværende og mål
+        forskyvninger[i] += (maalforskyvninger[i] - forskyvninger[i]) * 0.15;
       }
 
+      // Bygg punktene rundt klokkens kant
       const punkter = [];
       for (let i = 0; i < ANTALL_PUNKTER; i++) {
         const vinkel = (i / ANTALL_PUNKTER) * Math.PI * 2 - Math.PI / 2;
@@ -602,14 +644,17 @@
     }
     animer();
 
+    // Klokketikking
     function oppdaterKlokke() {
       const naa = new Date();
       const timer = naa.getHours() % 12;
       const minutter = naa.getMinutes();
       const sekunder = naa.getSeconds();
+
       const timeVinkel = (timer * 30) + (minutter * 0.5);
       const minuttVinkel = (minutter * 6) + (sekunder * 0.1);
       const sekundVinkel = sekunder * 6;
+
       timeviser.setAttribute('transform', `rotate(${timeVinkel} 100 100)`);
       minuttviser.setAttribute('transform', `rotate(${minuttVinkel} 100 100)`);
       sekundviser.setAttribute('transform', `rotate(${sekundVinkel} 100 100)`);
