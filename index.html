@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -360,7 +361,7 @@
 </head>
 <body>
 
-  <!-- Klokke som følger musen – fleksibel organisk form -->
+  <!-- Klokke som følger musen -->
   <div class="klokke" id="klokke">
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -370,7 +371,6 @@
         </radialGradient>
       </defs>
 
-      <!-- Selve urskiven – deformeres dynamisk mens man drar -->
       <path id="urskive"
             d="M 100 8 A 92 92 0 1 1 99.9 8 Z"
             fill="url(#skiveGrad)"
@@ -378,7 +378,6 @@
             stroke-width="1.5"
             stroke-opacity="0.35"/>
 
-      <!-- Klassiske romertall -->
       <g id="tall" font-family="Georgia, serif" font-size="12" fill="#1E5F2E" text-anchor="middle" font-weight="600">
         <text x="100" y="26">XII</text>
         <text x="137" y="35">I</text>
@@ -394,7 +393,6 @@
         <text x="63" y="35">XI</text>
       </g>
 
-      <!-- Visere -->
       <g id="visere">
         <line id="timeviser" x1="100" y1="100" x2="100" y2="55"
               stroke="#1E5F2E" stroke-width="3.5" stroke-linecap="round"/>
@@ -404,7 +402,6 @@
               stroke="#6BBF59" stroke-width="1.2" stroke-linecap="round"/>
       </g>
 
-      <!-- Senter -->
       <circle cx="100" cy="100" r="4" fill="#1E5F2E"/>
       <circle cx="100" cy="100" r="1.8" fill="#6BBF59"/>
     </svg>
@@ -416,7 +413,7 @@
       <a href="index.html" class="logo">Matteforeleseren</a>
       <ul class="nav-lenker">
         <li><a href="Matteassistenten/" class="cta">Matteassistenten</a></li>
-        <li><a href="Ommeg/">Om meg</a></li>
+        <li><a href="OmMatteforeleseren/">Om Matteforeleseren</a></li>
       </ul>
     </nav>
   </header>
@@ -435,8 +432,8 @@
         <a href="Matteassistenten/" class="knapp knapp-primær">
           Utforsk Matteassistenten →
         </a>
-        <a href="Ommeg/" class="knapp knapp-sekundær">
-          Les om meg
+        <a href="OmMatteforeleseren/" class="knapp knapp-sekundær">
+          Om Matteforeleseren
         </a>
       </div>
     </div>
@@ -448,7 +445,7 @@
     </div>
   </section>
 
-  <!-- Om meg -->
+  <!-- Om Matteforeleseren -->
   <section class="om-meg">
     <div class="om-meg-bilde">
       <img
@@ -456,7 +453,7 @@
         alt="Matematikk og notater">
     </div>
     <div class="om-meg-tekst">
-      <span class="eyebrow">Litt om meg</span>
+      <span class="eyebrow">Om Matteforeleseren</span>
       <h2>Jeg brenner for matematikk – og for at flere skal lykkes med det.</h2>
       <p>
         Gjennom mange år som foreleser og forfatter har jeg sett hvor stor forskjell
@@ -490,9 +487,9 @@
         <span class="pil">Gå til portalen →</span>
       </a>
 
-      <a href="Ommeg/" class="kort">
+      <a href="OmMatteforeleseren/" class="kort">
         <div class="ikon">👋</div>
-        <h3>Om meg</h3>
+        <h3>Om Matteforeleseren</h3>
         <p>
           Bakgrunn, erfaring og engasjement. Les mer om hvem som står bak
           Matteforeleseren og hvorfor jeg lager disse ressursene.
@@ -522,16 +519,11 @@
     let klokkeY = musY;
     let dratt = false;
 
-    // Vi lager en lukket kurve med mange punkter rundt klokkens kant.
-    // Mens du drar, forskyves punktene basert på musens posisjon,
-    // og danner en organisk "blob"-fasong. Når du slipper, går alt
-    // mykt tilbake til en perfekt sirkel.
     const ANTALL_PUNKTER = 64;
     const BASIS_RADIUS = 92;
     let forskyvninger = new Array(ANTALL_PUNKTER).fill(0);
     let maalforskyvninger = new Array(ANTALL_PUNKTER).fill(0);
 
-    // Musebevegelse
     document.addEventListener('mousemove', (e) => {
       forrigeMusX = musX;
       forrigeMusY = musY;
@@ -539,15 +531,9 @@
       musY = e.clientY;
     });
 
-    // Klikk = "dra"
-    document.addEventListener('mousedown', () => {
-      dratt = true;
-    });
-    document.addEventListener('mouseup', () => {
-      dratt = false;
-    });
+    document.addEventListener('mousedown', () => { dratt = true; });
+    document.addEventListener('mouseup', () => { dratt = false; });
 
-    // Touch
     document.addEventListener('touchmove', (e) => {
       if (e.touches[0]) {
         forrigeMusX = musX;
@@ -557,33 +543,26 @@
       }
     }, { passive: true });
 
-    // Hjelpefunksjon: bygg en jevn kurve fra punkter (lukket)
-    // Catmull-Rom til Bezier for myk kurve.
     function byggJevnPath(punkter) {
       if (punkter.length < 3) return '';
       const n = punkter.length;
       let d = 'M ' + punkter[0].x.toFixed(2) + ' ' + punkter[0].y.toFixed(2) + ' ';
-
       for (let i = 0; i < n; i++) {
         const p0 = punkter[(i - 1 + n) % n];
         const p1 = punkter[i];
         const p2 = punkter[(i + 1) % n];
         const p3 = punkter[(i + 2) % n];
-
         const cp1x = p1.x + (p2.x - p0.x) / 6;
         const cp1y = p1.y + (p2.y - p0.y) / 6;
         const cp2x = p2.x - (p3.x - p1.x) / 6;
         const cp2y = p2.y - (p3.y - p1.y) / 6;
-
-        d += 'C ' +
-          cp1x.toFixed(2) + ' ' + cp1y.toFixed(2) + ', ' +
-          cp2x.toFixed(2) + ' ' + cp2y.toFixed(2) + ', ' +
-          p2.x.toFixed(2) + ' ' + p2.y.toFixed(2) + ' ';
+        d += 'C ' + cp1x.toFixed(2) + ' ' + cp1y.toFixed(2) + ', ' +
+             cp2x.toFixed(2) + ' ' + cp2y.toFixed(2) + ', ' +
+             p2.x.toFixed(2) + ' ' + p2.y.toFixed(2) + ' ';
       }
       return d + 'Z';
     }
 
-    // Animasjon
     function animer() {
       const smootheness = 0.12;
       klokkeX += (musX - klokkeX) * smootheness;
@@ -597,7 +576,6 @@
 
       for (let i = 0; i < ANTALL_PUNKTER; i++) {
         const vinkel = (i / ANTALL_PUNKTER) * Math.PI * 2;
-
         if (dratt && hastighet > 0.5) {
           const samsvar = Math.cos(vinkel - retning);
           const bolge = Math.sin(vinkel * 3 + Date.now() * 0.003) * 0.15;
@@ -606,7 +584,6 @@
         } else {
           maalforskyvninger[i] = 0;
         }
-
         forskyvninger[i] += (maalforskyvninger[i] - forskyvninger[i]) * 0.12;
       }
 
@@ -621,22 +598,18 @@
       }
 
       urskive.setAttribute('d', byggJevnPath(punkter));
-
       requestAnimationFrame(animer);
     }
     animer();
 
-    // ---------- Klokken tikker ----------
     function oppdaterKlokke() {
       const naa = new Date();
       const timer = naa.getHours() % 12;
       const minutter = naa.getMinutes();
       const sekunder = naa.getSeconds();
-
       const timeVinkel = (timer * 30) + (minutter * 0.5);
       const minuttVinkel = (minutter * 6) + (sekunder * 0.1);
       const sekundVinkel = sekunder * 6;
-
       timeviser.setAttribute('transform', `rotate(${timeVinkel} 100 100)`);
       minuttviser.setAttribute('transform', `rotate(${minuttVinkel} 100 100)`);
       sekundviser.setAttribute('transform', `rotate(${sekundVinkel} 100 100)`);
