@@ -1,454 +1,204 @@
-
 <!DOCTYPE html>
 <html lang="no">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vedlegg – Om Matteforeleseren</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vedlegg – Forskning, undervisning og formidling</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  :root {
-    --lysegrønn: #6BBF59;
-    --mørkegrønn: #1E5F2E;
-    --tekst: #1a1a1a;
-    --muted: #6b7280;
-    --bg: #fafaf7;
-    --border: #e8e8e3;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #e6f0fa;
+      color: #1a2b4a;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
 
-    --f-attest:        #B71C1C;   /* rød */
-    --f-forskning:     #0E7490;   /* mørk teal */
-    --f-publikasjon:   #1F4E79;   /* mørk blå */
-    --f-poster:        #B8860B;   /* gull */
-    --f-kursbevis:     #16A34A;   /* grønn */
-  }
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #1a2b4a;
+    }
 
-  html { scroll-behavior: smooth; }
+    .subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #4a5c7a;
+      margin-bottom: 45px;
+    }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--tekst);
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-    padding: 32px 20px 64px;
-  }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-  .container { max-width: 900px; margin: 0 auto; }
+    .card {
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 30px 25px;
+      flex: 1 1 320px;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-  .tilbake {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 32px;
-    color: var(--mørkegrønn);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: gap 0.2s;
-  }
-  .tilbake:hover { gap: 10px; }
+    .card h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #1a2b4a;
+    }
 
-  .hero { margin-bottom: 40px; }
+    .item {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #ffffff;
+      margin-bottom: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+      line-height: 1.4;
+    }
 
-  .hero .eyebrow {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--mørkegrønn);
-    background: #e8f5e4;
-    padding: 6px 14px;
-    border-radius: 999px;
-    margin-bottom: 20px;
-  }
+    .item:last-child {
+      margin-bottom: 0;
+    }
 
-  .hero h1 {
-    font-family: Georgia, serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    margin-bottom: 16px;
-    color: #0f172a;
-  }
+    .item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
 
-  .hero p {
-    font-size: 1.05rem;
-    color: #4b5563;
-    max-width: 680px;
-  }
+    .item .num {
+      display: inline-block;
+      font-weight: 700;
+      margin-right: 6px;
+      opacity: 0.85;
+    }
 
-  /* Oversikt øverst */
-  .oversikt {
-    padding: 24px 28px;
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    margin-bottom: 48px;
-  }
+    .item .pdf {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-top: 4px;
+      font-style: italic;
+    }
 
-  .oversikt-tittel {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 16px;
-  }
+    /* Farger */
+    .blue   { background-color: #1f6fd6; }
+    .green  { background-color: #1a9e5c; }
+    .orange { background-color: #d97b00; }
+    .purple { background-color: #8e44ad; }
+    .red    { background-color: #c0392b; }
+    .teal   { background-color: #1a9e8a; }
+    .dark   { background-color: #2c3e50; }
+    .brown  { background-color: #8b5a2b; }
+    .pink   { background-color: #c2185b; }
+    .indigo { background-color: #3f51b5; }
+    .cyan   { background-color: #0097a7; }
 
-  .oversikt-liste {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 28px;
-    list-style: none;
-  }
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 1.6rem;
+      }
 
-  .oversikt-liste a {
-    font-family: Georgia, serif;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-bottom: 1px dotted currentColor;
-    padding-bottom: 2px;
-    transition: opacity 0.2s;
-  }
-  .oversikt-liste a:hover { opacity: 0.7; }
+      .card {
+        padding: 20px;
+      }
 
-  /* Seksjoner */
-  section { margin-bottom: 48px; }
+      .card h2 {
+        font-size: 1.2rem;
+      }
 
-  .seksjon-header {
-    margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .seksjon-header h2 {
-    font-family: Georgia, serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    color: #0f172a;
-    margin-bottom: 4px;
-  }
-
-  .seksjon-header p {
-    font-size: 0.95rem;
-    color: var(--muted);
-  }
-
-  /* Lenkeliste */
-  .lenke-liste { list-style: none; }
-
-  .lenke-liste li {
-    padding: 12px 0;
-    border-bottom: 1px solid #f0f0ec;
-    font-size: 0.95rem;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-  }
-  .lenke-liste li:last-child { border-bottom: none; }
-
-  .lenke-liste .nr {
-    font-family: Georgia, serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--muted);
-    flex-shrink: 0;
-    min-width: 28px;
-    padding-top: 2px;
-  }
-
-  .lenke-liste .innhold {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .lenke-liste a {
-    font-family: Georgia, serif;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-bottom: 1px dotted currentColor;
-    padding-bottom: 2px;
-    transition: opacity 0.2s;
-  }
-  .lenke-liste a:hover { opacity: 0.7; }
-
-  .lenke-liste .beskrivelse {
-    color: var(--muted);
-    font-size: 0.88rem;
-    margin-top: 3px;
-  }
-
-  /* Fargeklasser */
-  .f-attest      { color: var(--f-attest); }
-  .f-forskning   { color: var(--f-forskning); }
-  .f-publikasjon { color: var(--f-publikasjon); }
-  .f-poster      { color: var(--f-poster); }
-  .f-kursbevis   { color: var(--f-kursbevis); }
-
-  /* Info-boks */
-  .info-boks {
-    padding: 20px 24px;
-    background: #f0f9ec;
-    border-left: 4px solid var(--lysegrønn);
-    border-radius: 10px;
-    margin-bottom: 40px;
-    font-size: 0.95rem;
-    color: #2c4a2c;
-  }
-  .info-boks strong { color: var(--mørkegrønn); }
-
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 32px 24px;
-    text-align: center;
-  }
-  footer p { color: var(--muted); font-size: 0.85rem; }
-  footer a {
-    color: var(--mørkegrønn);
-    text-decoration: none;
-    font-weight: 500;
-  }
-  footer a:hover { text-decoration: underline; }
-
-  @media (max-width: 720px) {
-    .hero h1 { font-size: 1.7rem; }
-    .oversikt-liste { gap: 8px 18px; }
-    .oversikt-liste a { font-size: 0.92rem; }
-    .lenke-liste a { font-size: 0.95rem; }
-  }
-</style>
+      .item {
+        font-size: 0.95rem;
+        padding: 12px 14px;
+      }
+    }
+  </style>
 </head>
 <body>
+
+  <h1>Vedlegg</h1>
+  <p class="subtitle">Forskning, undervisning, lærebøker, formidling og kompetanseheving</p>
+
   <div class="container">
 
-    <a href="../../" class="tilbake">← Tilbake til Matteforeleseren</a>
-
-    <div class="hero">
-      <span class="eyebrow">Vedlegg · Attester · Publikasjoner</span>
-      <h1>Vedlegg</h1>
-      <p>
-        Samling av attester og anbefalinger, forskningsarbeid, publikasjoner,
-        postere og kursbevis – alle som nedlastbare PDF-er.
-      </p>
-    </div>
-
-    <!-- Oversikt øverst med farger -->
-    <nav class="oversikt" aria-label="Oversikt">
-      <div class="oversikt-tittel">Oversikt</div>
-      <ul class="oversikt-liste">
-        <li><a href="#attester" class="f-attest">Attester og anbefalinger</a></li>
-        <li><a href="#forskning" class="f-forskning">Forskningsarbeid</a></li>
-        <li><a href="#publikasjoner" class="f-publikasjon">Publikasjoner</a></li>
-        <li><a href="#postere" class="f-poster">Postere</a></li>
-        <li><a href="#kursbevis" class="f-kursbevis">Kursbevis</a></li>
-      </ul>
-    </nav>
-
-    <div class="info-boks">
-      <strong>Tips:</strong> Alle vedlegg åpnes som PDF i en ny fane. Du kan laste
-      dem ned eller skrive dem ut etter behov.
-    </div>
-
-    <!-- Attester og anbefalinger -->
-    <section id="attester">
-      <div class="seksjon-header">
-        <h2 class="f-attest">📜 Attester og anbefalinger</h2>
-        <p>Attester og anbefalinger fra institusjoner, kolleger og samarbeidspartnere.</p>
-      </div>
-
-      <ul class="lenke-liste">
-        <li>
-          <span class="nr">1)</span>
-          <div class="innhold">
-            <a href="pdf/V1.pdf" target="_blank" class="f-attest">
-              Instituttleder, Matematisk institutt ved UiB
-            </a>
-            <div class="beskrivelse">Attest</div>
-          </div>
-        </li>
-        <li>
-          <span class="nr">2)</span>
-          <div class="innhold">
-            <a href="pdf/V2.pdf" target="_blank" class="f-attest">
-              Anbefaling fra leder ved HVL
-            </a>
-            <div class="beskrivelse">Attest</div>
-          </div>
-        </li>
-        <li>
-          <span class="nr">3)</span>
-          <div class="innhold">
-            <a href="pdf/V3.pdf" target="_blank" class="f-attest">
-              Matematisk institutt, UiB
-            </a>
-            <div class="beskrivelse">Anbefaling</div>
-          </div>
-        </li>
-        <li>
-          <span class="nr">4)</span>
-          <div class="innhold">
-            <a href="pdf/V4.pdf" target="_blank" class="f-attest">
-              NTNU-samarbeid
-            </a>
-            <div class="beskrivelse">Anbefaling</div>
-          </div>
-        </li>
-        <li>
-          <span class="nr">5)</span>
-          <div class="innhold">
-            <a href="pdf/V5.pdf" target="_blank" class="f-attest">
-              Fra seminarleder ved MAT101 og fra ENT3R-prosjektleder
-            </a>
-            <div class="beskrivelse">Anbefaling</div>
-          </div>
-        </li>
-        <li>
-          <span class="nr">6)</span>
-          <div class="innhold">
-            <a href="pdf/V6.pdf" target="_blank" class="f-attest">
-              Fra Universitetet i Innlandet
-            </a>
-            <div class="beskrivelse">Anbefaling</div>
-          </div>
-        </li>
-        <li>
-          <span class="nr">7)</span>
-          <div class="innhold">
-            <a href="pdf/V7.pdf" target="_blank" class="f-attest">
-              Erasmus – Universidad Politécnica de Valencia
-            </a>
-            <div class="beskrivelse">Anbefaling</div>
-          </div>
-        </li>
-      </ul>
-    </section>
-
     <!-- Forskningsarbeid -->
-    <section id="forskning">
-      <div class="seksjon-header">
-        <h2 class="f-forskning">🔬 Forskningsarbeid</h2>
-        <p>Prosjektarbeid og forskningsbidrag.</p>
+    <div class="card">
+      <h2>Forskningsarbeid</h2>
+      <div class="item blue">
+        <span class="num">1)</span> Assisting first-year students Design Their Destiny
+        <span class="pdf">V5.pdf</span>
       </div>
-
-      <ul class="lenke-liste">
-        <li>
-          <span class="nr">8)</span>
-          <div class="innhold">
-            <a href="pdf/V8.pdf" target="_blank" class="f-forskning">
-              Nansen senter for miljø og fjernmåling
-            </a>
-            <div class="beskrivelse">Forskningsarbeid</div>
-          </div>
-        </li>
-        <li>
-          <span class="nr">9)</span>
-          <div class="innhold">
-            <a href="pdf/V9.pdf" target="_blank" class="f-forskning">
-              AMOC-prosjekt 1
-            </a>
-            <div class="beskrivelse">Forskningsarbeid</div>
-          </div>
-        </li>
-        <li>
-          <span class="nr">10)</span>
-          <div class="innhold">
-            <a href="pdf/V10.pdf" target="_blank" class="f-forskning">
-              AMOC-prosjekt 2
-            </a>
-            <div class="beskrivelse">Forskningsarbeid</div>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Publikasjoner -->
-    <section id="publikasjoner">
-      <div class="seksjon-header">
-        <h2 class="f-publikasjon">📚 Publikasjoner</h2>
-        <p>Faglige publikasjoner og lærebøker.</p>
+      <div class="item green">
+        <span class="num">2)</span> Problem-Based Learning and Talking Mathematics
+        <span class="pdf">V6.pdf</span>
       </div>
-
-      <ul class="lenke-liste">
-        <li>
-          <span class="nr">11)</span>
-          <div class="innhold">
-            <a href="pdf/V11.pdf" target="_blank" class="f-publikasjon">
-              Publikasjon 1
-            </a>
-            <div class="beskrivelse">Publikasjon</div>
-          </div>
-        </li>
-        <li>
-          <span class="nr">12)</span>
-          <div class="innhold">
-            <a href="pdf/V12.pdf" target="_blank" class="f-publikasjon">
-              Publikasjon 2
-            </a>
-            <div class="beskrivelse">Publikasjon</div>
-          </div>
-        </li>
-        <li>
-          <span class="nr">13)</span>
-          <div class="innhold">
-            <a href="pdf/V13.pdf" target="_blank" class="f-publikasjon">
-              Støttebok for matematikk 1 og 2, og Precalculus Compendium
-            </a>
-            <div class="beskrivelse">Mine forkursnotater oversatt av leder til norsk matematikkråd</div>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Postere -->
-    <section id="postere">
-      <div class="seksjon-header">
-        <h2 class="f-poster">🖼️ Postere</h2>
-        <p>Postere fra konferanser og prosjekter.</p>
+      <div class="item orange">
+        <span class="num">3)</span> Math-talk – EFYE 2016, Ghent
+        <span class="pdf">V7.pdf</span>
       </div>
-
-      <ul class="lenke-liste">
-        <li>
-          <span class="nr">14)</span>
-          <div class="innhold">
-            <a href="pdf/V14.pdf" target="_blank" class="f-poster">
-              Poster 1 og Poster 2
-            </a>
-            <div class="beskrivelse">Postere</div>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Kursbevis -->
-    <section id="kursbevis">
-      <div class="seksjon-header">
-        <h2 class="f-kursbevis">🎓 Kursbevis</h2>
-        <p>Pedagogiske og kompetansehevingsmoduler.</p>
+      <div class="item purple">
+        <span class="num">4)</span> Å tilrettelegge for at lektorstudenten lærer å lære fra seg
+        <span class="pdf">V9b.pdf</span>
       </div>
+    </div>
 
-      <ul class="lenke-liste">
-        <li>
-          <span class="nr">15)</span>
-          <div class="innhold">
-            <a href="pdf/V15.pdf" target="_blank" class="f-kursbevis">
-              Kursbevis (pedagogiske og kompetansehevingsmoduler)
-            </a>
-            <div class="beskrivelse">Kursbevis</div>
-          </div>
-        </li>
-      </ul>
-    </section>
+    <!-- Rapporter og presentasjoner -->
+    <div class="card">
+      <h2>Rapporter og presentasjoner</h2>
+      <div class="item red">
+        <span class="num">9)</span> KI i matematikkundervisning
+      </div>
+      <div class="item teal">
+        <span class="num">10)</span> KI som læringspartner i medikamentregning
+      </div>
+      <div class="item dark">
+        <span class="num">11)</span> KI som læringsverktøy og læringspartner for lærerstudenter
+      </div>
+    </div>
 
-    <footer>
-      <p>© Matteforeleseren · <a href="https://github.com/Matteforeleseren/Matteforeleseren">GitHub</a></p>
-    </footer>
+    <!-- Lærebøker -->
+    <div class="card">
+      <h2>Lærebøker</h2>
+      <div class="item brown">
+        <span class="num">12)</span> Støttebok
+      </div>
+      <div class="item indigo">
+        <span class="num">13)</span> Matematikk 1, 2 og 3 for ingeniørstudenter
+      </div>
+    </div>
+
+    <!-- Postere og kurs -->
+    <div class="card">
+      <h2>Postere og kurs</h2>
+      <div class="item pink">
+        <span class="num">14)</span> Postere
+      </div>
+      <div class="item cyan">
+        <span class="num">15)</span> Kurs – pedagogiske og kompetansehevingsmoduler
+      </div>
+    </div>
 
   </div>
+
 </body>
 </html>
