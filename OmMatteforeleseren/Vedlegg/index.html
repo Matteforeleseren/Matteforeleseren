@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -80,7 +81,6 @@
     max-width: 680px;
   }
 
-  /* Oversikt øverst */
   .oversikt {
     padding: 24px 28px;
     background: #ffffff;
@@ -116,7 +116,6 @@
   }
   .oversikt-liste a:hover { opacity: 0.7; }
 
-  /* Seksjoner */
   section { margin-bottom: 48px; }
 
   .seksjon-header {
@@ -139,7 +138,6 @@
     color: var(--muted);
   }
 
-  /* Lenkeliste */
   .lenke-liste { list-style: none; }
 
   .lenke-liste li {
@@ -184,7 +182,6 @@
     margin-top: 3px;
   }
 
-  /* Fargeklasser */
   .f-attest      { color: var(--f-attest); }
   .f-acoustics   { color: var(--f-acoustics); }
   .f-ki          { color: var(--f-ki); }
@@ -192,7 +189,6 @@
   .f-poster      { color: var(--f-poster); }
   .f-kurs        { color: var(--f-kurs); }
 
-  /* Info-boks */
   .info-boks {
     padding: 20px 24px;
     background: #f0f9ec;
@@ -235,11 +231,10 @@
       <h1>Vedlegg</h1>
       <p>
         Samling av attester og anbefalinger, forskningsarbeid, rapporter,
-        lærebøker, postere og kurs – alle som nedlastbare PDF-er.
+        lærebøker, postere og kurs – alle som nedlastbare PDF-er eller lenker.
       </p>
     </div>
 
-    <!-- Oversikt øverst med farger -->
     <nav class="oversikt" aria-label="Oversikt">
       <div class="oversikt-tittel">Oversikt</div>
       <ul class="oversikt-liste">
@@ -253,8 +248,8 @@
     </nav>
 
     <div class="info-boks">
-      <strong>Tips:</strong> Alle vedlegg åpnes som PDF i en ny fane. Du kan laste
-      dem ned eller skrive dem ut etter behov.
+      <strong>Tips:</strong> Alle PDF-ene åpnes i en ny fane. Lærebok-lenkene går til
+      eksterne sider (Fagbokforlaget).
     </div>
 
     <!-- Attester og anbefalinger -->
@@ -400,16 +395,20 @@
         <li>
           <span class="nr">12)</span>
           <div class="innhold">
-            <a href="pdf/V12.pdf" target="_blank" class="f-laerebok">
-              Støttebok
+            <a href="https://fagbokforlaget.no/produkt/9788245052114-matematikk-for-ingeniorutdanning"
+               target="_blank" rel="noopener" class="f-laerebok">
+              Støttebok for Matematikk 1, 2 og 3 for ingeniørstudenter
             </a>
-            <div class="beskrivelse">Lærebok</div>
+            <div class="beskrivelse">
+              Oversettelse av forkursnotater for ingeniørstudenter, utgitt av Norsk matematikkråd
+            </div>
           </div>
         </li>
         <li>
           <span class="nr">13)</span>
           <div class="innhold">
-            <a href="pdf/V13.pdf" target="_blank" class="f-laerebok">
+            <a href="https://fagbokforlaget.no/produkt/9788245052114-matematikk-for-ingeniorutdanning"
+               target="_blank" rel="noopener" class="f-laerebok">
               Matematikk 1, 2 og 3 for ingeniørstudenter
             </a>
             <div class="beskrivelse">Lærebok</div>
