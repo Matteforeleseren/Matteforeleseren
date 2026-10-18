@@ -14,6 +14,7 @@
     --med-teal: #0d9488;
     --med-red: #dc2626;
     --med-purple: #7e22ce;
+    --med-orange: #d97706;
     
     --tekst: #1a1a1a;
     --muted: #6b7280;
@@ -83,10 +84,10 @@
     margin: 0 auto 16px auto;
   }
 
-  /* Grid for de tre hovedkortene */
+  /* Grid for hovedkortene */
   .hoved-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
     margin-bottom: 48px;
   }
@@ -109,7 +110,6 @@
   .hoved-kort:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px -4px rgba(0,0,0,0.08);
-    border-color: var(--med-blue);
   }
 
   .hoved-kort .icon-wrapper {
@@ -137,6 +137,10 @@
 
   .kort-stige .icon-wrapper { background: #f3e8ff; color: #7e22ce; }
   .kort-stige:hover { border-color: #7e22ce; }
+
+  /* NYTT KORT: Medimatiker */
+  .kort-medimatiker .icon-wrapper { background: #fef3c7; color: #d97706; }
+  .kort-medimatiker:hover { border-color: #d97706; }
 
   .hoved-kort .kort-tittel {
     font-family: Georgia, serif;
@@ -206,7 +210,7 @@
       <p class="subtitle">
         Her finner du alt du trenger for å øve på medikamentregning. 
         Bruk læringsmappen for teori og oppgaver, stigen for å se progresjonen, 
-        og kalkulatoren for å kontrollere egne utregninger.
+        og verktøyene for å kontrollere egne utregninger.
       </p>
     </div>
 
@@ -225,7 +229,7 @@
       </a>
 
       <!-- Kort 2: Medikamentkalkulator -->
-      <a href="MedikamentKalkulator/index.html" class="hoved-kort kort-kalkulator">
+      <a href="MedikamentKalkultor/index.html" class="hoved-kort kort-kalkulator">
         <div class="icon-wrapper">
           <i class="fa-solid fa-calculator"></i>
         </div>
@@ -246,6 +250,18 @@
         </div>
       </a>
 
+      <!-- Kort 4: Medimatiker (NYTT) -->
+      <!-- HUSK: Bytt ut "#" med den faktiske lenken til Medimatiker -->
+      <a href="#" target="_blank" class="hoved-kort kort-medimatiker">
+        <div class="icon-wrapper">
+          <i class="fa-solid fa-laptop-medical"></i>
+        </div>
+        <div class="kort-tittel">Medimatiker</div>
+        <div class="kort-beskrivelse">
+          Interaktive læringsressurser og oppgaver innen medisinsk matematikk.
+        </div>
+      </a>
+
     </div>
 
     <!-- Pedagogisk Advarsel -->
@@ -254,7 +270,7 @@
       <div>
         <p><strong>Viktig om verktøyene:</strong></p>
         <p>
-          Både <strong>Medikamentkalkulatoren</strong> og <strong>Medikamentregning-stigen</strong> er kun ment som en <em>pedagogisk støtte for å kontrollere svarene du allerede har regnet ut selv</em>. 
+          Både <strong>Medikamentkalkulatoren</strong>, <strong>Medikamentregning-stigen</strong> og <strong>Medimatiker</strong> er kun ment som en <em>pedagogisk støtte for å kontrollere svarene du allerede har regnet ut selv</em>. 
           De er ikke en fasit-maskin eller en erstatning for å lære selve regnemetoden.
         </p>
         <p>
