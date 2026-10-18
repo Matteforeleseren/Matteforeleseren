@@ -1,1 +1,493 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legemiddelregning – kalkulatorer</title>
+<style>
+  :root {
+    --bg: #f7f9fb;
+    --card: #ffffff;
+    --primary: #1a6db5;
+    --primary-dark: #144f85;
+    --border: #dfe6ee;
+    --text: #1f2933;
+    --muted: #5f6b7a;
+    --warn-bg: #fff6e5;
+    --warn-border: #f0b429;
+    --ok: #1f8a4c;
+    --danger: #c0392b;
+  }
 
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  header {
+    background: var(--primary);
+    color: white;
+    padding: 24px 16px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 4px; font-size: 1.5rem; }
+  header p  { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+
+  .disclaimer {
+    background: var(--warn-bg);
+    border-left: 4px solid var(--warn-border);
+    padding: 14px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+  }
+  .disclaimer strong { display: block; margin-bottom: 4px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .calc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 18px 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .calc h2 {
+    font-size: 1rem;
+    margin: 0 0 12px;
+    color: var(--primary-dark);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .calc h2 .num {
+    background: var(--primary);
+    color: white;
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .field {
+    margin-bottom: 10px;
+  }
+  .field label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+  .field input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: #fff;
+  }
+  .field input:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: -1px;
+    border-color: var(--primary);
+  }
+  .field input.inline-short { width: 100px; display: inline-block; }
+
+  .result {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: #eef6fc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    min-height: 1.4em;
+  }
+  .result .value {
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-size: 1.05rem;
+  }
+  .result.ok     { background: #e7f6ed; color: var(--ok); font-weight: 600; }
+  .result.danger { background: #fdecea; color: var(--danger); font-weight: 600; }
+  .result .hint  { color: var(--muted); font-size: 0.85rem; font-weight: normal; }
+
+  .reset {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  .reset:hover { background: var(--bg); }
+
+  footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding: 24px 16px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Legemiddelregning</h1>
+  <p>Enkle kalkulatorer for vanlige doseringsberegninger</p>
+</header>
+
+<main>
+
+  <div class="disclaimer">
+    <strong>⚠️ Viktig informasjon</strong>
+    Dette er et hjelpeverktøy. Verktøyet fastsetter <em>ikke</em> indikasjon, anbefalt dose eller behandlingsvalg, og tar ikke hensyn til nyre-/leverfunksjon, interaksjoner eller pasientens kliniske tilstand. Kontroller alltid resultatet mot Felleskatalogen/SPC, lokale prosedyrer og pasientens forhold før legemidlet gis. Bruk av verktøyet er på eget ansvar.
+  </div>
+
+  <div class="grid">
+
+    <!-- 1 -->
+    <section class="calc">
+      <h2><span class="num">1</span> mg/kg → mengde per dose</h2>
+      <div class="field">
+        <label>Vekt (kg)</label>
+        <input type="text" inputmode="decimal" id="c1_vekt">
+      </div>
+      <div class="field">
+        <label>Dose (mg/kg)</label>
+        <input type="text" inputmode="decimal" id="c1_dose">
+      </div>
+      <div class="result" id="c1_out">–</div>
+    </section>
+
+    <!-- 2 -->
+    <section class="calc">
+      <h2><span class="num">2</span> mg/kg/døgn fordelt på doser</h2>
+      <div class="field">
+        <label>Vekt (kg)</label>
+        <input type="text" inputmode="decimal" id="c2_vekt">
+      </div>
+      <div class="field">
+        <label>Dose (mg/kg/døgn)</label>
+        <input type="text" inputmode="decimal" id="c2_dose">
+      </div>
+      <div class="field">
+        <label>Antall doser per døgn</label>
+        <input type="text" inputmode="decimal" id="c2_antall">
+      </div>
+      <div class="result" id="c2_out">–</div>
+    </section>
+
+    <!-- 3 -->
+    <section class="calc">
+      <h2><span class="num">3</span> Antall tabletter</h2>
+      <div class="field">
+        <label>Ønsket dose (mg)</label>
+        <input type="text" inputmode="decimal" id="c3_dose">
+      </div>
+      <div class="field">
+        <label>Tablettstyrke (mg)</label>
+        <input type="text" inputmode="decimal" id="c3_styrke">
+      </div>
+      <div class="result" id="c3_out">–</div>
+    </section>
+
+    <!-- 4 -->
+    <section class="calc">
+      <h2><span class="num">4</span> Mikstur – ml per dose</h2>
+      <div class="field">
+        <label>Ønsket dose (mg)</label>
+        <input type="text" inputmode="decimal" id="c4_dose">
+      </div>
+      <div class="field">
+        <label>Konsentrasjon (mg/ml)</label>
+        <input type="text" inputmode="decimal" id="c4_kons">
+      </div>
+      <div class="result" id="c4_out">–</div>
+    </section>
+
+    <!-- 5 -->
+    <section class="calc">
+      <h2><span class="num">5</span> Infusjon – mg/time → ml/time</h2>
+      <div class="field">
+        <label>Ordinert dose (mg/time)</label>
+        <input type="text" inputmode="decimal" id="c5_mg">
+      </div>
+      <div class="field">
+        <label>Løsningskonsentrasjon (mg/ml)</label>
+        <input type="text" inputmode="decimal" id="c5_kons">
+      </div>
+      <div class="result" id="c5_out">–</div>
+    </section>
+
+    <!-- 6 -->
+    <section class="calc">
+      <h2><span class="num">6</span> Infusjon – µg/kg/min → ml/time</h2>
+      <div class="field">
+        <label>Vekt (kg)</label>
+        <input type="text" inputmode="decimal" id="c6_vekt">
+      </div>
+      <div class="field">
+        <label>Dose (µg/kg/min)</label>
+        <input type="text" inputmode="decimal" id="c6_dose">
+      </div>
+      <div class="field">
+        <label>Konsentrasjon (mg/ml)</label>
+        <input type="text" inputmode="decimal" id="c6_kons">
+      </div>
+      <div class="result" id="c6_out">–</div>
+    </section>
+
+    <!-- 7 -->
+    <section class="calc">
+      <h2><span class="num">7</span> Fortynning fra konsentrat</h2>
+      <div class="field">
+        <label>Ønsket konsentrasjon (mg/ml)</label>
+        <input type="text" inputmode="decimal" id="c7_onsket">
+      </div>
+      <div class="field">
+        <label>Sluttvolum (ml)</label>
+        <input type="text" inputmode="decimal" id="c7_volum">
+      </div>
+      <div class="field">
+        <label>Konsentratets styrke (mg/ml)</label>
+        <input type="text" inputmode="decimal" id="c7_kons">
+      </div>
+      <div class="result" id="c7_out">–</div>
+    </section>
+
+    <!-- 8 -->
+    <section class="calc">
+      <h2><span class="num">8</span> Prosentløsning → mg/ml</h2>
+      <div class="field">
+        <label>Prosentstyrke (%)</label>
+        <input type="text" inputmode="decimal" id="c8_pct">
+      </div>
+      <div class="result" id="c8_out">–</div>
+    </section>
+
+    <!-- 9 -->
+    <section class="calc">
+      <h2><span class="num">9</span> Dråpetakt</h2>
+      <div class="field">
+        <label>Volum (ml)</label>
+        <input type="text" inputmode="decimal" id="c9_volum">
+      </div>
+      <div class="field">
+        <label>Tid (minutter)</label>
+        <input type="text" inputmode="decimal" id="c9_tid">
+      </div>
+      <div class="field">
+        <label>Dråpefaktor (dråper/ml)</label>
+        <input type="text" inputmode="decimal" id="c9_faktor" value="20">
+      </div>
+      <div class="result" id="c9_out">–</div>
+    </section>
+
+    <!-- 10 -->
+    <section class="calc">
+      <h2><span class="num">10</span> Maksdosekontroll</h2>
+      <div class="field">
+        <label>Planlagt dose (mg)</label>
+        <input type="text" inputmode="decimal" id="c10_plan">
+      </div>
+      <div class="field">
+        <label>Maksdose (mg)</label>
+        <input type="text" inputmode="decimal" id="c10_maks">
+      </div>
+      <div class="result" id="c10_out">–</div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  Kalkulatorene er kun ment som støtte. Kontroller alltid mot Felleskatalogen/SPC og lokale prosedyrer.
+</footer>
+
+<script>
+  // --- Hjelpefunksjoner ---
+  function parseNum(str) {
+    if (str === null || str === undefined) return NaN;
+    str = String(str).trim().replace(/\s/g, "").replace(",", ".");
+    if (str === "") return NaN;
+    const n = Number(str);
+    return isFinite(n) ? n : NaN;
+  }
+
+  function fmt(n, desimaler = 2) {
+    if (!isFinite(n)) return null;
+    // Unngå "-0"
+    if (Math.abs(n) < 1e-12) n = 0;
+    return n.toLocaleString("nb-NO", {
+      minimumFractionDigits: desimaler,
+      maximumFractionDigits: desimaler
+    });
+  }
+
+  function setOut(id, html, klass) {
+    const el = document.getElementById(id);
+    el.className = "result" + (klass ? " " + klass : "");
+    el.innerHTML = html;
+  }
+
+  function visResultat(id, tekst, enhet, ekstra) {
+    setOut(id,
+      `<span class="value">${tekst}</span>${enhet ? " " + enhet : ""}` +
+      (ekstra ? `<div class="hint">${ekstra}</div>` : "")
+    );
+  }
+
+  function visTom(id) { setOut(id, "–"); }
+
+  // Bind input-lyttere for en kalkulator
+  function bind(ids, fn) {
+    ids.forEach(id => {
+      document.getElementById(id).addEventListener("input", fn);
+    });
+    fn(); // initial
+  }
+
+  // --- 1 ---
+  function c1() {
+    const v = parseNum(document.getElementById("c1_vekt").value);
+    const d = parseNum(document.getElementById("c1_dose").value);
+    if (!isFinite(v) || !isFinite(d)) return visTom("c1_out");
+    visResultat("c1_out", fmt(v * d), "mg");
+  }
+  bind(["c1_vekt", "c1_dose"], c1);
+
+  // --- 2 ---
+  function c2() {
+    const v = parseNum(document.getElementById("c2_vekt").value);
+    const d = parseNum(document.getElementById("c2_dose").value);
+    const a = parseNum(document.getElementById("c2_antall").value);
+    if (!isFinite(v) || !isFinite(d) || !isFinite(a) || a <= 0)
+      return visTom("c2_out");
+    const dogn = v * d;
+    const perDose = dogn / a;
+    setOut("c2_out",
+      `<span class="value">${fmt(perDose)} mg</span> per dose` +
+      `<div class="hint">Døgndose: ${fmt(dogn)} mg fordelt på ${a} doser</div>`
+    );
+  }
+  bind(["c2_vekt", "c2_dose", "c2_antall"], c2);
+
+  // --- 3 ---
+  function c3() {
+    const dose = parseNum(document.getElementById("c3_dose").value);
+    const styrke = parseNum(document.getElementById("c3_styrke").value);
+    if (!isFinite(dose) || !isFinite(styrke) || styrke <= 0)
+      return visTom("c3_out");
+    const n = dose / styrke;
+    visResultat("c3_out", fmt(n), "tablett(er)");
+  }
+  bind(["c3_dose", "c3_styrke"], c3);
+
+  // --- 4 ---
+  function c4() {
+    const dose = parseNum(document.getElementById("c4_dose").value);
+    const kons = parseNum(document.getElementById("c4_kons").value);
+    if (!isFinite(dose) || !isFinite(kons) || kons <= 0)
+      return visTom("c4_out");
+    visResultat("c4_out", fmt(dose / kons), "ml");
+  }
+  bind(["c4_dose", "c4_kons"], c4);
+
+  // --- 5 ---
+  function c5() {
+    const mg = parseNum(document.getElementById("c5_mg").value);
+    const kons = parseNum(document.getElementById("c5_kons").value);
+    if (!isFinite(mg) || !isFinite(kons) || kons <= 0)
+      return visTom("c5_out");
+    visResultat("c5_out", fmt(mg / kons), "ml/time");
+  }
+  bind(["c5_mg", "c5_kons"], c5);
+
+  // --- 6 ---
+  function c6() {
+    const v = parseNum(document.getElementById("c6_vekt").value);
+    const d = parseNum(document.getElementById("c6_dose").value);
+    const k = parseNum(document.getElementById("c6_kons").value);
+    if (!isFinite(v) || !isFinite(d) || !isFinite(k) || k <= 0)
+      return visTom("c6_out");
+    // ml/time = (vekt * dose * 60) / (1000 * konsentrasjon)
+    const mlTime = (v * d * 60) / (1000 * k);
+    visResultat("c6_out", fmt(mlTime), "ml/time");
+  }
+  bind(["c6_vekt", "c6_dose", "c6_kons"], c6);
+
+  // --- 7 ---
+  function c7() {
+    const onsket = parseNum(document.getElementById("c7_onsket").value);
+    const volum = parseNum(document.getElementById("c7_volum").value);
+    const kons = parseNum(document.getElementById("c7_kons").value);
+    if (!isFinite(onsket) || !isFinite(volum) || !isFinite(kons) || kons <= 0)
+      return visTom("c7_out");
+    const mengde = onsket * volum; // mg totalt
+    const volumKonsentrat = mengde / kons;
+    setOut("c7_out",
+      `<span class="value">${fmt(volumKonsentrat)} ml</span> konsentrat` +
+      `<div class="hint">Tilsett væske til totalt ${fmt(volum)} ml (totalt ${fmt(mengde)} mg)</div>`
+    );
+  }
+  bind(["c7_onsket", "c7_volum", "c7_kons"], c7);
+
+  // --- 8 ---
+  function c8() {
+    const p = parseNum(document.getElementById("c8_pct").value);
+    if (!isFinite(p)) return visTom("c8_out");
+    visResultat("c8_out", fmt(p * 10), "mg/ml");
+  }
+  bind(["c8_pct"], c8);
+
+  // --- 9 ---
+  function c9() {
+    const vol = parseNum(document.getElementById("c9_volum").value);
+    const tid = parseNum(document.getElementById("c9_tid").value);
+    const fak = parseNum(document.getElementById("c9_faktor").value);
+    if (!isFinite(vol) || !isFinite(tid) || !isFinite(fak) || tid <= 0 || fak <= 0)
+      return visTom("c9_out");
+    const dpm = (vol * fak) / tid;
+    visResultat("c9_out", fmt(dpm, 0), "dråper/min");
+  }
+  bind(["c9_volum", "c9_tid", "c9_faktor"], c9);
+
+  // --- 10 ---
+  function c10() {
+    const plan = parseNum(document.getElementById("c10_plan").value);
+    const maks = parseNum(document.getElementById("c10_maks").value);
+    if (!isFinite(plan) || !isFinite(maks)) return visTom("c10_out");
+    if (plan > maks) {
+      setOut("c10_out",
+        `⚠️ Planlagt dose (${fmt(plan)} mg) overskrider maksdose (${fmt(maks)} mg)`,
+        "danger"
+      );
+    } else {
+      setOut("c10_out",
+        `✅ Innenfor maksdose (${fmt(plan)} / ${fmt(maks)} mg)`,
+        "ok"
+      );
+    }
+  }
+  bind(["c10_plan", "c10_maks"], c10);
+
+</script>
+</body>
+</html>
