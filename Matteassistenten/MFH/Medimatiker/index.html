@@ -1,1 +1,288 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Læringsmappen - Medikamentregning for sykepleierstudenter</title>
+<!-- FontAwesome for ikoner -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --med-blue: #1d4ed8;
+    --med-teal: #0d9488;
+    --med-red: #dc2626;
+    --med-purple: #7e22ce;
+    --med-orange: #d97706;
+    
+    --tekst: #1a1a1a;
+    --muted: #6b7280;
+    --bg: #f8fafc;
+    --border: #e2e8f0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--tekst);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    padding: 40px 20px 64px;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; }
+
+  .tilbake {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 32px;
+    color: var(--med-teal);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: gap 0.2s;
+  }
+  .tilbake:hover { gap: 10px; }
+
+  /* Stor hero-seksjon */
+  .hero { 
+    margin-bottom: 48px; 
+    text-align: center;
+  }
+
+  .hero .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--med-teal);
+    background: #ccfbf1;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: Georgia, serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: #0f172a;
+  }
+
+  .hero p.subtitle {
+    font-size: 1.15rem;
+    color: #4b5563;
+    max-width: 700px;
+    margin: 0 auto 16px auto;
+  }
+
+  /* Grid for hovedkortene */
+  .hoved-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .hoved-kort {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    text-decoration: none;
+    color: var(--tekst);
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+    text-align: center;
+    align-items: center;
+  }
+  
+  .hoved-kort:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -4px rgba(0,0,0,0.08);
+  }
+
+  .hoved-kort .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .hoved-kort:hover .icon-wrapper {
+    transform: scale(1.1);
+  }
+
+  /* Spesifikke farger for hvert kort */
+  .kort-pdf .icon-wrapper { background: #fee2e2; color: #dc2626; }
+  .kort-pdf:hover { border-color: #dc2626; }
+
+  .kort-kalkulator .icon-wrapper { background: #dbeafe; color: #2563eb; }
+  .kort-kalkulator:hover { border-color: #2563eb; }
+
+  .kort-stige .icon-wrapper { background: #f3e8ff; color: #7e22ce; }
+  .kort-stige:hover { border-color: #7e22ce; }
+
+  /* NYTT KORT: Medimatiker */
+  .kort-medimatiker .icon-wrapper { background: #fef3c7; color: #d97706; }
+  .kort-medimatiker:hover { border-color: #d97706; }
+
+  .hoved-kort .kort-tittel {
+    font-family: Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8px;
+  }
+
+  .hoved-kort .kort-beskrivelse {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* Pedagogisk advarsel */
+  .pedagogisk-advarsel {
+    padding: 24px 28px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 5px solid #d97706;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #92400e;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 48px;
+  }
+  .pedagogisk-advarsel i {
+    font-size: 1.5rem;
+    color: #d97706;
+    margin-top: 2px;
+  }
+  .pedagogisk-advarsel p { margin-bottom: 12px; }
+  .pedagogisk-advarsel p:last-child { margin-bottom: 0; }
+  .pedagogisk-advarsel strong { font-weight: 600; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  footer p { color: var(--muted); font-size: 0.85rem; }
+  footer a {
+    color: var(--med-teal);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 2.2rem; }
+    .hoved-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <a href="../" class="tilbake"><i class="fa-solid fa-arrow-left"></i> Tilbake til forsiden</a>
+
+    <!-- Hero -->
+    <div class="hero">
+      <span class="eyebrow">Sykepleie · SYKB141</span>
+      <h1>Læringsmappen<br>Medikamentregning for sykepleierstudenter</h1>
+      <p class="subtitle">
+        Her finner du alt du trenger for å øve på medikamentregning. 
+        Bruk læringsmappen for teori og oppgaver, stigen for å se progresjonen, 
+        og verktøyene for å kontrollere egne utregninger.
+      </p>
+    </div>
+
+    <!-- Hovedkort / Knapper -->
+    <div class="hoved-grid">
+      
+      <!-- Kort 1: Læringsmappe (PDF) -->
+      <a href="pdf/LM-MFH.pdf" target="_blank" class="hoved-kort kort-pdf">
+        <div class="icon-wrapper">
+          <i class="fa-solid fa-file-pdf"></i>
+        </div>
+        <div class="kort-tittel">Læringsmappe (PDF)</div>
+        <div class="kort-beskrivelse">
+          Last ned hele heftet med teori, algoritmisk tenkning, KI-veiledning og oppgaver.
+        </div>
+      </a>
+
+      <!-- Kort 2: Medikamentkalkulator -->
+      <a href="MedikamentKalkultor/index.html" class="hoved-kort kort-kalkulator">
+        <div class="icon-wrapper">
+          <i class="fa-solid fa-calculator"></i>
+        </div>
+        <div class="kort-tittel">Medikamentkalkulator</div>
+        <div class="kort-beskrivelse">
+          Et verktøy for å kontrollere dine egne regnestykker for dose, styrke og volum.
+        </div>
+      </a>
+
+      <!-- Kort 3: Medikamentregning - Stige -->
+      <a href="Medikamentregning-Stige/index.html" class="hoved-kort kort-stige">
+        <div class="icon-wrapper">
+          <i class="fa-solid fa-stairs"></i>
+        </div>
+        <div class="kort-tittel">Medikamentregning - Stige</div>
+        <div class="kort-beskrivelse">
+          Visuell oversikt over de 10 trinnene. Se hva du mestrer og hva du bør øve mer på.
+        </div>
+      </a>
+
+      <!-- Kort 4: Medimatiker (NYTT) -->
+      <!-- HUSK: Bytt ut "#" med den faktiske lenken til Medimatiker -->
+      <a href="#" target="_blank" class="hoved-kort kort-medimatiker">
+        <div class="icon-wrapper">
+          <i class="fa-solid fa-laptop-medical"></i>
+        </div>
+        <div class="kort-tittel">Medimatiker</div>
+        <div class="kort-beskrivelse">
+          Interaktive læringsressurser og oppgaver innen medisinsk matematikk.
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Pedagogisk Advarsel -->
+    <div class="pedagogisk-advarsel">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <div>
+        <p><strong>Viktig om verktøyene:</strong></p>
+        <p>
+          Både <strong>Medikamentkalkulatoren</strong>, <strong>Medikamentregning-stigen</strong> og <strong>Medimatiker</strong> er kun ment som en <em>pedagogisk støtte for å kontrollere svarene du allerede har regnet ut selv</em>. 
+          De er ikke en fasit-maskin eller en erstatning for å lære selve regnemetoden.
+        </p>
+        <p>
+          For å bli en trygg kliniker må du kunne regne selvstendig. Hvis du bare ser på svaret uten å forstå <em>hvordan</em> du kom frem til det, vil du ikke mestre medikamentregning i klinisk praksis – hvor sikkerheten til pasientene avhenger av at du kan regne uten hjelpemidler.
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <p>© Sykepleieutdanningen · <a href="https://www.hvl.no/">Høgskulen på Vestlandet</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>
