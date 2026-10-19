@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medimatiker – treningsapp</title>
+  <style>
+    :root {
+      --bakgrunn: #081a33;
+      --kort: #102747;
+      --tekst: #df8a3b;
+      --dempa: #b5c5dc;
+      --linje: #294363;
+      --primar: #2878c8;
+      --primar-mork: #1b5b9d;
+      --feil: #ff8b98;
+      --ok: #76e0ae;
+      --varsel: #f5e8cf;
+      --fane-aktiv: #1b3b60;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bakgrunn);
+      color: var(--tekst);
+      line-height: 1.5;
+    }
+    header, main, footer { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+    header { padding-top: 28px; }
+    h1 { font-size: 1.7rem; margin: 0 0 8px; }
+    h2 { font-size: 1.2rem; margin: 0 0 14px; }
+    h3 { font-size: 1rem; margin: 18px 0 8px; }
+    .varsel {
+      background: var(--varsel);
+      color: #3b2d20;
+      border: 1px solid #d8c29a;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 14px 0 18px;
+      font-size: 0.95rem;
+    }
+    .kort {
+      background: var(--kort);
+      border: 1px solid var(--linje);
+      border-radius: 16px;
+      padding: 18px;
+      margin: 16px 0;
+      box-shadow: 0 4px 18px rgba(23, 32, 51, 0.04);
+    }
+    .faner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .fane-knapp {
+      border: 1px solid var(--linje);
+      background: #183353;
+      color: var(--tekst);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .fane-knapp.aktiv {
+      background: var(--fane-aktiv);
+      border-color: var(--primar);
+      color: var(--primar-mork);
+    }
+    label { display: block; font-weight: 600; margin: 12px 0 6px; }
+    select, input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--linje);
+      border-radius: 10px;
+      font: inherit;
+      background: #183353;
+      color: var(--tekst);
+    }
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 16px;
+      font: inherit;
+      font-weight: 700;
+      background: var(--primar);
+      color: #fff;
+      cursor: pointer;
+      margin: 12px 8px 0 0;
+    }
+    button:hover { background: var(--primar-mork); }
+    button.secondary {
+      background: #244565;
+      color: #edf4ff;
+    }
+    button.secondary:hover { background: #315577; }
+    .resultat {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #17395e;
+      border: 1px solid #315d88;
+      font-weight: 700;
+      min-height: 22px;
+    }
+    .utregning {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #0c203b;
+      border: 1px dashed var(--linje);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.92rem;
+      white-space: pre-wrap;
+    }
+    .feil { color: var(--feil); font-weight: 700; margin-top: 12px; }
+    .ok { color: var(--ok); font-weight: 700; margin-top: 12px; }
+    .dempa { color: var(--dempa); font-size: 0.92rem; }
+    footer { padding: 20px 16px 36px; color: var(--dempa); font-size: 0.9rem; }
+    .rader { display: grid; gap: 4px; }
+    .skjult { display: none; }
+    .inn-data { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Medimatiker</h1>
+    <p class="dempa">Kalkulator og treningsmodus for grunnleggende medikamentregning.</p>
+    <div class="varsel">
+      <strong>Kun til opplæring.</strong> Appen er ikke medisinsk utstyr og skal ikke brukes til pasientbehandling.
+      Kontroller alltid mot godkjente kilder og lokale prosedyrer. Ikke legg inn pasientdata.
+    </div>
+  </header>
+
+  <main>
+    <section class="kort">
+      <h2>Kalkulator</h2>
+      <div class="faner" id="faner">
+        <button class="fane-knapp aktiv" data-type="dose">Dose</button>
+        <button class="fane-knapp" data-type="styrke">Styrke</button>
+        <button class="fane-knapp" data-type="tablett">Tabletter</button>
+        <button class="fane-knapp" data-type="vaeske">Væske</button>
+        <button class="fane-knapp" data-type="beholdning">Beholdning</button>
+        <button class="fane-knapp" data-type="infusjon">Infusjon (ml/time)</button>
+        <button class="fane-knapp" data-type="drap">Dråpetakt</button>
+        <button class="fane-knapp" data-type="vekt">Vektbasert dose</button>
+      </div>
+
+      <div id="inndata"></div>
+      <button onclick="beregn()">Beregn</button>
+      <div id="resultat" class="resultat" aria-live="polite"></div>
+      <div id="utregning" class="utregning skjult" aria-live="polite"></div>
+      <div id="feilmelding" class="feil" aria-live="polite"></div>
+    </section>
+
+    <section class="kort">
+      <h2>Trening</h2>
+      <p id="sporsmal" class="rader"></p>
+      <label for="svar">Ditt svar</label>
+      <input id="svar" type="number" step="any" inputmode="decimal" placeholder="Skriv tallet her">
+      <button onclick="sjekkSvar()">Sjekk svar</button>
+      <button class="secondary" onclick="nyttSporsmal()">Nytt spørsmål</button>
+      <div id="tilbakemelding" aria-live="polite"></div>
+      <div id="fasit" class="utregning skjult" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer>
+    Formler: dose = styrke × mengde · styrke = dose / mengde ·
+    tabletter = dose / styrke per tablett · volum = dose / konsentrasjon ·
+    volum = dose / styrke × beholdningsvolum · ml/time = volum / tid ·
+    dråper/min = volum × dråpefaktor / (tid × 60) · total dose = dose per kg × vekt.
+  </footer>
+
+  <script>
+    const faner = document.getElementById("faner");
+    const inndata = document.getElementById("inndata");
+    const resultat = document.getElementById("resultat");
+    const utregning = document.getElementById("utregning");
+    const feilmelding = document.getElementById("feilmelding");
+
+    let aktivType = "dose";
+
+    const konfig = {
+      dose: {
+        navn: "Dose",
+        felt: [
+          { id: "styrke", tekst: "Styrke per enhet (mg)" },
+          { id: "mengde", tekst: "Mengde (antall tabletter/enheter)" }
+        ]
+      },
+      styrke: {
+        navn: "Styrke",
+        felt: [
+          { id: "dose", tekst: "Dose (mg)" },
+          { id: "mengde", tekst: "Mengde (antall tabletter/enheter)" }
+        ]
+      },
+      tablett: {
+        navn: "Tablettdose",
+        felt: [
+          { id: "dose", tekst: "Ønsket dose (mg)" },
+          { id: "styrke", tekst: "Styrke per tablett (mg)" }
+        ]
+      },
+      vaeske: {
+        navn: "Væskedose",
+        felt: [
+          { id: "dose", tekst: "Ønsket dose (mg)" },
+          { id: "kons", tekst: "Konsentrasjon (mg/ml)" }
+        ]
+      },
+      beholdning: {
+        navn: "Volum fra beholdning",
+        felt: [
+          { id: "dose", tekst: "Ønsket dose (mg)" },
+          { id: "styrke", tekst: "Styrke i beholdning (mg)" },
+          { id: "volum", tekst: "Volum i beholdning (ml)" }
+        ]
+      },
+      infusjon: {
+        navn: "Infusjonshastighet",
+        felt: [
+          { id: "volum", tekst: "Volum (ml)" },
+          { id: "tid", tekst: "Tid (timer)" }
+        ]
+      },
+      drap: {
+        navn: "Dråpetakt",
+        felt: [
+          { id: "volum", tekst: "Volum (ml)" },
+          { id: "tid", tekst: "Tid (timer)" },
+          { id: "faktor", tekst: "Dråpefaktor (dråper/ml)" }
+        ]
+      },
+      vekt: {
+        navn: "Vektbasert dose",
+        felt: [
+          { id: "dosekg", tekst: "Dose (mg/kg)" },
+          { id: "vekt", tekst: "Vekt (kg)" }
+        ]
+      }
+    };
+
+    function visInndata(type) {
+      aktivType = type;
+      resultat.textContent = "";
+      feilmelding.textContent = "";
+      utregning.classList.add("skjult");
+      utregning.textContent = "";
+      inndata.innerHTML = "";
+
+      // Oppdater fane-knapper
+      document.querySelectorAll(".fane-knapp").forEach(function (knapp) {
+        knapp.classList.toggle("aktiv", knapp.dataset.type === type);
+      });
+
+      // Bygg input-felt
+      konfig[type].felt.forEach(function (felt) {
+        const label = document.createElement("label");
+        label.setAttribute("for", felt.id);
+        label.textContent = felt.tekst;
+
+        const input = document.createElement("input");
+        input.type = "number";
+        input.id = felt.id;
+        input.step = "any";
+        input.inputMode = "decimal";
+        input.placeholder = "Skriv inn tall";
+
+        inndata.appendChild(label);
+        inndata.appendChild(input);
+      });
+    }
+
+    function hentTall(id) {
+      const element = document.getElementById(id);
+      const tall = Number(element.value);
+
+      if (!Number.isFinite(tall) || tall <= 0) {
+        throw new Error("Fyll inn positive tall i alle felt.");
+      }
+      return tall;
+    }
+
+    function formater(tall) {
+      return Number(tall.toFixed(2)).toLocaleString("nb-NO", {
+        maximumFractionDigits: 2
+      });
+    }
+
+    function beregn() {
+      resultat.textContent = "";
+      feilmelding.textContent = "";
+      utregning.classList.add("skjult");
+      utregning.textContent = "";
+
+      try {
+        let svar = "";
+        let regnestykke = "";
+
+        if (aktivType === "dose") {
+          const styrke = hentTall("styrke");
+          const mengde = hentTall("mengde");
+          const totalDose = styrke * mengde;
+          svar = "Dose: " + formater(totalDose) + " mg";
+          regnestykke = "Dose = styrke × mengde\n" +
+                        "= " + formater(styrke) + " mg × " + formater(mengde) + "\n" +
+                        "= " + formater(totalDose) + " mg";
+        }
+
+        if (aktivType === "styrke") {
+          const dose = hentTall("dose");
+          const mengde = hentTall("mengde");
+          const styrke = dose / mengde;
+          svar = "Styrke: " + formater(styrke) + " mg per enhet";
+          regnestykke = "Styrke = dose / mengde\n" +
+                        "= " + formater(dose) + " mg / " + formater(mengde) + "\n" +
+                        "= " + formater(styrke) + " mg per enhet";
+        }
+
+        if (aktivType === "tablett") {
+          const dose = hentTall("dose");
+          const styrke = hentTall("styrke");
+          svar = "Antall tabletter: " + formater(dose / styrke);
+          regnestykke = "Antall tabletter = dose / styrke per tablett\n" +
+                        "= " + formater(dose) + " mg / " + formater(styrke) + " mg\n" +
+                        "= " + formater(dose / styrke);
+        }
+
+        if (aktivType === "vaeske") {
+          const dose = hentTall("dose");
+          const kons = hentTall("kons");
+          svar = "Volum: " + formater(dose / kons) + " ml";
+          regnestykke = "Volum = dose / konsentrasjon\n" +
+                        "= " + formater(dose) + " mg / " + formater(kons) + " mg/ml\n" +
+                        "= " + formater(dose / kons) + " ml";
+        }
+
+        if (aktivType === "beholdning") {
+          const dose = hentTall("dose");
+          const styrke = hentTall("styrke");
+          const volum = hentTall("volum");
+          const resultatVolum = (dose / styrke) * volum;
+          svar = "Volum: " + formater(resultatVolum) + " ml";
+          regnestykke = "Volum = (dose / styrke) × beholdningsvolum\n" +
+                        "= (" + formater(dose) + " mg / " + formater(styrke) + " mg) × " + formater(volum) + " ml\n" +
+                        "= " + formater(resultatVolum) + " ml";
+        }
+
+        if (aktivType === "infusjon") {
+          const volum = hentTall("volum");
+          const tid = hentTall("tid");
+          svar = "Infusjonshastighet: " + formater(volum / tid) + " ml/time";
+          regnestykke = "ml/time = volum / tid\n" +
+                        "= " + formater(volum) + " ml / " + formater(tid) + " timer\n" +
+                        "= " + formater(volum / tid) + " ml/time";
+        }
+
+        if (aktivType === "drap") {
+          const volum = hentTall("volum");
+          const tid = hentTall("tid");
+          const faktor = hentTall("faktor");
+          const drapPerMin = (volum * faktor) / (tid * 60);
+          svar = "Dråpetakt: " + formater(drapPerMin) +
+                 " dråper/min (ca. " + Math.round(drapPerMin) + " dråper/min)";
+          regnestykke = "Dråper/min = (volum × dråpefaktor) / (tid × 60)\n" +
+                        "= (" + formater(volum) + " ml × " + formater(faktor) + " dråper/ml) / (" +
+                        formater(tid) + " t × 60 min/t)\n" +
+                        "= " + formater(volum * faktor) + " dråper / " + formater(tid * 60) + " min\n" +
+                        "= " + formater(drapPerMin) + " dråper/min";
+        }
+
+        if (aktivType === "vekt") {
+          const dosekg = hentTall("dosekg");
+          const vekt = hentTall("vekt");
+          const totalDose = dosekg * vekt;
+          svar = "Total dose: " + formater(totalDose) + " mg";
+          regnestykke = "Total dose = dose per kg × vekt\n" +
+                        "= " + formater(dosekg) + " mg/kg × " + formater(vekt) + " kg\n" +
+                        "= " + formater(totalDose) + " mg";
+        }
+
+        resultat.textContent = svar;
+        utregning.textContent = regnestykke;
+        utregning.classList.remove("skjult");
+      } catch (feil) {
+        feilmelding.textContent = feil.message;
+      }
+    }
+
+    // ---------- Treningsmodus ----------
+    let riktigSvar = null;
+    let aktivOppgave = null;
+
+    function tilfeldigHeltall(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function nyttSporsmal() {
+      const type = tilfeldigHeltall(1, 4);
+      let sporsmalTekst = "";
+      let fasitTekst = "";
+
+      if (type === 1) {
+        // Tabletter
+        const styrke = tilfeldigHeltall(1, 20) * 5;      // 5–100 mg
+        const antall = tilfeldigHeltall(1, 8);           // 1–8 tabletter
+        const dose = styrke * antall;
+        riktigSvar = antall;
+        aktivOppgave = "tablett";
+        sporsmalTekst =
+          "<strong>Pasienten skal ha " + dose + " mg.</strong><br>" +
+          "Tablettene er på " + styrke + " mg.<br>" +
+          "Hvor mange tabletter skal gis?";
+        fasitTekst =
+          "Antall tabletter = dose / styrke per tablett<br>" +
+          "= " + dose + " mg / " + styrke + " mg = <strong>" + antall + " tabletter</strong>";
+      } else if (type === 2) {
+        // Væske
+        const kons = tilfeldigHeltall(1, 20) * 5;       // 5–100 mg/ml
+        const dose = kons * tilfeldigHeltall(1, 6);     // 5–600 mg
+        riktigSvar = dose / kons;
+        aktivOppgave = "vaeske";
+        sporsmalTekst =
+          "<strong>Pasienten skal ha " + dose + " mg.</strong><br>" +
+          "Konsentrasjonen er " + kons + " mg/ml.<br>" +
+          "Hvor mange ml skal gis? (avrund til 2 desimaler)";
+        fasitTekst =
+          "Volum = dose / konsentrasjon<br>" +
+          "= " + dose + " mg / " + kons + " mg/ml = <strong>" + (dose / kons).toFixed(2) + " ml</strong>";
+      } else if (type === 3) {
+        // Infusjon ml/time
+        const volum = tilfeldigHeltall(1, 20) * 50;     // 50–1000 ml
+        const tid = tilfeldigHeltall(1, 8);             // 1–8 timer
+        riktigSvar = volum / tid;
+        aktivOppgave = "infusjon";
+        sporsmalTekst =
+          "<strong>Du skal gi " + volum + " ml over " + tid + " timer.</strong><br>" +
+          "Hva er infusjonshastigheten i ml/time? (avrund til 2 desimaler)";
+        fasitTekst =
+          "ml/time = volum / tid<br>" +
+          "= " + volum + " ml / " + tid + " timer = <strong>" + (volum / tid).toFixed(2) + " ml/time</strong>";
+      } else {
+        // Vektbasert dose
+        const dosekg = tilfeldigHeltall(1, 20) * 0.5;    // 0.5–10 mg/kg
+        const vekt = tilfeldigHeltall(10, 90);          // 10–90 kg
+        riktigSvar = dosekg * vekt;
+        aktivOppgave = "vekt";
+        sporsmalTekst =
+          "<strong>Pasienten veier " + vekt + " kg.</strong><br>" +
+          "Dosen er " + dosekg + " mg/kg.<br>" +
+          "Hva er total dose i mg? (avrund til 2 desimaler)";
+        fasitTekst =
+          "Total dose = dose per kg × vekt<br>" +
+          "= " + dosekg + " mg/kg × " + vekt + " kg = <strong>" + (dosekg * vekt).toFixed(2) + " mg</strong>";
+      }
+
+      document.getElementById("sporsmal").innerHTML = sporsmalTekst;
+      document.getElementById("svar").value = "";
+      document.getElementById("tilbakemelding").textContent = "";
+      document.getElementById("tilbakemelding").className = "";
+      document.getElementById("fasit").classList.add("skjult");
+      document.getElementById("fasit").innerHTML = "";
+
+      // Lagre fasit for visning
+      aktivOppgave = { type: aktivOppgave, fasit: fasitTekst };
+    }
+
+    function sjekkSvar() {
+      const tilbakemelding = document.getElementById("tilbakemelding");
+      const fasitDiv = document.getElementById("fasit");
+      const svar = Number(document.getElementById("svar").value);
+
+      if (!Number.isFinite(svar)) {
+        tilbakemelding.textContent = "Skriv inn et tall.";
+        tilbakemelding.className = "feil";
+        return;
+      }
+
+      if (Math.abs(svar - riktigSvar) < 0.011) {
+        tilbakemelding.textContent = "Riktig!";
+        tilbakemelding.className = "ok";
+      } else {
+        tilbakemelding.textContent = "Ikke riktig. Se fasit under.";
+        tilbakemelding.className = "feil";
+      }
+
+      if (aktivOppgave && aktivOppgave.fasit) {
+        fasitDiv.innerHTML = "Fasit:<br>" + aktivOppgave.fasit;
+        fasitDiv.classList.remove("skjult");
+      }
+    }
+
+    // ---------- Init ----------
+    document.querySelectorAll(".fane-knapp").forEach(function (knapp) {
+      knapp.addEventListener("click", function () {
+        visInndata(this.dataset.type);
+      });
+    });
+
+    visInndata("dose");
+    nyttSporsmal();
+  </script>
+</body>
+</html>
