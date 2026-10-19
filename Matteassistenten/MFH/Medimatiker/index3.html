@@ -1,9 +1,9 @@
-<!doctype htmL>
-<htmL lang="en">
+<!doctype html>
+<html lang="no">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nursing Dosage Calculation Trainer</title>
+  <title>Medikamentregning – treningsapp</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -399,37 +399,37 @@
 <!-- Hjelp -->
   <div class="help-box">
     <div class="help-header" onclick="toggleHelp()">
-      <span>❓ How to Use</span>
+      <span>❓ Til opplæring (les her)</span>
       <span id="help-arrow">▼</span>
     </div>
     <div class="help-content" id="help-content">
-      <p><strong>1. Choose a calculation type</strong> using the tabs above, or select a preset.</p>
-      <p><strong>2. Adjust the values</strong> using the sliders. The medication order updates automatically.</p>
-      <p><strong>3. Click Calculate</strong> to see the step-by-step solution in the right panel.</p>
-      <p><strong>4. New Problem</strong> generates new values. NCLEX Timer starts a 5-minute countdown.</p>
-      <p><strong>5. Export Report</strong> copies the calculation to your clipboard.</p>
-      <p style="color: var(--accent); margin-top: 10px;">⚠️ For education only. Not a medical device.</p>
+      <p><strong>1. Velg beregningstype</strong> med fanene, eller velg en forhåndsinnstilling.</p>
+      <p><strong>2. Juster verdiene</strong> med glidere. Medikamentordren oppdateres automatisk.</p>
+      <p><strong>3. Trykk «Beregn»</strong> for å se trinnvis løsning i høyre panel.</p>
+      <p><strong>4. Nytt problem</strong> genererer nye verdier. NCLEX-timer starter en 5-minutters nedtelling.</p>
+      <p><strong>5. Eksporter rapport</strong> kopierer beregningen til utklippstavlen.</p>
+      <p style="color: var(--accent); margin-top: 10px;">⚠️ Kun til opplæring. Ikke medisinsk utstyr.</p>
     </div>
   </div>
 
   <!-- Faner -->
   <div class="tabs" id="tabs">
-    <button class="tab-btn active" data-tab="oral">Dimensional Analysis</button>
-    <button class="tab-btn" data-tab="iv">IV Drip Rate</button>
-    <button class="tab-btn" data-tab="weight">Weight-Based</button>
-    <button class="tab-btn" data-tab="recon">Reconstitution</button>
-    <button class="tab-btn" data-tab="heparin">Heparin Protocol</button>
+    <button class="tab-btn active" data-tab="oral">Dimensjonsanalyse</button>
+    <button class="tab-btn" data-tab="iv">Dråpetakt IV</button>
+    <button class="tab-btn" data-tab="weight">Vektbasert</button>
+    <button class="tab-btn" data-tab="recon">Rekonstituering</button>
+    <button class="tab-btn" data-tab="heparin">Heparinprotokoll</button>
   </div>
 
   <!-- Forhåndsinnstillinger -->
   <div class="presets">
-    <span>Presets:</span>
-    <button class="preset-btn" onclick="loadPreset('oral')">Oral Med</button>
-    <button class="preset-btn" onclick="loadPreset('iv')">IV Infusion</button>
-    <button class="preset-btn" onclick="loadPreset('weight')">Peds Dosing</button>
-    <button class="preset-btn" onclick="loadPreset('insulin')">Insulin Scale</button>
+    <span>Forhåndsvalg:</span>
+    <button class="preset-btn" onclick="loadPreset('oral')">Oralt medikament</button>
+    <button class="preset-btn" onclick="loadPreset('iv')">IV-infusjon</button>
+    <button class="preset-btn" onclick="loadPreset('weight')">Pediatrisk dosering</button>
+    <button class="preset-btn" onclick="loadPreset('insulin')">Insulinskala</button>
     <button class="preset-btn" onclick="loadPreset('heparin')">Heparin</button>
-    <button class="preset-btn" onclick="loadPreset('recon')">Reconstitution</button>
+    <button class="preset-btn" onclick="loadPreset('recon')">Rekonstituering</button>
   </div>
 
   <!-- Hovedlayout -->
@@ -437,16 +437,16 @@
     <!-- Venstre: Input -->
     <div class="card">
       <div class="card-header">
-        <span class="tag tag-input">INPUT</span> Medikamentordre
+        <span class="tag tag-input">INNDATA</span> Medikamentordre
       </div>
       <div class="card-body">
         <!-- Pasientjournal -->
         <div class="mar-box">
-          <div class="mar-title">MEDICATION ADMINISTRATION RECORD</div>
-          <div class="mar-row"><span class="label">Patient:</span><span class="value" id="mar-patient">Smith, John</span></div>
-          <div class="mar-row"><span class="label">DOB:</span><span class="value" id="mar-dob">15.01.1965</span></div>
-          <div class="mar-row"><span class="label">Allergies:</span><span class="value" id="mar-allergies">NKDA</span></div>
-          <div class="mar-row"><span class="label">Order:</span><span class="value" id="mar-order">Amoxicillin 500 mg PO q8h</span></div>
+          <div class="mar-title">LEGEMIDDELADMINISTRASJONSJOURNAL</div>
+          <div class="mar-row"><span class="label">Pasient:</span><span class="value" id="mar-patient">Smith, John</span></div>
+          <div class="mar-row"><span class="label">Fødselsdato:</span><span class="value" id="mar-dob">15.01.1965</span></div>
+          <div class="mar-row"><span class="label">Allergier:</span><span class="value" id="mar-allergies">Ingen kjente</span></div>
+          <div class="mar-row"><span class="label">Ordre:</span><span class="value" id="mar-order">Amoxicillin 500 mg PO q8h</span></div>
         </div>
 
         <!-- Dynamiske input-felt -->
@@ -456,7 +456,7 @@
         <div class="btn-group">
           <button class="btn btn-primary" onclick="calculate()">🧮 Beregn</button>
           <button class="btn btn-secondary" onclick="newProblem()">🔄 Nytt problem</button>
-          <button class="btn btn-secondary" onclick="toggleTimer()">⏱️ NCLEX Timer</button>
+          <button class="btn btn-secondary" onclick="toggleTimer()">⏱️ NCLEX-timer</button>
         </div>
         <div class="hours-display" id="hours-display">05:00</div>
       </div>
@@ -465,11 +465,11 @@
     <!-- Høyre: Output -->
     <div class="card">
       <div class="card-header">
-        <span class="tag tag-output">OUTPUT</span> Løsning
+        <span class="tag tag-output">UTDATA</span> Løsning
       </div>
       <div class="card-body">
         <div class="solution-area" id="solution-area">
-          <div class="placeholder">Press Calculate to see step-by-step solution</div>
+          <div class="placeholder">Trykk «Beregn» for å se trinnvis løsning</div>
         </div>
         <div class="btn-group">
           <button class="btn btn-primary" onclick="exportReport()">📄 Eksporter rapport</button>
@@ -508,7 +508,7 @@
     document.getElementById('role-student').classList.toggle('active', role === 'student');
     document.getElementById('role-nurse').classList.toggle('active', role === 'nurse');
     // Nullstill visning
-    document.getElementById('solution-area').innerHTML = '<div class="placeholder">Press Calculate to see step-by-step solution</div>';
+    document.getElementById('solution-area').innerHTML = '<div class="placeholder">Trykk «Beregn» for å se trinnvis løsning</div>';
     document.getElementById('report-area').classList.remove('show');
   }
 
@@ -524,7 +524,7 @@
 
   // ---------- Forhåndsinnstillinger ----------
   function loadPreset(type) {
-    // Sett aktiv fane basert på preset
+    // Sett aktiv fane basert på forhåndsvalg
     if (type === 'oral') { document.querySelector('[data-tab="oral"]').click(); }
     else if (type === 'iv') { document.querySelector('[data-tab="iv"]').click(); }
     else if (type === 'weight') { document.querySelector('[data-tab="weight"]').click(); }
@@ -544,7 +544,7 @@
         setVal('iv-volume', 1000);
         setVal('iv-time', 8);
         setVal('iv-drop', 20);
-        updateMAR('NaCl 0,9% 1000 mL IV over 8 hours', 'Johansen, Kari');
+        updateMAR('NaCl 0,9% 1000 mL IV over 8 timer', 'Johansen, Kari');
       } else if (type === 'weight') {
         setVal('weight-kg', 70);
         setVal('dose-per-kg', 5);
@@ -556,13 +556,13 @@
         setVal('available', 100);
         setVal('quantity', 1);
         document.getElementById('form-type').value = 'liquid';
-        updateMAR('Insulin Glargine 30 units SC', 'Hansen, Per');
+        updateMAR('Insulin Glargine 30 enheter SC', 'Hansen, Per');
       } else if (type === 'heparin') {
         setVal('heparin-weight', 70);
         setVal('heparin-dose', 18);
         setVal('heparin-conc', 25000);
         setVal('heparin-vol', 500);
-        updateMAR('Heparin 18 units/kg/time IV', 'Berg, Anne');
+        updateMAR('Heparin 18 enheter/kg/time IV', 'Berg, Anne');
       } else if (type === 'recon') {
         setVal('recon-strength', 1000);
         setVal('recon-diluent', 10);
@@ -586,13 +586,13 @@
   function renderInputs() {
     const container = document.getElementById('dynamic-inputs');
     container.innerHTML = '';
-    document.getElementById('solution-area').innerHTML = '<div class="placeholder">Press Calculate to see step-by-step solution</div>';
+    document.getElementById('solution-area').innerHTML = '<div class="placeholder">Trykk «Beregn» for å se trinnvis løsning</div>';
     document.getElementById('report-area').classList.remove('show');
 
     if (currentTab === 'oral') {
       container.innerHTML = `
         <div class="form-group">
-          <label>Ordered Dose (mg) <span class="val" id="val-ordered">500</span></label>
+          <label>Ordnet dose (mg) <span class="val" id="val-ordered">500</span></label>
           <input type="range" id="ordered-dose" min="50" max="2000" step="50" value="500" oninput="updateVal('ordered-dose','val-ordered')">
         </div>
         <div class="form-group">
@@ -600,18 +600,18 @@
           <input type="range" id="available" min="10" max="1000" step="10" value="250" oninput="updateVal('available','val-available')">
         </div>
         <div class="form-group">
-          <label>Quantity Per Unit (mL) <span class="val" id="val-quantity">5</span></label>
+          <label>Mengde per enhet (mL) <span class="val" id="val-quantity">5</span></label>
           <input type="range" id="quantity" min="1" max="20" step="1" value="5" oninput="updateVal('quantity','val-quantity')">
         </div>
         <div class="form-group">
           <label>Form</label>
           <select id="form-type">
-            <option value="liquid">mL (Liquid)</option>
-            <option value="tablet">Tablet</option>
-            <option value="capsule">Capsule</option>
+            <option value="liquid">mL (væske)</option>
+            <option value="tablet">Tablett</option>
+            <option value="capsule">Kapsel</option>
           </select>
         </div>
-        <div class="info-line" id="stock-info">Available: 250 mg / 5 mL</div>
+        <div class="info-line" id="stock-info">Tilgjengelig: 250 mg / 5 mL</div>
       `;
       // Oppdater info-linje dynamisk
       document.getElementById('available').addEventListener('input', updateStockInfo);
@@ -622,15 +622,15 @@
     else if (currentTab === 'iv') {
       container.innerHTML = `
         <div class="form-group">
-          <label>Volume (mL) <span class="val" id="val-iv-vol">1000</span></label>
+          <label>Volum (mL) <span class="val" id="val-iv-vol">1000</span></label>
           <input type="range" id="iv-volume" min="50" max="3000" step="50" value="1000" oninput="updateVal('iv-volume','val-iv-vol')">
         </div>
         <div class="form-group">
-          <label>Time (hours) <span class="val" id="val-iv-time">8</span></label>
+          <label>Tid (timer) <span class="val" id="val-iv-time">8</span></label>
           <input type="range" id="iv-time" min="1" max="24" step="1" value="8" oninput="updateVal('iv-time','val-iv-time')">
         </div>
         <div class="form-group">
-          <label>Drop Factor (gtt/mL) <span class="val" id="val-iv-drop">20</span></label>
+          <label>Dråpefaktor (dråper/mL) <span class="val" id="val-iv-drop">20</span></label>
           <input type="range" id="iv-drop" min="10" max="60" step="10" value="20" oninput="updateVal('iv-drop','val-iv-drop')">
         </div>
       `;
@@ -639,7 +639,7 @@
     else if (currentTab === 'weight') {
       container.innerHTML = `
         <div class="form-group">
-          <label>Patient Weight (kg) <span class="val" id="val-weight-kg">70</span></label>
+          <label>Pasientvekt (kg) <span class="val" id="val-weight-kg">70</span></label>
           <input type="range" id="weight-kg" min="1" max="150" step="1" value="70" oninput="updateVal('weight-kg','val-weight-kg')">
         </div>
         <div class="form-group">
@@ -647,11 +647,11 @@
           <input type="range" id="dose-per-kg" min="0.1" max="50" step="0.1" value="5" oninput="updateVal('dose-per-kg','val-dose-kg')">
         </div>
         <div class="form-group">
-          <label>Available Strength (mg) <span class="val" id="val-weight-stock">250</span></label>
+          <label>Tilgjengelig styrke (mg) <span class="val" id="val-weight-stock">250</span></label>
           <input type="range" id="weight-stock" min="10" max="2000" step="10" value="250" oninput="updateVal('weight-stock','val-weight-stock')">
         </div>
         <div class="form-group">
-          <label>Volume on Hand (mL) <span class="val" id="val-weight-qty">5</span></label>
+          <label>Volum tilgjengelig (mL) <span class="val" id="val-weight-qty">5</span></label>
           <input type="range" id="weight-qty" min="1" max="20" step="1" value="5" oninput="updateVal('weight-qty','val-weight-qty')">
         </div>
       `;
@@ -660,18 +660,18 @@
     else if (currentTab === 'recon') {
       container.innerHTML = `
         <div class="form-group">
-          <label>Vial Strength (mg) <span class="val" id="val-recon-strength">1000</span></label>
+          <label>Hetteglass styrke (mg) <span class="val" id="val-recon-strength">1000</span></label>
           <input type="range" id="recon-strength" min="100" max="10000" step="100" value="1000" oninput="updateVal('recon-strength','val-recon-strength')">
         </div>
         <div class="form-group">
-          <label>Diluent Volume (mL) <span class="val" id="val-recon-diluent">10</span></label>
+          <label>Fortynningsvolum (mL) <span class="val" id="val-recon-diluent">10</span></label>
           <input type="range" id="recon-diluent" min="1" max="50" step="1" value="10" oninput="updateVal('recon-diluent','val-recon-diluent')">
         </div>
         <div class="form-group">
-          <label>Ordered Dose (mg) <span class="val" id="val-recon-dose">250</span></label>
+          <label>Ordnet dose (mg) <span class="val" id="val-recon-dose">250</span></label>
           <input type="range" id="recon-dose" min="10" max="2000" step="10" value="250" oninput="updateVal('recon-dose','val-recon-dose')">
         </div>
-        <div class="info-line" id="recon-info">Concentration: 1000 mg / 10 mL = 100 mg/mL</div>
+        <div class="info-line" id="recon-info">Konsentrasjon: 1000 mg / 10 mL = 100 mg/mL</div>
       `;
       document.getElementById('recon-strength').addEventListener('input', updateReconInfo);
       document.getElementById('recon-diluent').addEventListener('input', updateReconInfo);
@@ -681,19 +681,19 @@
     else if (currentTab === 'heparin') {
       container.innerHTML = `
         <div class="form-group">
-          <label>Patient Weight (kg) <span class="val" id="val-hep-weight">70</span></label>
+          <label>Pasientvekt (kg) <span class="val" id="val-hep-weight">70</span></label>
           <input type="range" id="heparin-weight" min="1" max="150" step="1" value="70" oninput="updateVal('heparin-weight','val-hep-weight')">
         </div>
         <div class="form-group">
-          <label>Dose (units/kg/time) <span class="val" id="val-hep-dose">18</span></label>
+          <label>Dose (enheter/kg/time) <span class="val" id="val-hep-dose">18</span></label>
           <input type="range" id="heparin-dose" min="5" max="50" step="1" value="18" oninput="updateVal('heparin-dose','val-hep-dose')">
         </div>
         <div class="form-group">
-          <label>Heparin in Bag (units) <span class="val" id="val-hep-conc">25000</span></label>
+          <label>Heparin i pose (enheter) <span class="val" id="val-hep-conc">25000</span></label>
           <input type="range" id="heparin-conc" min="5000" max="50000" step="5000" value="25000" oninput="updateVal('heparin-conc','val-hep-conc')">
         </div>
         <div class="form-group">
-          <label>Bag Volume (mL) <span class="val" id="val-hep-vol">500</span></label>
+          <label>Posevolum (mL) <span class="val" id="val-hep-vol">500</span></label>
           <input type="range" id="heparin-vol" min="100" max="1000" step="50" value="500" oninput="updateVal('heparin-vol','val-hep-vol')">
         </div>
       `;
@@ -713,7 +713,7 @@
     const qty = document.getElementById('quantity');
     const info = document.getElementById('stock-info');
     if (avail && qty && info) {
-      info.textContent = `Available: ${avail.value} mg / ${qty.value} mL`;
+      info.textContent = `Tilgjengelig: ${avail.value} mg / ${qty.value} mL`;
     }
   }
 
@@ -723,14 +723,14 @@
     const info = document.getElementById('recon-info');
     if (str && dil && info) {
       const conc = str.value / dil.value;
-      info.textContent = `Concentration: ${str.value} mg / ${dil.value} mL = ${conc.toFixed(2)} mg/mL`;
+      info.textContent = `Konsentrasjon: ${str.value} mg / ${dil.value} mL = ${conc.toFixed(2)} mg/mL`;
     }
   }
 
   // ---------- Beregning ----------
   function calculate() {
     const area = document.getElementById('solution-area');
-    let htmL = '';
+    let html = '';
 
     try {
       if (currentTab === 'oral') {
@@ -739,12 +739,12 @@
         const qty = parseFloat(document.getElementById('quantity').value);
         if (!dose || !avail || !qty) throw new Error('Fyll inn alle felt.');
         const result = (dose / avail) * qty;
-        htmL = `
-          <div class="step">📋 <strong>Formula:</strong> Dose å gi = (Ordnet dose / Tilgjengelig dose) × Mengde</div>
+        html = `
+          <div class="step">📋 <strong>Formel:</strong> Dose å gi = (Ordnet dose / Tilgjengelig dose) × Mengde</div>
           <div class="step">= (${dose} mg / ${avail} mg) × ${qty} mL</div>
           <div class="step">= ${(dose/avail).toFixed(4)} × ${qty} mL</div>
           <div class="step">= <span class="highlight">${fmt(result)} mL</span></div>
-          <div class="result">Answer: Give ${fmt(result)} mL</div>
+          <div class="result">Svar: Gi ${fmt(result)} mL</div>
         `;
         updateMAR(`Amoxicillin ${dose} mg PO`, 'Smith, John');
       }
@@ -756,14 +756,14 @@
         if (!vol || !time || !drop) throw new Error('Fyll inn alle felt.');
         const mLPerTime = vol / time;
         const dropsPerMin = (vol * drop) / (time * 60);
-        htmL = `
-          <div class="step">📋 <strong>Formula:</strong> Dråper/min = (Volum × Dråpefaktor) / (Tid × 60)</div>
+        html = `
+          <div class="step">📋 <strong>Formel:</strong> Dråper/min = (Volum × Dråpefaktor) / (Tid × 60)</div>
           <div class="step">= (${vol} mL × ${drop} dråper/mL) / (${time} t × 60 min/t)</div>
           <div class="step">= ${vol * drop} dråper / ${time * 60} min</div>
-          <div class="step">= <span class="highlight">${fmt(dropsPerMin)} gtt/min</span></div>
-          <div class="result">Answer: ${fmt(dropsPerMin)} gtt/min (ca. ${Math.round(dropsPerMin)} gtt/min)</div>
+          <div class="step">= <span class="highlight">${fmt(dropsPerMin)} dråper/min</span></div>
+          <div class="result">Svar: ${fmt(dropsPerMin)} dråper/min (ca. ${Math.round(dropsPerMin)} dråper/min)</div>
         `;
-        updateMAR(`NaCl 0,9% ${vol} mL IV over ${time} hours`, 'Johansen, Kari');
+        updateMAR(`NaCl 0,9% ${vol} mL IV over ${time} timer`, 'Johansen, Kari');
       }
 
       else if (currentTab === 'weight') {
@@ -774,13 +774,13 @@
         if (!kg || !doseKg || !stock || !qty) throw new Error('Fyll inn alle felt.');
         const totalDose = kg * doseKg;
         const volume = (totalDose / stock) * qty;
-        htmL = `
-          <div class="step">📋 <strong>Step 1:</strong> Total dose = Vekt × Dose per kg</div>
+        html = `
+          <div class="step">📋 <strong>Trinn 1:</strong> Total dose = Vekt × Dose per kg</div>
           <div class="step">= ${kg} kg × ${doseKg} mg/kg = <span class="highlight">${fmt(totalDose)} mg</span></div>
-          <div class="step" style="margin-top:12px;">📋 <strong>Step 2:</strong> Volum = (Total dose / Styrke) × Mengde</div>
+          <div class="step" style="margin-top:12px;">📋 <strong>Trinn 2:</strong> Volum = (Total dose / Styrke) × Mengde</div>
           <div class="step">= (${fmt(totalDose)} mg / ${stock} mg) × ${qty} mL</div>
           <div class="step">= <span class="highlight">${fmt(volume)} mL</span></div>
-          <div class="result">Answer: Give ${fmt(volume)} mL (${fmt(totalDose)} mg)</div>
+          <div class="result">Svar: Gi ${fmt(volume)} mL (${fmt(totalDose)} mg)</div>
         `;
         updateMAR(`Gentamicin ${doseKg} mg/kg IV`, 'Barn, Ola');
       }
@@ -792,13 +792,13 @@
         if (!strength || !diluent || !dose) throw new Error('Fyll inn alle felt.');
         const conc = strength / diluent;
         const volume = dose / conc;
-        htmL = `
-          <div class="step">📋 <strong>Step 1:</strong> Konsentrasjon = Styrke / Tilsett volum</div>
+        html = `
+          <div class="step">📋 <strong>Trinn 1:</strong> Konsentrasjon = Styrke / Fortynningsvolum</div>
           <div class="step">= ${strength} mg / ${diluent} mL = <span class="highlight">${fmt(conc)} mg/mL</span></div>
-          <div class="step" style="margin-top:12px;">📋 <strong>Step 2:</strong> Volum = Ordnet dose / Konsentrasjon</div>
+          <div class="step" style="margin-top:12px;">📋 <strong>Trinn 2:</strong> Volum = Ordnet dose / Konsentrasjon</div>
           <div class="step">= ${dose} mg / ${fmt(conc)} mg/mL</div>
           <div class="step">= <span class="highlight">${fmt(volume)} mL</span></div>
-          <div class="result">Answer: Draw up ${fmt(volume)} mL</div>
+          <div class="result">Svar: Trekk opp ${fmt(volume)} mL</div>
         `;
         updateMAR(`Cefazolin ${dose} mg IV`, 'Dahl, Lars');
       }
@@ -812,20 +812,20 @@
         const totalUnits = kg * doseKg;
         const concPerMl = conc / vol;
         const rate = totalUnits / concPerMl;
-        htmL = `
-          <div class="step">📋 <strong>Step 1:</strong> Totale units per time = Vekt × Dose per kg</div>
-          <div class="step">= ${kg} kg × ${doseKg} units/kg/time = <span class="highlight">${fmt(totalUnits)} units/time</span></div>
-          <div class="step" style="margin-top:12px;">📋 <strong>Step 2:</strong> Konsentrasjon = Heparinmengde / Volum</div>
-          <div class="step">= ${conc} units / ${vol} mL = <span class="highlight">${fmt(concPerMl)} units/mL</span></div>
-          <div class="step" style="margin-top:12px;">📋 <strong>Step 3:</strong> Infusjonsrate = Totale units / Konsentrasjon</div>
-          <div class="step">= ${fmt(totalUnits)} units/time / ${fmt(concPerMl)} units/mL</div>
-          <div class="step">= <span class="highlight">${fmt(rate)} mL/hr</span></div>
-          <div class="result">Answer: Sett infusjonspumpen til ${fmt(rate)} mL/hr</div>
+        html = `
+          <div class="step">📋 <strong>Trinn 1:</strong> Totale enheter per time = Vekt × Dose per kg</div>
+          <div class="step">= ${kg} kg × ${doseKg} enheter/kg/time = <span class="highlight">${fmt(totalUnits)} enheter/time</span></div>
+          <div class="step" style="margin-top:12px;">📋 <strong>Trinn 2:</strong> Konsentrasjon = Heparinmengde / Volum</div>
+          <div class="step">= ${conc} enheter / ${vol} mL = <span class="highlight">${fmt(concPerMl)} enheter/mL</span></div>
+          <div class="step" style="margin-top:12px;">📋 <strong>Trinn 3:</strong> Infusjonsrate = Totale enheter / Konsentrasjon</div>
+          <div class="step">= ${fmt(totalUnits)} enheter/time / ${fmt(concPerMl)} enheter/mL</div>
+          <div class="step">= <span class="highlight">${fmt(rate)} mL/time</span></div>
+          <div class="result">Svar: Sett infusjonspumpen til ${fmt(rate)} mL/time</div>
         `;
-        updateMAR(`Heparin ${doseKg} units/kg/time IV`, 'Berg, Anne');
+        updateMAR(`Heparin ${doseKg} enheter/kg/time IV`, 'Berg, Anne');
       }
 
-      area.innerHTML = htmL;
+      area.innerHTML = html;
       document.getElementById('report-area').classList.remove('show');
 
     } catch (e) {
@@ -858,11 +858,11 @@
       setVal('heparin-conc', randomInt(1, 10) * 5000);
       setVal('heparin-vol', randomInt(1, 10) * 100);
     }
-    document.getElementById('solution-area').innerHTML = '<div class="placeholder">Press Calculate to see step-by-step solution</div>';
+    document.getElementById('solution-area').innerHTML = '<div class="placeholder">Trykk «Beregn» for å se trinnvis løsning</div>';
     document.getElementById('report-area').classList.remove('show');
   }
 
-  // ---------- NCLEX Timer ----------
+  // ---------- NCLEX-timer ----------
   function toggleTimer() {
     const display = document.getElementById('hours-display');
     if (hoursInterval) {
@@ -901,17 +901,17 @@
     const report = document.getElementById('report-area');
     const text = area.innerText.trim();
     if (!text || text.includes('Trykk «Beregn»')) {
-      alert('Calculate first to export a report.');
+      alert('Beregn først for å eksportere en rapport.');
       return;
     }
     const mar = document.querySelector('.mar-box').innerText;
     const fullReport = `=== MEDIKAMENTRAPPORT ===\n\n${mar}\n\n=== LØSNING ===\n${text}\n\n=== SLUTT ===`;
     navigator.clipboard.writeText(fullReport).then(() => {
-      report.textContent = '✅ Report copied to clipboard!';
+      report.textContent = '✅ Rapport kopiert til utklippstavlen!';
       report.classList.add('show');
       setTimeout(() => report.classList.remove('show'), 3000);
     }).catch(() => {
-      report.textContent = '❌ Could not copy. Please try again.';
+      report.textContent = '❌ Kunne ikke kopiere. Prøv igjen.';
       report.classList.add('show');
     });
   }
@@ -921,4 +921,4 @@
 </script>
 
 </body>
-</htmL>
+</html>
