@@ -3,331 +3,206 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matteassistenten – Notater, oppgaver og ressurser</title>
+<title>Læringsmappen – Medikamentregning</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --lysegrønn: #6BBF59;
-    --mørkegrønn: #1E5F2E;
-    --tekst: #1a1a1a;
-    --muted: #6b7280;
-    --bg: #fafaf7;
-    --border: #e8e8e3;
-  }
-
-  html, body {
-    height: 100%;
-    overflow: hidden;
+    --bg: #f8fafc;
+    --tekst: #1e293b;
+    --muted: #475569;
+    --border: #cbd5e1;
+    
+    /* Dempede farger for lenker */
+    --link-blå: #1e3a8a;      /* Arbeidshefte */
+    --link-grønn: #065f46;    /* KI */
+    --link-lilla: #4c1d95;    /* Formler */
+    --link-oransje: #9a3412;  /* Kalkulator */
+    --link-teal: #115e59;     /* Medistigen */
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background: var(--bg);
     color: var(--tekst);
-    line-height: 1.5;
+    line-height: 1.6;
+    padding: 24px 16px 48px;
     -webkit-font-smoothing: antialiased;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
   }
 
-  /* ---------- Meny ---------- */
-  header {
-    flex-shrink: 0;
-    background: rgba(250, 250, 247, 0.85);
-    backdrop-filter: saturate(180%) blur(12px);
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav {
-    max-width: 1200px;
+  .container {
+    max-width: 800px;
     margin: 0 auto;
-    padding: 12px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   }
 
-  .logo {
-    font-family: Georgia, serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--mørkegrønn);
-    text-decoration: none;
-  }
-
-  .nav-lenker {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-  }
-  .nav-lenker a {
+  .tilbake {
+    display: inline-block;
+    margin-bottom: 20px;
     font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--tekst);
+    color: var(--muted);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .nav-lenker a:hover { color: var(--mørkegrønn); }
-  .nav-lenker a.cta { color: var(--mørkegrønn); font-weight: 600; }
+  .tilbake:hover { color: var(--tekst); }
 
-  /* ---------- Hovedinnhold ---------- */
-  .main {
-    flex: 1;
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px 24px 32px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  /* ---------- Hero (kompakt) ---------- */
-  .hero {
-    text-align: center;
-    margin-bottom: 24px;
-    flex-shrink: 0;
-  }
-
-  .hero .eyebrow {
-    display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--mørkegrønn);
-    background: #e8f5e4;
-    padding: 4px 12px;
-    border-radius: 999px;
-    margin-bottom: 12px;
-  }
-
-  .hero h1 {
+  h1 {
     font-family: Georgia, serif;
-    font-size: 1.6rem;
-    font-weight: 700;
+    font-size: 1.8rem;
+    color: #0f172a;
+    margin-bottom: 16px;
     line-height: 1.2;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
   }
-  .hero h1 span {
-    color: var(--mørkegrønn);
+
+  p.intro {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  /* Kulepunkter for innhold */
+  ul.innhold-liste {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  ul.innhold-liste li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+  }
+
+  ul.innhold-liste li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #64748b;
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+
+  ul.innhold-liste li strong {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  /* Lenkestiler */
+  a.f-link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+  a.f-link:hover { opacity: 0.7; }
+
+  .c-blue { color: var(--link-blå); }
+  .c-green { color: var(--link-grønn); }
+  .c-purple { color: var(--link-lilla); }
+  .c-orange { color: var(--link-oransje); }
+  .c-teal { color: var(--link-teal); }
+
+  /* Nummerert liste */
+  div.pedagogisk-seksjon {
+    background: #f1f5f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+
+  div.pedagogisk-seksjon h2 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: #0f172a;
+  }
+
+  ol.steg-liste {
+    margin-left: 20px;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  ol.steg-liste li {
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+
+  ol.steg-liste li strong {
+    color: var(--tekst);
+  }
+
+  .avslutning {
+    font-size: 0.95rem;
+    color: var(--muted);
     font-style: italic;
   }
 
-  .hero p {
-    font-size: 0.9rem;
-    color: #4b5563;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-
-  /* ---------- Kort-grid ---------- */
-  .utforsk {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .kort-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    flex: 1;
-  }
-
-  .kort {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px 16px;
-    text-decoration: none;
-    color: var(--tekst);
-    transition: transform 0.18s, box-shadow 0.2s, border-color 0.2s;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    position: relative;
-    overflow: hidden;
-    min-height: 0;
-  }
-  .kort::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--kort-farge, var(--lysegrønn));
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .kort:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-    border-color: var(--kort-farge, var(--lysegrønn));
-  }
-  .kort:hover::before { opacity: 1; }
-
-  .kort .ikon {
-    font-size: 1.4rem;
-    margin-bottom: 6px;
-    line-height: 1;
-  }
-  .kort h3 {
-    font-family: Georgia, serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    line-height: 1.25;
-  }
-  .kort p {
-    color: var(--muted);
-    font-size: 0.78rem;
-    line-height: 1.45;
-    flex: 1;
-  }
-  .kort .pil {
-    margin-top: 8px;
-    color: var(--kort-farge, var(--mørkegrønn));
-    font-weight: 600;
-    font-size: 0.75rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    transition: gap 0.2s;
-  }
-  .kort:hover .pil { gap: 8px; }
-
-  /* Fargekoder */
-  .kort.ent3r      { --kort-farge: #1F4E79; }
-  .kort.mfi        { --kort-farge: #006400; }
-  .kort.mfr        { --kort-farge: #8B0000; }
-  .kort.mfl        { --kort-farge: #4B0082; }
-  .kort.mfs        { --kort-farge: #00796B; }
-  .kort.handout10  { --kort-farge: #B8860B; }
-  .kort.handoutvgs { --kort-farge: #008080; }
-
-  /* ---------- Footer ---------- */
-  footer {
-    flex-shrink: 0;
-    border-top: 1px solid var(--border);
-    padding: 14px 24px;
-    text-align: center;
-    background: #fff;
-  }
-  footer p { color: var(--muted); font-size: 0.75rem; }
-  footer a {
-    color: var(--mørkegrønn);
-    text-decoration: none;
-    font-weight: 500;
-  }
-  footer a:hover { text-decoration: underline; }
-
-  /* ---------- Responsive ---------- */
-  @media (max-width: 1000px) {
-    .kort-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  @media (max-width: 760px) {
-    html, body { overflow: auto; }
-    .kort-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero h1 { font-size: 1.35rem; }
-    .hero p { font-size: 0.85rem; }
-    .kort-grid { gap: 10px; }
-  }
-
-  @media (max-width: 480px) {
-    .nav { padding: 10px 16px; }
-    .nav-lenker { gap: 14px; }
-    .nav-lenker a { font-size: 0.78rem; }
-    .main { padding: 16px 16px 24px; }
-    .kort-grid { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 1.2rem; }
-    .kort { padding: 14px 12px; }
+  @media (max-width: 600px) {
+    .container { padding: 20px; }
+    h1 { font-size: 1.5rem; }
   }
 </style>
 </head>
 <body>
 
-  <header>
-    <nav class="nav">
-      <a href="../" class="logo">Matteforeleseren</a>
-      <ul class="nav-lenker">
-        <li><a href="../Ommeg/">Om meg</a></li>
-      </ul>
-    </nav>
-  </header>
+<div class="container">
+  
+  <a href="../" class="tilbake">← Tilbake til forsiden</a>
 
-  <main class="main">
+  <h1>Læringsmappen for Medikamentregning</h1>
+  
+  <p class="intro">
+    Læringsmappen er designet for å hjelpe deg å få bedre regnetrening og øke bevisstheten rundt dine egne læringsprosesser. Gjennom strukturert arbeid og bevisst bruk av verktøyene, bygger du trygghet og faglig kompetanse. 
+  </p>
 
-    <section class="hero">
-      <span class="eyebrow">Notater · Oppgaver · Ressurser</span>
-      <h1>Velkommen til <span>Matteassistenten</span>.</h1>
-      <p>Velg kategorien du er interessert i.</p>
-    </section>
+  <p class="intro">Læringsmappen inneholder:</p>
 
-    <section class="utforsk">
-      <div class="kort-grid">
+  <ul class="innhold-liste">
+    <li>
+      <strong>Arbeidshefte:</strong> <a href="pdf/LM-MFH.pdf" target="_blank" class="f-link c-blue">Last ned kompendiet (PDF)</a>.<br>
+      <span style="font-size: 0.85rem; color: #64748b;">Inneholder blant annet algoritmisk tenkning og problemløsningsmetoden.</span>
+    </li>
+    <li>
+      <strong>Hvordan KI kan brukes som læringspartner for medikamentregning:</strong><br>
+      <span style="font-size: 0.85rem; color: #64748b;">Lær om prompt engineering, og hvordan KI kan brukes som en aktiv læringspartner – ikke som en fasitmaskin.</span>
+    </li>
+    <li>
+      <strong>Formler og omgjøring av enheter:</strong> <a href="pdf/Formler/index.html" class="f-link c-purple">Gå til Formler og enheter</a>.
+    </li>
+    <li>
+      <strong>Medikalkulator/Medimatiker:</strong> <span style="color: #64748b; font-size: 0.9rem;">(kun for å kontrollere egne svar)</span>.
+    </li>
+    <li>
+      <strong>Medistigen:</strong> <a href="pdf/MediStigen/index.html" class="f-link c-teal">Gå til Medistigen</a>.<br>
+      <span style="font-size: 0.85rem; color: #64748b;">En visuell progresjonsstige for de ulike trinnene i regningen.</span>
+    </li>
+  </ul>
 
-        <a href="ENT3R/" class="kort ent3r">
-          <div class="ikon">📘</div>
-          <h3>ENT3R</h3>
-          <p>Matematikkhjelp for elever – veiledningshefter og ressurser.</p>
-          <span class="pil">Gå til →</span>
-        </a>
+  <div class="pedagogisk-seksjon">
+    <h2>Lær deg en systematisk fremgangsmåte</h2>
+    <p style="font-size: 0.95rem; color: var(--muted); margin-bottom: 12px;">
+      Det er viktig at de pedagogiske komponentene brukes til å lære å:
+    </p>
+    <ol class="steg-liste">
+      <li><strong>Les oppgaven nøye.</strong></li>
+      <li><strong>Sett opp opplysningene</strong> du har fått.</li>
+      <li><strong>Del opp problemet og sjekk enhetene</strong>. Om nødvendig, omgjør enhetene (<a href="pdf/Formler/index.html" class="f-link c-purple">se oversikt over enheter</a>).</li>
+      <li><strong>Sett opp formler og relasjoner</strong> som forbinder opplysningene (<a href="pdf/Formler/index.html" class="f-link c-purple">se formler</a>).</li>
+      <li><strong>Regn oppgaven</strong> og kontroller underveis.</li>
+      <li><strong>Bruk Medikalkulator/Medimatiker</strong> til å kontrollere svaret du har kommet frem til.</li>
+      <li><strong>Bruk KI for utdypende forklaringer:</strong> Be om forklaringer på begrepene, gi KI din oppgave og be den lage en lignende oppgave du kan øve deg på.</li>
+    </ol>
+  </div>
 
-        <a href="MFI/" class="kort mfi">
-          <div class="ikon">📗</div>
-          <h3>Matematikk for ingeniørstudenter</h3>
-          <p>Forelesningsnotater og oppgaver for ingeniørstudiet.</p>
-          <span class="pil">Gå til →</span>
-        </a>
+  <p class="avslutning">
+    Husk at hovedmålet er at du skal mestre regnestykket selv. Bruk derfor verktøyene som støttehjul på veien mot å bli en trygg og selvstendig kliniker.
+  </p>
 
-        <a href="MFR/" class="kort mfr">
-          <div class="ikon">📕</div>
-          <h3>Matematikk for realfagsstudenter</h3>
-          <p>Notater og ressurser for deg som studerer realfag.</p>
-          <span class="pil">Gå til →</span>
-        </a>
-
-        <a href="MFL/" class="kort mfl">
-          <div class="ikon">📙</div>
-          <h3>Matematikk for lærerstudenter</h3>
-          <p>Fagdidaktikk og matematikk for deg som skal bli lærer.</p>
-          <span class="pil">Gå til →</span>
-        </a>
-
-        <a href="MFH/" class="kort mfh">
-          <div class="ikon">💊</div>
-          <h3>Medikamentregning for sykepleierstudenter</h3>
-          <p>Læringsmappe for sykepleierstudenter.</p>
-          <span class="pil">Gå til →</span>
-        </a>
-
-        <a href="Handout10klasse/" class="kort handout10">
-          <div class="ikon">📄</div>
-          <h3>Handout – 10. klasse</h3>
-          <p>Prosjektmateriell og oppgaver for 10. trinn.</p>
-          <span class="pil">Gå til →</span>
-        </a>
-
-        <a href="HandoutVGS/" class="kort handoutvgs">
-          <div class="ikon">📄</div>
-          <h3>Handout – VGS</h3>
-          <p>Prosjektmateriell og oppgaver for videregående skole.</p>
-          <span class="pil">Gå til →</span>
-        </a>
-
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <p>© Matteforeleseren · <a href="https://github.com/Matteforeleseren/Matteforeleseren">GitHub</a></p>
-  </footer>
+</div>
 
 </body>
 </html>
