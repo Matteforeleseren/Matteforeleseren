@@ -8,12 +8,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
   :root {
-    /* Ny lilla fargepalett */
-    --bg: #faf8ff;
+    /* Mørkere og fyldigere lilla fargepalett */
+    --bg: #f7f5fb;
     --card: #ffffff;
-    --primary: #8b5cf6;
-    --primary-dark: #6d28d9;
-    --primary-light: #f3e8ff;
+    --primary: #6d28d9;      /* Dyp lilla (Violet-700) */
+    --primary-dark: #4c1d95; /* Mørk lilla (Violet-900) */
+    --primary-light: #ede9fe;/* Lys lilla for bakgrunn i bokser */
     --border: #e5e7eb;
     --text: #1f2937;
     --muted: #6b7280;
@@ -141,7 +141,8 @@
     outline: none;
     border-color: var(--primary);
     background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+    /* Oppdatert skygge til å matche den mørkere lilla fargen */
+    box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.2); 
   }
   .field input.inline-short { width: 100px; display: inline-block; }
 
@@ -361,7 +362,6 @@
 
   function fmt(n, desimaler = 2) {
     if (!isFinite(n)) return null;
-    // Unngå "-0"
     if (Math.abs(n) < 1e-12) n = 0;
     return n.toLocaleString("nb-NO", {
       minimumFractionDigits: desimaler,
@@ -384,12 +384,11 @@
 
   function visTom(id) { setOut(id, "–"); }
 
-  // Bind input-lyttere for en kalkulator
   function bind(ids, fn) {
     ids.forEach(id => {
       document.getElementById(id).addEventListener("input", fn);
     });
-    fn(); // initial
+    fn(); 
   }
 
   // --- 1 ---
@@ -455,7 +454,6 @@
     const k = parseNum(document.getElementById("c6_kons").value);
     if (!isFinite(v) || !isFinite(d) || !isFinite(k) || k <= 0)
       return visTom("c6_out");
-    // ml/time = (vekt * dose * 60) / (1000 * konsentrasjon)
     const mlTime = (v * d * 60) / (1000 * k);
     visResultat("c6_out", fmt(mlTime), "ml/time");
   }
@@ -468,7 +466,7 @@
     const kons = parseNum(document.getElementById("c7_kons").value);
     if (!isFinite(onsket) || !isFinite(volum) || !isFinite(kons) || kons <= 0)
       return visTom("c7_out");
-    const mengde = onsket * volum; // mg totalt
+    const mengde = onsket * volum; 
     const volumKonsentrat = mengde / kons;
     setOut("c7_out",
       `<span class="value">${fmt(volumKonsentrat)} ml</span> konsentrat` +
