@@ -1,1 +1,272 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formler du trenger – Medikamentregning</title>
+<!-- MathJax for å vise formler pent -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f8fafc;
+    --tekst: #1e293b;
+    --muted: #475569;
+    --border: #e2e8f0;
+
+    /* Dempede farger for boksene */
+    --color-blue: #1e3a8a;
+    --bg-blue: #eff6ff;
+
+    --color-teal: #0f766e;
+    --bg-teal: #f0fdfa;
+
+    --color-orange: #9a3412;
+    --bg-orange: #fff7ed;
+
+    --color-green: #166534;
+    --bg-green: #f0fdf4;
+
+    --color-purple: #4c1d95;
+    --bg-purple: #f5f3ff;
+
+    --color-red: #991b1b;
+    --bg-red: #fef2f2;
+
+    --color-brown: #78350f;
+    --bg-brown: #fdf8f6;
+
+    --color-pink: #9d174d;
+    --bg-pink: #fdf2f8;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--tekst);
+    line-height: 1.6;
+    padding: 32px 20px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 1000px; margin: 0 auto; }
+
+  .tilbake {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 32px;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .tilbake:hover { color: var(--color-teal); }
+
+  .hero { margin-bottom: 40px; text-align: center; }
+  .hero h1 {
+    font-family: Georgia, serif;
+    font-size: 2.2rem;
+    color: #0f172a;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Grid for boksene */
+  .grid-formler {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  /* Felles stil for alle bokser */
+  .formel-boks {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    border-top: 6px solid;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .formel-boks h2 {
+    font-family: Georgia, serif;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .formel-innhold {
+    font-size: 1.1rem;
+    overflow-x: auto; /* Hindrer at lange formler ødelegger layouten */
+    padding: 8px 0;
+  }
+
+  .formel-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+    background: rgba(0,0,0,0.03);
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  /* Spesifikke farger for boksene */
+  .box-blue { border-top-color: var(--color-blue); }
+  .box-blue h2 { color: var(--color-blue); }
+  .box-blue { background: var(--bg-blue); }
+
+  .box-teal { border-top-color: var(--color-teal); }
+  .box-teal h2 { color: var(--color-teal); }
+  .box-teal { background: var(--bg-teal); }
+
+  .box-orange { border-top-color: var(--color-orange); }
+  .box-orange h2 { color: var(--color-orange); }
+  .box-orange { background: var(--bg-orange); }
+
+  .box-green { border-top-color: var(--color-green); }
+  .box-green h2 { color: var(--color-green); }
+  .box-green { background: var(--bg-green); }
+
+  .box-purple { border-top-color: var(--color-purple); }
+  .box-purple h2 { color: var(--color-purple); }
+  .box-purple { background: var(--bg-purple); }
+
+  .box-red { border-top-color: var(--color-red); }
+  .box-red h2 { color: var(--color-red); }
+  .box-red { background: var(--bg-red); }
+
+  .box-brown { border-top-color: var(--color-brown); }
+  .box-brown h2 { color: var(--color-brown); }
+  .box-brown { background: var(--bg-brown); }
+
+  .box-pink { border-top-color: var(--color-pink); }
+  .box-pink h2 { color: var(--color-pink); }
+  .box-pink { background: var(--bg-pink); }
+
+  @media (max-width: 600px) {
+    .grid-formler { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  
+  <a href="../index.html" class="tilbake"><i class="fa-solid fa-arrow-left"></i> Tilbake til hovedsiden</a>
+
+  <div class="hero">
+    <h1>Formler du trenger</h1>
+    <p>
+      Nedenfor er de viktigste formlene og omgjøringene du trenger for å løse oppgavene. 
+      De er delt inn i temaer, med hver sin farge. Du trenger ikke pugge alle — men du må vite hvor du finner dem, og du må forstå hva de betyr.
+    </p>
+  </div>
+
+  <div class="grid-formler">
+
+    <!-- 1. Masseenheter (Blå) -->
+    <div class="formel-boks box-blue">
+      <h2><i class="fa-solid fa-weight-hanging"></i> Masseenheter</h2>
+      <div class="formel-innhold">
+        \[ 1\,\text{g} = 1000\,\text{mg} \]
+        \[ 1\,\text{mg} = 1000\,\mu\text{g} \]
+        \[ 1\,\mu\text{g} = 1000\,\text{ng} \]
+      </div>
+      <div class="formel-note">
+        <strong>Huskeregel:</strong> multipliser med 1000 når du går fra større til mindre enhet; divider med 1000 når du går fra mindre til større.
+      </div>
+    </div>
+
+    <!-- 2. Volumenheter (Teal) -->
+    <div class="formel-boks box-teal">
+      <h2><i class="fa-solid fa-flask"></i> Volumenheter</h2>
+      <div class="formel-innhold">
+        \[ 1\,\text{L} = 1000\,\text{ml} \]
+        \[ 1\,\text{ml} = 1000\,\mu\text{l} \]
+      </div>
+    </div>
+
+    <!-- 3. Konsentrasjon og styrke (Oransje) -->
+    <div class="formel-boks box-orange">
+      <h2><i class="fa-solid fa-percent"></i> Konsentrasjon og styrke</h2>
+      <div class="formel-innhold">
+        \[ 1\,\% = 1\,\text{g}/100\,\text{ml} = 10\,\text{mg/ml} \]
+        \[ \text{Konsentrasjon} = \frac{\text{mengde virkestoff (mg)}}{\text{volum (ml)}} \]
+        \[ \text{Mengde virkestoff} = \text{konsentrasjon} \times \text{volum} \]
+      </div>
+    </div>
+
+    <!-- 4. Dose - mengde - volum og styrke (Grønn) -->
+    <div class="formel-boks box-green">
+      <h2><i class="fa-solid fa-pills"></i> Dose og styrke</h2>
+      <div class="formel-innhold">
+        \[ \text{Volum (ml)} = \frac{\text{ønsket dose (mg)}}{\text{styrke (mg/ml)}} \]
+        \[ \text{Antall tabletter} = \frac{\text{ønsket dose (mg)}}{\text{styrke per tablett (mg)}} \]
+      </div>
+    </div>
+
+    <!-- 5. Vektbasert dosering (Lilla) -->
+    <div class="formel-boks box-purple">
+      <h2><i class="fa-solid fa-weight-scale"></i> Vektbasert dosering</h2>
+      <div class="formel-innhold">
+        \[ \text{Total dose (mg)} = \text{dose per kg} \times \text{vekt (kg)} \]
+        \[ \text{Volum (ml)} = \frac{\text{total dose (mg)}}{\text{konsentrasjon (mg/ml)}} \]
+      </div>
+    </div>
+
+    <!-- 6. Infusjonshastighet (Rød) -->
+    <div class="formel-boks box-red">
+      <h2><i class="fa-solid fa-gauge-high"></i> Infusjonshastighet</h2>
+      <div class="formel-innhold">
+        \[ \text{ml/time} = \frac{\text{total volum (ml)}}{\text{tid (timer)}} \]
+        \[ \text{ml/min} = \frac{\text{total volum (ml)}}{\text{tid (minutter)}} \]
+      </div>
+    </div>
+
+    <!-- 7. Dråpetakt (Brun) -->
+    <div class="formel-boks box-brown">
+      <h2><i class="fa-solid fa-eye-dropper"></i> Dråpetakt</h2>
+      <div class="formel-innhold">
+        \[ \text{dråper/min} = \frac{\text{volum (ml)}}{\text{tid (min)}} \times \text{dråpefaktor} \]
+      </div>
+      <div class="formel-note">
+        <strong>Dråpefaktor:</strong> vanligvis 20 dråper/ml for makrodråper, 60 dråper/ml for mikrodråper. Bruk den faktoren oppgaven oppgir.
+      </div>
+    </div>
+
+    <!-- 8. Fortynning (Rosa) -->
+    <div class="formel-boks box-pink">
+      <h2><i class="fa-solid fa-droplet"></i> Fortynning</h2>
+      <div class="formel-innhold">
+        \[ C_1 \times V_1 = C_2 \times V_2 \]
+        \[ \text{Total mengde virkestoff} = C_1 \times V_1 \]
+        \[ V_2 = \frac{C_1 \times V_1}{C_2} \]
+        \[ \text{Volum som må tilsettes} = V_2 - V_1 \]
+      </div>
+      <div class="formel-note">
+        Mengden virkestoff er konstant ved fortynning.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
