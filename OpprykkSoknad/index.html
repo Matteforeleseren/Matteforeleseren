@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="nb">
 <head>
@@ -7,19 +6,18 @@
 <title>Søknad om opprykk til dosent – HVL</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #fafaf7;
-    --surface: #ffffff;
+    --bg: #ffffff;
+    --surface: #fafafa;
     --ink: #1a1f2b;
     --muted: #5a6472;
-    --line: #e5e5e0;
+    --line: #e8e8e4;
     --accent: #0b5d5b;
     --accent-soft: #e6f0ef;
     --accent-hover: #084a48;
-    --radius: 14px;
-    --shadow: 0 1px 2px rgba(20,30,40,.04), 0 8px 24px rgba(20,30,40,.06);
+    --radius: 10px;
   }
 
   * { box-sizing: border-box; }
@@ -29,183 +27,195 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background: var(--bg);
     color: var(--ink);
-    line-height: 1.65;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
 
   a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s; }
   a:hover { border-bottom-color: var(--accent); }
 
-  /* --- Top bar --- */
-  header.topbar {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(250, 250, 247, 0.85);
-    backdrop-filter: saturate(160%) blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
-  .topbar-inner {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 14px 24px;
+  /* --- Layout: sidebar + innhold --- */
+  .layout {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-  }
-  .brand-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--accent);
-  }
-  .topbar nav {
-    display: flex;
-    gap: 22px;
-    font-size: 0.92rem;
-  }
-  .topbar nav a {
-    color: var(--muted);
-    border: none;
-  }
-  .topbar nav a:hover { color: var(--accent); }
-  @media (max-width: 640px) {
-    .topbar nav { display: none; }
+    min-height: 100vh;
   }
 
-  /* --- Hero --- */
-  .hero {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 64px 24px 32px;
+  /* --- Venstremeny --- */
+  aside.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--line);
+    padding: 32px 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
   }
+  .sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-bottom: 28px;
+    color: var(--ink);
+  }
+  .sidebar-brand .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sidebar-nav a {
+    display: block;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--muted);
+    border: 1px solid transparent;
+    transition: all .15s;
+    text-decoration: none;
+  }
+  .sidebar-nav a:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: transparent;
+  }
+  .sidebar-nav a.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .sidebar-nav .nav-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #a0a0a0;
+    padding: 16px 12px 6px;
+  }
+
+  /* --- Hovedinnhold --- */
+  main.content {
+    flex: 1;
+    max-width: 760px;
+    padding: 48px 56px 80px;
+    margin: 0 auto;
+  }
+
+  /* --- Typografi --- */
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 16px;
+  }
+  h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 40px 0 12px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  h2:first-of-type { border-top: none; padding-top: 0; margin-top: 32px; }
+  h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+  p {
+    font-size: 0.94rem;
+    color: var(--muted);
+    margin: 0 0 14px;
+    max-width: 68ch;
+  }
+  p em { color: var(--ink); font-style: italic; }
+
   .eyebrow {
     display: inline-block;
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--accent);
     background: var(--accent-soft);
-    padding: 6px 12px;
+    padding: 4px 10px;
     border-radius: 999px;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
   }
-  h1 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 600;
-    font-size: clamp(2rem, 5vw, 3rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin: 0 0 20px;
-    max-width: 20ch;
-  }
-  .hero-lede {
-    font-size: 1.02rem;
-    color: var(--muted);
-    max-width: 68ch;
-    margin: 0 0 28px;
-  }
-  .hero-lede em { color: var(--ink); font-style: italic; }
 
-  .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  /* --- Knapper --- */
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0 0;
+  }
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
+    gap: 6px;
+    padding: 9px 16px;
     border-radius: 999px;
     font-weight: 500;
-    font-size: 0.88rem;
-    border: 1px solid transparent;
+    font-size: 0.86rem;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--ink);
     cursor: pointer;
-    transition: all .18s;
+    transition: all .15s;
+    text-decoration: none;
   }
-  .btn-primary { background: var(--accent); color: #fff; }
-  .btn-primary:hover { background: var(--accent-hover); border-color: transparent; }
-  .btn-ghost { background: transparent; border-color: var(--line); color: var(--ink); }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-
-  /* --- Hovedinnhold --- */
-  main { max-width: 1080px; margin: 0 auto; padding: 8px 24px 80px; }
-
-  section.block {
-    padding: 28px 0;
-    border-top: 1px solid var(--line);
-  }
-  section.block:first-of-type { border-top: none; }
-
-  .block-head {
-    display: flex;
-    align-items: baseline;
-    gap: 18px;
-    margin-bottom: 12px;
-  }
-  .num {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1rem;
-    font-weight: 600;
+  .btn:hover {
+    border-color: var(--accent);
     color: var(--accent);
-    min-width: 30px;
+    background: var(--accent-soft);
+    border-bottom-color: var(--accent);
   }
-  h2 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 600;
-    font-size: clamp(1.3rem, 3vw, 1.6rem);
-    letter-spacing: -0.015em;
-    margin: 0;
-    line-height: 1.2;
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
   }
-  .block p { color: var(--muted); max-width: 72ch; margin: 0 0 14px; font-size: 0.92rem; }
-  .block p:last-child { margin-bottom: 0; }
-  .block p em { color: var(--ink); }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: #fff;
+  }
 
   /* --- Dokumentkort --- */
   .doc-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 16px;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 14px 18px;
-    margin: 16px 0;
-    box-shadow: var(--shadow);
-    transition: transform .2s, box-shadow .2s, border-color .2s;
+    margin: 14px 0;
+    transition: border-color .15s, background .15s;
   }
   .doc-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgba(20,30,40,.05), 0 16px 36px rgba(20,30,40,.09);
-    border-color: #d6d6d0;
+    border-color: var(--accent);
+    background: var(--accent-soft);
   }
-  .doc-card-text h3 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin: 0 0 2px;
-  }
+  .doc-card-text h3 { margin: 0 0 2px; }
   .doc-card-text span {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     color: var(--muted);
   }
   .doc-card .arrow {
-    flex: 0 0 auto;
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: var(--accent-soft);
-    color: var(--accent);
-    display: grid;
-    place-items: center;
+    flex-shrink: 0;
     font-size: 1rem;
-    transition: background .18s, color .18s;
+    color: var(--accent);
   }
-  .doc-card:hover .arrow { background: var(--accent); color: #fff; }
 
   /* --- Kompakte lister --- */
   ol.points, ul.points {
@@ -220,9 +230,8 @@
     position: relative;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 10px 14px 10px 44px;
-    color: var(--ink);
+    border-radius: 8px;
+    padding: 10px 14px 10px 42px;
     font-size: 0.88rem;
     counter-increment: pt;
   }
@@ -231,10 +240,9 @@
     position: absolute;
     left: 14px;
     top: 10px;
-    font-family: 'Fraunces', Georgia, serif;
     font-weight: 600;
     color: var(--accent);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
   ul.points li::before {
     content: "";
@@ -246,82 +254,92 @@
     background: var(--accent);
   }
 
-  /* --- Vedlegg-rutenett (inspirert av Alrek) --- */
+  /* --- Vedlegg-rutenett --- */
   .vedlegg-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 12px;
-    margin-top: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 16px;
   }
-  .vedlegg-grid .doc-card {
-    margin: 0;
-  }
+  .vedlegg-grid .doc-card { margin: 0; }
 
   /* --- Footer --- */
   footer {
     border-top: 1px solid var(--line);
-    padding: 24px;
-    text-align: center;
-    color: var(--muted);
+    padding: 24px 0 0;
+    margin-top: 48px;
     font-size: 0.82rem;
+    color: var(--muted);
   }
 
-  /* --- Reveal on scroll --- */
-  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
-  .reveal.visible { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
-    html { scroll-behavior: auto; }
+  /* --- Mobil --- */
+  @media (max-width: 760px) {
+    .layout { flex-direction: column; }
+    aside.sidebar {
+      width: 100%;
+      height: auto;
+      position: static;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 20px;
+    }
+    .sidebar-nav { flex-direction: row; flex-wrap: wrap; gap: 6px; }
+    .sidebar-nav a { padding: 7px 12px; font-size: 0.84rem; }
+    .sidebar-nav .nav-label { display: none; }
+    main.content { padding: 32px 24px 64px; }
+    h2 { margin-top: 32px; padding-top: 20px; }
   }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <div class="brand"><span class="brand-dot"></span>Søknad om opprykk til dosent</div>
-    <nav>
-      <a href="#vedlegg">Vedlegg</a>
-      <a href="#profileringsdokument">Profileringsdokument</a>
+<div class="layout">
+
+  <!-- Venstremeny -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="dot"></span>
+      Søknad om opprykk
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Innhold</span>
       <a href="#pedagogisk-mappe">Pedagogisk mappe</a>
+      <a href="#profileringsdokument">Profileringsdokument</a>
+      <a href="#vedlegg">Vedlegg</a>
     </nav>
-  </div>
-</header>
+  </aside>
 
-<main>
+  <!-- Hovedinnhold -->
+  <main class="content">
 
-  <div class="hero reveal">
     <span class="eyebrow">Høgskulen på Vestlandet</span>
     <h1>Søknad om opprykk til dosent</h1>
-    <p class="hero-lede">
+    <p>
       Jeg søker med dette om opprykk til dosent ved Høgskulen på Vestlandet (HVL),
       i samsvar med § 2-3 i
-      <em><a href="https://lovdata.no/dokument/SFO/forskrift/2006-02-09-129" target="_blank" rel="noopener">Forskrift om ansettelse og opprykk i undervisnings- og forskerstillinger</a></em>.
-      Søknaden gjelder opprykk fra min nåværende stilling som førstelektor innenfor
-      fagområdet jeg er ansatt i.
+      <a href="https://lovdata.no/dokument/SFO/forskrift/2006-02-09-129" target="_blank" rel="noopener">Forskrift om ansettelse og opprykk i undervisnings- og forskerstillinger</a>.
+      Søknaden gjelder opprykk fra min nåværende stilling som førstelektor
+      innenfor fagområdet jeg er ansatt i.
     </p>
-    <div class="cta-row">
+
+    <div class="btn-row">
       <a class="btn btn-primary" href="pdf/Pedagogiskmappe.pdf" target="_blank" rel="noopener">
         Åpne pedagogisk mappe
       </a>
-      <a class="btn btn-ghost" href="#profileringsdokument">
+      <a class="btn" href="#profileringsdokument">
         Se profileringsdokument
       </a>
-      <a class="btn btn-ghost" href="#vedlegg">
+      <a class="btn" href="#vedlegg">
         Vedlegg
       </a>
     </div>
-  </div>
 
-  <section class="block reveal" id="pedagogisk-mappe">
-    <div class="block-head">
-      <span class="num">01</span>
-      <h2>Pedagogisk mappe</h2>
-    </div>
+    <!-- Seksjon 1: Pedagogisk mappe -->
+    <h2 id="pedagogisk-mappe">Pedagogisk mappe</h2>
     <p>
-      Mappen dokumenterer min <em>utdanningsfaglige kompetanse</em> og utvikling
+      Mappen dokumenterer min <em>utdanningsfaglige kompetanse</em> og min utvikling
       som underviser, veileder og faglig bidragsyter gjennom mer enn 30 år.
-      Strukturert i tre hovedområder:
+      Den er strukturert rundt tre hovedområder:
     </p>
 
     <a class="doc-card" href="pdf/Pedagogiskmappe.pdf" target="_blank" rel="noopener">
@@ -329,7 +347,7 @@
         <h3>Pedagogisk mappe (PDF)</h3>
         <span>Utdanningsfaglig kompetanse</span>
       </div>
-      <div class="arrow">↗</div>
+      <span class="arrow">↗</span>
     </a>
 
     <ol class="points">
@@ -337,17 +355,21 @@
       <li><strong>Område II:</strong> Bred erfaring med pedagogisk veiledning.</li>
       <li><strong>Område III:</strong> Bidrag til utvikling av utdanningskvalitet i fagfellesskap.</li>
     </ol>
-  </section>
 
-  <section class="block reveal" id="profileringsdokument">
-    <div class="block-head">
-      <span class="num">02</span>
-      <h2>Profileringsdokument</h2>
-    </div>
+    <!-- Seksjon 2: Profileringsdokument -->
+    <h2 id="profileringsdokument">Profileringsdokument</h2>
     <p>
-      Viser min <em>faglige utvikling</em> over 30 år i høyere utdanning,
-      strukturert etter HVLs krav:
+      Dokumentet viser min <em>faglige utvikling</em> over 30 år i høyere utdanning,
+      strukturert etter HVLs krav for opprykk til dosent:
     </p>
+
+    <a class="doc-card" href="pdf/profileringsdokument.pdf" target="_blank" rel="noopener">
+      <div class="doc-card-text">
+        <h3>Profileringsdokument (PDF)</h3>
+        <span>Faglig utvikling</span>
+      </div>
+      <span class="arrow">↗</span>
+    </a>
 
     <ol class="points">
       <li>Profesjons- og/eller undervisningsrettet FoU-arbeid med høy kvalitet og relevans.</li>
@@ -355,13 +377,9 @@
       <li>Ledelse, samarbeid og utvikling av komplekse utdanningsfelt over tid.</li>
       <li>Høy kvalitet og relevans som viser fortrolighet med fagfeltet.</li>
     </ol>
-  </section>
 
-  <section class="block reveal" id="vedlegg">
-    <div class="block-head">
-      <span class="num">03</span>
-      <h2>Vedlegg</h2>
-    </div>
+    <!-- Seksjon 3: Vedlegg -->
+    <h2 id="vedlegg">Vedlegg</h2>
     <p>
       De tre hoveddokumentene samlet. Alle åpnes i ny fane.
     </p>
@@ -372,47 +390,31 @@
           <h3>Pedagogisk mappe</h3>
           <span>PDF · utdanningsfaglig kompetanse</span>
         </div>
-        <div class="arrow">↗</div>
+        <span class="arrow">↗</span>
       </a>
-      <a class="doc-card" href="pdf/Profileringsdokument.pdf" target="_blank" rel="noopener">
+      <a class="doc-card" href="pdf/profileringsdokument.pdf" target="_blank" rel="noopener">
         <div class="doc-card-text">
           <h3>Profileringsdokument</h3>
           <span>PDF · faglig utvikling</span>
         </div>
-        <div class="arrow">↗</div>
+        <span class="arrow">↗</span>
       </a>
       <a class="doc-card" href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/" target="_blank" rel="noopener">
         <div class="doc-card-text">
           <h3>Øvrige vedlegg</h3>
           <span>Samlet oversikt (Matteforeleseren)</span>
         </div>
-        <div class="arrow">↗</div>
+        <span class="arrow">↗</span>
       </a>
     </div>
-  </section>
 
-</main>
+    <footer>
+      Søknad om opprykk til dosent · Høgskulen på Vestlandet
+    </footer>
 
-<footer>
-  Søknad om opprykk til dosent · Høgskulen på Vestlandet
-</footer>
+  </main>
 
-<script>
-  const els = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    els.forEach(el => io.observe(el));
-  } else {
-    els.forEach(el => el.classList.add('visible'));
-  }
-</script>
+</div>
 
 </body>
 </html>
