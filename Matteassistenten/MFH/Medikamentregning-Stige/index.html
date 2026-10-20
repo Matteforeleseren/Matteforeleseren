@@ -3,18 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Medikamentregning Stigen - Kalkulator</title>
+<title>Medikamentregning Stigen – Kalkulator og Oversikt</title>
+<!-- MathJax for å vise formler pent -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- FontAwesome for ikoner -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --med-blue: #1d4ed8;
-    --med-teal: #0d9488;
     --bg: #f8fafc;
-    --border: #e2e8f0;
     --tekst: #1a1a1a;
-    --muted: #6b7280;
+    --muted: #475569;
+    --border: #e2e8f0;
+
+    /* Farger for trinnene */
+    --c-blue: #1d4ed8;
+    --c-teal: #0d9488;
+    --c-green: #166534;
+    --c-olive: #65a30d;
+    --c-orange: #ea580c;
+    --c-red: #dc2626;
+    --c-purple: #7e22ce;
+    --c-magenta: #c026d3;
+    --c-violet: #8b5cf6;
+    --c-brown: #78350f;
   }
 
   body {
@@ -22,137 +37,174 @@
     background: var(--bg);
     color: var(--tekst);
     line-height: 1.6;
-    padding: 32px 20px 64px;
+    -webkit-font-smoothing: antialiased;
+    padding: 40px 20px 64px;
   }
 
-  .container { max-width: 850px; margin: 0 auto; }
+  .container { max-width: 1100px; margin: 0 auto; }
 
+  /* Tilbake-knapp */
   .tilbake {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     margin-bottom: 32px;
-    color: var(--med-teal);
+    color: var(--muted);
     text-decoration: none;
     font-weight: 500;
     font-size: 0.9rem;
+    transition: color 0.2s;
   }
-  .tilbake:hover { gap: 10px; }
+  .tilbake:hover { color: var(--c-blue); }
 
-  .hero { text-align: center; margin-bottom: 40px; }
+  /* Hero-seksjon */
+  .hero { 
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
   .hero h1 {
     font-family: Georgia, serif;
-    font-size: 2.4rem;
+    font-size: 2.6rem;
     font-weight: 700;
     color: #0f172a;
-    margin-bottom: 12px;
-  }
-  .hero p {
-    font-size: 1.05rem;
-    color: var(--muted);
-    max-width: 600px;
-    margin: 0 auto;
+    margin-bottom: 16px;
   }
 
-  /* Pedagogisk advarsel */
-  .advarsel {
-    padding: 20px;
-    background: #fffbeb;
-    border-left: 5px solid #d97706;
-    border-radius: 8px;
-    color: #92400e;
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 750px;
+    margin: 0 auto 32px auto;
+  }
+
+  /* Bilde av stigen */
+  .stige-bilde-container {
+    text-align: center;
     margin-bottom: 40px;
+  }
+  
+  .stige-bilde-container img {
+    max-width: 100%;
+    height: auto;
+    width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+  }
+
+  /* Tema-oversikt */
+  .tema-oversikt {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 48px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+  
+  .tema-oversikt ul {
     display: flex;
-    gap: 16px;
-    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    margin-top: 16px;
     font-size: 0.95rem;
   }
-  .advarsel i { font-size: 1.5rem; color: #d97706; margin-top: 2px; }
+  
+  .tema-oversikt li strong { color: #0f172a; }
 
-  /* Stige kort */
-  .stige-kort {
-    background: white;
+  /* Grid for trinnene */
+  .grid-trinn {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 28px;
+  }
+
+  /* Felles stil for trinn-boksene */
+  .trinn-boks {
+    background: #ffffff;
     border-radius: 12px;
     padding: 24px;
-    margin-bottom: 24px;
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    border-top: 6px solid;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.2s ease;
   }
-  .stige-kort:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
 
-  /* Trinn-indikator (venstre kant) */
-  .stige-kort::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 6px;
+  .trinn-boks:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -5px rgba(0,0,0,0.08);
   }
-  .t1::before { background: #0284c7; }
-  .t2::before { background: #16a34a; }
-  .t3::before { background: #ca8a04; }
-  .t4::before { background: #ea580c; }
-  .t5::before { background: #dc2626; }
-  .t6::before { background: #db2777; }
-  .t7::before { background: #9333ea; }
-  .t8::before { background: #2563eb; }
-  .t9::before { background: #0d9488; }
-  .t10::before { background: #4b5563; }
 
   .kort-header {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 20px;
+  }
+
+  .kort-header h2 {
+    font-family: Georgia, serif;
+    font-size: 1.2rem;
+    color: #0f172a;
+    margin: 0;
   }
 
   .kort-header .icon-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    font-size: 1.2rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    font-size: 1.1rem;
     flex-shrink: 0;
   }
-  .t1 .icon-wrapper { background: #e0f2fe; color: #0284c7; }
-  .t2 .icon-wrapper { background: #dcfce7; color: #16a34a; }
-  .t3 .icon-wrapper { background: #fef9c3; color: #ca8a04; }
-  .t4 .icon-wrapper { background: #ffedd5; color: #ea580c; }
-  .t5 .icon-wrapper { background: #fee2e2; color: #dc2626; }
-  .t6 .icon-wrapper { background: #fce7f3; color: #db2777; }
-  .t7 .icon-wrapper { background: #f3e8ff; color: #9333ea; }
-  .t8 .icon-wrapper { background: #dbeafe; color: #2563eb; }
-  .t9 .icon-wrapper { background: #ccfbf1; color: #0d9488; }
-  .t10 .icon-wrapper { background: #e5e7eb; color: #4b5563; }
 
-  .kort-header h2 {
-    font-family: Georgia, serif;
-    font-size: 1.15rem;
-    color: #0f172a;
+  .beskrivelse {
+    font-size: 0.95rem;
+    color: #1a1a1a;
   }
 
-  /* Inputs og knapper */
+  .formel-innhold {
+    font-size: 1.1rem;
+    overflow-x: auto;
+    padding: 8px 0;
+    text-align: center;
+    background: rgba(0,0,0,0.02);
+    border-radius: 8px;
+    border: 1px dashed #cbd5e1;
+  }
+
+  /* Kalkulator-styling */
+  .kalkulator-wrapper {
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    margin-top: auto;
+  }
+
   .input-rad {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 16px;
+    gap: 12px;
+    margin-bottom: 12px;
   }
   
   .input-gruppe {
     flex: 1;
-    min-width: 200px;
+    min-width: 100px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
   }
   
   .input-gruppe label {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: var(--muted);
     text-transform: uppercase;
@@ -160,408 +212,571 @@
   }
 
   .input-gruppe input, .input-gruppe select {
-    padding: 10px 12px;
+    padding: 8px 10px;
     border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 1rem;
-    background: #f8fafc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background: #ffffff;
     width: 100%;
   }
   .input-gruppe input:focus, .input-gruppe select:focus {
-    outline: 2px solid var(--med-blue);
+    outline: 2px solid #1d4ed8;
     border-color: transparent;
-    background: white;
   }
 
   .knapp {
-    background: var(--med-blue);
+    background: #0f172a;
     color: white;
     border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
+    padding: 10px 20px;
+    border-radius: 6px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.1s;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
+    width: 100%;
   }
-  .knapp:hover { background: #1e40af; }
+  .knapp:hover { background: #334155; }
+  .knapp:active { transform: scale(0.98); }
 
   /* Resultat-boks */
   .resultat {
-    margin-top: 16px;
-    padding: 16px;
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    border-radius: 8px;
-    color: #166534;
-    font-size: 1.05rem;
+    margin-top: 12px;
+    padding: 12px;
+    background: #ffffff;
+    border-left: 4px solid #10b981;
+    border-radius: 4px;
+    color: #064e3b;
+    font-size: 0.95rem;
     display: none;
     animation: fadeIn 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   }
-  .resultat strong { font-weight: 700; color: #065f46; }
+  .resultat strong { font-weight: 700; color: #065f46; font-size: 1.05rem; }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Spesifikke farger for hvert trinn */
+  .t1 { border-top-color: var(--c-blue); background: #eff6ff; }
+  .t1 h2 { color: var(--c-blue); }
+  .t1 .icon-wrapper { background: #dbeafe; color: var(--c-blue); }
+
+  .t2 { border-top-color: var(--c-teal); background: #f0fdfa; }
+  .t2 h2 { color: var(--c-teal); }
+  .t2 .icon-wrapper { background: #ccfbf1; color: var(--c-teal); }
+
+  .t3 { border-top-color: var(--c-green); background: #f0fdf4; }
+  .t3 h2 { color: var(--c-green); }
+  .t3 .icon-wrapper { background: #dcfce7; color: var(--c-green); }
+
+  .t4 { border-top-color: var(--c-olive); background: #f7fee7; }
+  .t4 h2 { color: var(--c-olive); }
+  .t4 .icon-wrapper { background: #ecfccb; color: var(--c-olive); }
+
+  .t5 { border-top-color: var(--c-orange); background: #fff7ed; }
+  .t5 h2 { color: var(--c-orange); }
+  .t5 .icon-wrapper { background: #ffedd5; color: var(--c-orange); }
+
+  .t6 { border-top-color: var(--c-red); background: #fef2f2; }
+  .t6 h2 { color: var(--c-red); }
+  .t6 .icon-wrapper { background: #fee2e2; color: var(--c-red); }
+
+  .t7 { border-top-color: var(--c-purple); background: #f5f3ff; }
+  .t7 h2 { color: var(--c-purple); }
+  .t7 .icon-wrapper { background: #ede9fe; color: var(--c-purple); }
+
+  .t8 { border-top-color: var(--c-magenta); background: #fdf4ff; }
+  .t8 h2 { color: var(--c-magenta); }
+  .t8 .icon-wrapper { background: #fae8ff; color: var(--c-magenta); }
+
+  .t9 { border-top-color: var(--c-violet); background: #f8fafc; }
+  .t9 h2 { color: var(--c-violet); }
+  .t9 .icon-wrapper { background: #f3e8ff; color: var(--c-violet); }
+
+  .t10 { border-top-color: var(--c-brown); background: #fdf8f6; }
+  .t10 h2 { color: var(--c-brown); }
+  .t10 .icon-wrapper { background: #ffedd5; color: var(--c-brown); }
+
+  @media (max-width: 600px) {
+    .grid-trinn { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+    .stige-bilde-container img { width: 100%; }
+    .tema-oversikt ul { flex-direction: column; align-items: flex-start; gap: 10px; margin-left: 20px; }
+  }
 </style>
 </head>
 <body>
-  <div class="container">
-    <a href="../index.html" class="tilbake"><i class="fa-solid fa-arrow-left"></i> Tilbake til hovedsiden</a>
 
-    <div class="hero">
-      <h1>Medikamentregning Stigen</h1>
-      <p>Fra trinn 1 til 10. Bruk kalkulatorene under hvert trinn for å kontrollere dine egne utregninger.</p>
-    </div>
+<div class="container">
+  
+  <a href="../index.html" class="tilbake"><i class="fa-solid fa-arrow-left"></i> Tilbake til hovedsiden</a>
 
-    <div class="advarsel">
-      <i class="fa-solid fa-triangle-exclamation"></i>
-      <div>
-        <strong>Husk:</strong> Kalkulatoren er kun en pedagogisk støtte for å kontrollere svarene du allerede har regnet ut selv. For å bli en trygg kliniker, må du forstå *hvordan* svaret beregnes.
-      </div>
-    </div>
+  <div class="hero">
+    <h1>Medikamentregning Stigen</h1>
+    <p>
+      Medikamentregning kan sammenlignes med å klatre i en stige. Hvert trinn bygger på det forrige. 
+      Bruk kalkulatorene under hvert trinn for å kontrollere dine egne utregninger, og se formlene som hører til.
+    </p>
+  </div>
 
-    <!-- TRINN 1 -->
-    <div class="stige-kort t1">
+  <!-- Bilde av stigen -->
+  <div class="stige-bilde-container">
+    <!-- Pass på at filnavnet og stien stemmer med der du har lagret bildet -->
+    <img src="./Fig/Medi-Stige.png" alt="Illustrasjon av Medikamentregning stigen med 10 trinn">
+  </div>
+
+  <!-- Tema-oversikt -->
+  <div class="tema-oversikt">
+    <p>Stigen består av ti trinn som er delt inn i fire hovedtemaer:</p>
+    <ul>
+      <li><strong>Grunnleggende konvertering</strong> (Trinn 1–2)</li>
+      <li><strong>Doseberegning</strong> (Trinn 3–6)</li>
+      <li><strong>Infusjon og tid</strong> (Trinn 7–9)</li>
+      <li><strong>Fortynning</strong> (Trinn 10)</li>
+    </ul>
+  </div>
+
+  <!-- Trinnene med innebygd kalkulator -->
+  <div class="grid-trinn">
+
+    <!-- Trinn 1 -->
+    <div class="trinn-boks t1">
       <div class="kort-header">
         <div class="icon-wrapper"><i class="fa-solid fa-ruler-combined"></i></div>
         <h2>Trinn 1: Enheter og omgjøring</h2>
       </div>
-      <div class="input-rad">
-        <div class="input-gruppe">
-          <label>Verdi</label>
-          <input type="number" id="t1-verdi" placeholder="f.eks. 2">
-        </div>
-        <div class="input-gruppe">
-          <label>Fra enhet</label>
-          <select id="t1-fra">
-            <option value="g">Gram (g)</option>
-            <option value="mg">Milligram (mg)</option>
-            <option value="ug">Mikrogram (µg)</option>
-          </select>
-        </div>
-        <div class="input-gruppe">
-          <label>Til enhet</label>
-          <select id="t1-til">
-            <option value="mg">Milligram (mg)</option>
-            <option value="g">Gram (g)</option>
-            <option value="ug">Mikrogram (µg)</option>
-          </select>
-        </div>
+      <div class="beskrivelse">
+        Å kunne konvertere mellom vekt- og volumenheter er grunnmuren i all medikamentregning.
       </div>
-      <button class="knapp" onclick="regnTrinn1()"><i class="fa-solid fa-equals"></i> Regn ut</button>
-      <div class="resultat" id="res-1"></div>
+      <div class="formel-innhold">
+        \[ 1\,\text{g} = 1000\,\text{mg} \quad|\quad 1\,\text{mg} = 1000\,\mu\text{g} \]
+      </div>
+      
+      <div class="kalkulator-wrapper">
+        <div class="input-rad">
+          <div class="input-gruppe">
+            <label>Verdi</label>
+            <input type="number" id="t1-verdi" placeholder="f.eks. 2">
+          </div>
+          <div class="input-gruppe">
+            <label>Fra</label>
+            <select id="t1-fra">
+              <option value="g">Gram (g)</option>
+              <option value="mg">Milligram (mg)</option>
+              <option value="ug">Mikrogram (µg)</option>
+            </select>
+          </div>
+          <div class="input-gruppe">
+            <label>Til</label>
+            <select id="t1-til">
+              <option value="mg">Milligram (mg)</option>
+              <option value="g">Gram (g)</option>
+              <option value="ug">Mikrogram (µg)</option>
+            </select>
+          </div>
+        </div>
+        <button class="knapp" onclick="regnTrinn1()"><i class="fa-solid fa-equals"></i> Regn ut</button>
+        <div class="resultat" id="res-1"></div>
+      </div>
     </div>
 
-    <!-- TRINN 2 -->
-    <div class="stige-kort t2">
+    <!-- Trinn 2 -->
+    <div class="trinn-boks t2">
       <div class="kort-header">
-        <div class="icon-wrapper"><i class="fa-solid fa-fill-drip"></i></div>
+        <div class="icon-wrapper"><i class="fa-solid fa-flask"></i></div>
         <h2>Trinn 2: Volum og konvertering</h2>
       </div>
-      <div class="input-rad">
-        <div class="input-gruppe">
-          <label>Verdi</label>
-          <input type="number" id="t2-verdi" placeholder="f.eks. 1.5">
-        </div>
-        <div class="input-gruppe">
-          <label>Fra enhet</label>
-          <select id="t2-fra">
-            <option value="L">Liter (L)</option>
-            <option value="ml">Milliliter (ml)</option>
-          </select>
-        </div>
-        <div class="input-gruppe">
-          <label>Til enhet</label>
-          <select id="t2-til">
-            <option value="ml">Milliliter (ml)</option>
-            <option value="L">Liter (L)</option>
-          </select>
-        </div>
+      <div class="beskrivelse">
+        Volum oppgis ofte i liter eller milliliter, og du må kunne veksle sømløst mellom dem.
       </div>
-      <button class="knapp" onclick="regnTrinn2()"><i class="fa-solid fa-equals"></i> Regn ut</button>
-      <div class="resultat" id="res-2"></div>
+      <div class="formel-innhold">
+        \[ 1\,\text{L} = 1000\,\text{ml} \]
+      </div>
+
+      <div class="kalkulator-wrapper">
+        <div class="input-rad">
+          <div class="input-gruppe">
+            <label>Verdi</label>
+            <input type="number" id="t2-verdi" placeholder="f.eks. 1.5">
+          </div>
+          <div class="input-gruppe">
+            <label>Fra</label>
+            <select id="t2-fra">
+              <option value="L">Liter (L)</option>
+              <option value="ml">Milliliter (ml)</option>
+            </select>
+          </div>
+          <div class="input-gruppe">
+            <label>Til</label>
+            <select id="t2-til">
+              <option value="ml">Milliliter (ml)</option>
+              <option value="L">Liter (L)</option>
+            </select>
+          </div>
+        </div>
+        <button class="knapp" onclick="regnTrinn2()"><i class="fa-solid fa-equals"></i> Regn ut</button>
+        <div class="resultat" id="res-2"></div>
+      </div>
     </div>
 
-    <!-- TRINN 3 -->
-    <div class="stige-kort t3">
+    <!-- Trinn 3 -->
+    <div class="trinn-boks t3">
       <div class="kort-header">
-        <div class="icon-wrapper"><i class="fa-solid fa-tablets"></i></div>
+        <div class="icon-wrapper"><i class="fa-solid fa-pills"></i></div>
         <h2>Trinn 3: Tabletter og kapsler</h2>
       </div>
-      <div class="input-rad">
-        <div class="input-gruppe">
-          <label>Ønsket dose (mg)</label>
-          <input type="number" id="t3-dose" placeholder="f.eks. 500">
-        </div>
-        <div class="input-gruppe">
-          <label>Styrke per tablett (mg)</label>
-          <input type="number" id="t3-styrke" placeholder="f.eks. 250">
-        </div>
+      <div class="beskrivelse">
+        Når styrken er oppgitt per tablett eller kapsel, finner du antallet ved å dele ønsket dose på styrken.
       </div>
-      <button class="knapp" onclick="regnTrinn3()"><i class="fa-solid fa-equals"></i> Regn ut</button>
-      <div class="resultat" id="res-3"></div>
+      <div class="formel-innhold">
+        \[ \text{Antall tabletter} = \frac{\text{Ønsket dose}}{\text{Styrke per tablett}} \]
+      </div>
+
+      <div class="kalkulator-wrapper">
+        <div class="input-rad">
+          <div class="input-gruppe">
+            <label>Ønsket dose (mg)</label>
+            <input type="number" id="t3-dose" placeholder="f.eks. 500">
+          </div>
+          <div class="input-gruppe">
+            <label>Styrke per tbl (mg)</label>
+            <input type="number" id="t3-styrke" placeholder="f.eks. 250">
+          </div>
+        </div>
+        <button class="knapp" onclick="regnTrinn3()"><i class="fa-solid fa-equals"></i> Regn ut</button>
+        <div class="resultat" id="res-3"></div>
+      </div>
     </div>
 
-    <!-- TRINN 4 -->
-    <div class="stige-kort t4">
+    <!-- Trinn 4 -->
+    <div class="trinn-boks t4">
       <div class="kort-header">
         <div class="icon-wrapper"><i class="fa-solid fa-syringe"></i></div>
         <h2>Trinn 4: Væske og injeksjon</h2>
       </div>
-      <div class="input-rad">
-        <div class="input-gruppe">
-          <label>Ønsket dose (mg)</label>
-          <input type="number" id="t4-dose" placeholder="f.eks. 15">
-        </div>
-        <div class="input-gruppe">
-          <label>Konsentrasjon (mg/ml)</label>
-          <input type="number" id="t4-styrke" placeholder="f.eks. 20">
-        </div>
+      <div class="beskrivelse">
+        For væsker og injeksjoner finner du volumet ved å dele ønsket dose på konsentrasjonen.
       </div>
-      <button class="knapp" onclick="regnTrinn4()"><i class="fa-solid fa-equals"></i> Regn ut</button>
-      <div class="resultat" id="res-4"></div>
+      <div class="formel-innhold">
+        \[ \text{Volum (ml)} = \frac{\text{Ønsket dose (mg)}}{\text{Styrke (mg/ml)}} \]
+      </div>
+
+      <div class="kalkulator-wrapper">
+        <div class="input-rad">
+          <div class="input-gruppe">
+            <label>Ønsket dose (mg)</label>
+            <input type="number" id="t4-dose" placeholder="f.eks. 15">
+          </div>
+          <div class="input-gruppe">
+            <label>Konsentrasjon (mg/ml)</label>
+            <input type="number" id="t4-styrke" placeholder="f.eks. 20">
+          </div>
+        </div>
+        <button class="knapp" onclick="regnTrinn4()"><i class="fa-solid fa-equals"></i> Regn ut</button>
+        <div class="resultat" id="res-4"></div>
+      </div>
     </div>
 
-    <!-- TRINN 5 -->
-    <div class="stige-kort t5">
+    <!-- Trinn 5 -->
+    <div class="trinn-boks t5">
       <div class="kort-header">
         <div class="icon-wrapper"><i class="fa-solid fa-percent"></i></div>
         <h2>Trinn 5: Prosent og styrke</h2>
       </div>
-      <div class="input-rad">
-        <div class="input-gruppe">
-          <label>Prosentstyrke (%)</label>
-          <input type="number" id="t5-prosent" placeholder="f.eks. 5">
-        </div>
+      <div class="beskrivelse">
+        Prosentstyrke forteller hvor mange gram virkestoff det er per 100 ml. Husk at 1 % tilsvarer 10 mg/ml.
       </div>
-      <button class="knapp" onclick="regnTrinn5()"><i class="fa-solid fa-equals"></i> Regn ut</button>
-      <div class="resultat" id="res-5"></div>
+      <div class="formel-innhold">
+        \[ 1\,\% = 1\,\text{g}/100\,\text{ml} = 10\,\text{mg/ml} \]
+      </div>
+
+      <div class="kalkulator-wrapper">
+        <div class="input-rad">
+          <div class="input-gruppe">
+            <label>Prosentstyrke (%)</label>
+            <input type="number" id="t5-prosent" placeholder="f.eks. 5">
+          </div>
+        </div>
+        <button class="knapp" onclick="regnTrinn5()"><i class="fa-solid fa-equals"></i> Regn ut</button>
+        <div class="resultat" id="res-5"></div>
+      </div>
     </div>
 
-    <!-- TRINN 6 -->
-    <div class="stige-kort t6">
+    <!-- Trinn 6 -->
+    <div class="trinn-boks t6">
       <div class="kort-header">
         <div class="icon-wrapper"><i class="fa-solid fa-weight-hanging"></i></div>
         <h2>Trinn 6: Vekt og dosering</h2>
       </div>
-      <div class="input-rad">
-        <div class="input-gruppe">
-          <label>Dose per kg (mg/kg)</label>
-          <input type="number" id="t6-dose" placeholder="f.eks. 3">
-        </div>
-        <div class="input-gruppe">
-          <label>Pasientens vekt (kg)</label>
-          <input type="number" id="t6-vekt" placeholder="f.eks. 12">
-        </div>
+      <div class="beskrivelse">
+        Når dosen er oppgitt per kilogram kroppsvekt, må du først finne totaldosen basert på pasientens vekt.
       </div>
-      <button class="knapp" onclick="regnTrinn6()"><i class="fa-solid fa-equals"></i> Regn ut</button>
-      <div class="resultat" id="res-6"></div>
+      <div class="formel-innhold">
+        \[ \text{Total dose} = \text{Dose per kg} \times \text{Vekt (kg)} \]
+      </div>
+
+      <div class="kalkulator-wrapper">
+        <div class="input-rad">
+          <div class="input-gruppe">
+            <label>Dose per kg (mg/kg)</label>
+            <input type="number" id="t6-dose" placeholder="f.eks. 3">
+          </div>
+          <div class="input-gruppe">
+            <label>Pasientens vekt (kg)</label>
+            <input type="number" id="t6-vekt" placeholder="f.eks. 12">
+          </div>
+        </div>
+        <button class="knapp" onclick="regnTrinn6()"><i class="fa-solid fa-equals"></i> Regn ut</button>
+        <div class="resultat" id="res-6"></div>
+      </div>
     </div>
 
-    <!-- TRINN 7 -->
-    <div class="stige-kort t7">
+    <!-- Trinn 7 -->
+    <div class="trinn-boks t7">
       <div class="kort-header">
         <div class="icon-wrapper"><i class="fa-solid fa-clock"></i></div>
         <h2>Trinn 7: Døgn og enkeltdose</h2>
       </div>
-      <div class="input-rad">
-        <div class="input-gruppe">
-          <label>Døgndose (mg)</label>
-          <input type="number" id="t7-dogn" placeholder="f.eks. 360">
-        </div>
-        <div class="input-gruppe">
-          <label>Antall doser per døgn</label>
-          <input type="number" id="t7-antall" placeholder="f.eks. 4">
-        </div>
+      <div class="beskrivelse">
+        Ofte er døgndosen oppgitt, men pasienten skal ha flere enkeltdoser. Da må du fordele døgndosen riktig.
       </div>
-      <button class="knapp" onclick="regnTrinn7()"><i class="fa-solid fa-equals"></i> Regn ut</button>
-      <div class="resultat" id="res-7"></div>
+      <div class="formel-innhold">
+        \[ \text{Dose per gang} = \frac{\text{Døgndose}}{\text{Antall doser per døgn}} \]
+      </div>
+
+      <div class="kalkulator-wrapper">
+        <div class="input-rad">
+          <div class="input-gruppe">
+            <label>Døgndose (mg)</label>
+            <input type="number" id="t7-dogn" placeholder="f.eks. 360">
+          </div>
+          <div class="input-gruppe">
+            <label>Antall doser per døgn</label>
+            <input type="number" id="t7-antall" placeholder="f.eks. 4">
+          </div>
+        </div>
+        <button class="knapp" onclick="regnTrinn7()"><i class="fa-solid fa-equals"></i> Regn ut</button>
+        <div class="resultat" id="res-7"></div>
+      </div>
     </div>
 
-    <!-- TRINN 8 -->
-    <div class="stige-kort t8">
+    <!-- Trinn 8 -->
+    <div class="trinn-boks t8">
       <div class="kort-header">
         <div class="icon-wrapper"><i class="fa-solid fa-gauge-high"></i></div>
         <h2>Trinn 8: Infusjon og hastighet</h2>
       </div>
-      <div class="input-rad">
-        <div class="input-gruppe">
-          <label>Total volum (ml)</label>
-          <input type="number" id="t8-volum" placeholder="f.eks. 1000">
-        </div>
-        <div class="input-gruppe">
-          <label>Tid (timer)</label>
-          <input type="number" id="t8-tid" placeholder="f.eks. 4">
-        </div>
+      <div class="beskrivelse">
+        Ved infusjon må du beregne hvor mange milliliter som skal gis per time, basert på totalvolum og tid.
       </div>
-      <button class="knapp" onclick="regnTrinn8()"><i class="fa-solid fa-equals"></i> Regn ut</button>
-      <div class="resultat" id="res-8"></div>
+      <div class="formel-innhold">
+        \[ \text{ml/time} = \frac{\text{Volum (ml)}}{\text{Tid (timer)}} \]
+      </div>
+
+      <div class="kalkulator-wrapper">
+        <div class="input-rad">
+          <div class="input-gruppe">
+            <label>Total volum (ml)</label>
+            <input type="number" id="t8-volum" placeholder="f.eks. 1000">
+          </div>
+          <div class="input-gruppe">
+            <label>Tid (timer)</label>
+            <input type="number" id="t8-tid" placeholder="f.eks. 4">
+          </div>
+        </div>
+        <button class="knapp" onclick="regnTrinn8()"><i class="fa-solid fa-equals"></i> Regn ut</button>
+        <div class="resultat" id="res-8"></div>
+      </div>
     </div>
 
-    <!-- TRINN 9 -->
-    <div class="stige-kort t9">
+    <!-- Trinn 9 -->
+    <div class="trinn-boks t9">
       <div class="kort-header">
         <div class="icon-wrapper"><i class="fa-solid fa-eye-dropper"></i></div>
         <h2>Trinn 9: Dråper og takt</h2>
       </div>
-      <div class="input-rad">
-        <div class="input-gruppe">
-          <label>Volum (ml)</label>
-          <input type="number" id="t9-volum" placeholder="f.eks. 100">
-        </div>
-        <div class="input-gruppe">
-          <label>Tid (minutter)</label>
-          <input type="number" id="t9-tid" placeholder="f.eks. 20">
-        </div>
-        <div class="input-gruppe">
-          <label>Dråpefaktor (dr/ml)</label>
-          <input type="number" id="t9-faktor" value="20">
-        </div>
+      <div class="beskrivelse">
+        Når infusjonen gis uten pumpe, må du beregne dråpetakten (dråper per minutt) ut fra dråpefaktoren på utstyret.
       </div>
-      <button class="knapp" onclick="regnTrinn9()"><i class="fa-solid fa-equals"></i> Regn ut</button>
-      <div class="resultat" id="res-9"></div>
+      <div class="formel-innhold">
+        \[ \text{Dråper/min} = \frac{\text{Volum} \times \text{Dråpefaktor}}{\text{Tid (min)}} \]
+      </div>
+
+      <div class="kalkulator-wrapper">
+        <div class="input-rad">
+          <div class="input-gruppe">
+            <label>Volum (ml)</label>
+            <input type="number" id="t9-volum" placeholder="f.eks. 100">
+          </div>
+          <div class="input-gruppe">
+            <label>Tid (min)</label>
+            <input type="number" id="t9-tid" placeholder="f.eks. 20">
+          </div>
+          <div class="input-gruppe">
+            <label>Dråpefaktor</label>
+            <input type="number" id="t9-faktor" value="20">
+          </div>
+        </div>
+        <button class="knapp" onclick="regnTrinn9()"><i class="fa-solid fa-equals"></i> Regn ut</button>
+        <div class="resultat" id="res-9"></div>
+      </div>
     </div>
 
-    <!-- TRINN 10 -->
-    <div class="stige-kort t10">
+    <!-- Trinn 10 -->
+    <div class="trinn-boks t10">
       <div class="kort-header">
         <div class="icon-wrapper"><i class="fa-solid fa-flask-vial"></i></div>
-        <h2>Trinn 10: Fortynning og konsentrasjon</h2>
+        <h2>Trinn 10: Fortynning</h2>
       </div>
-      <div class="input-rad">
-        <div class="input-gruppe">
-          <label>Startkonsentrasjon C1 (mg/ml)</label>
-          <input type="number" id="t10-c1" placeholder="f.eks. 50">
-        </div>
-        <div class="input-gruppe">
-          <label>Startvolum V1 (ml)</label>
-          <input type="number" id="t10-v1" placeholder="f.eks. 2">
-        </div>
-        <div class="input-gruppe">
-          <label>Ønsket konsentrasjon C2 (mg/ml)</label>
-          <input type="number" id="t10-c2" placeholder="f.eks. 5">
-        </div>
+      <div class="beskrivelse">
+        Ved fortynning endres konsentrasjonen, men mengden virkestoff forblir den samme. Formelen under brukes for å finne riktig volum og konsentrasjon.
       </div>
-      <button class="knapp" onclick="regnTrinn10()"><i class="fa-solid fa-equals"></i> Regn ut</button>
-      <div class="resultat" id="res-10"></div>
+      <div class="formel-innhold">
+        \[ C_1 \times V_1 = C_2 \times V_2 \]
+      </div>
+
+      <div class="kalkulator-wrapper">
+        <div class="input-rad">
+          <div class="input-gruppe">
+            <label>Startkons. C1 (mg/ml)</label>
+            <input type="number" id="t10-c1" placeholder="f.eks. 50">
+          </div>
+          <div class="input-gruppe">
+            <label>Startvolum V1 (ml)</label>
+            <input type="number" id="t10-v1" placeholder="f.eks. 2">
+          </div>
+        </div>
+        <div class="input-rad">
+          <div class="input-gruppe" style="flex: 100%;">
+            <label>Ønsket konsentrasjon C2 (mg/ml)</label>
+            <input type="number" id="t10-c2" placeholder="f.eks. 5">
+          </div>
+        </div>
+        <button class="knapp" onclick="regnTrinn10()"><i class="fa-solid fa-equals"></i> Regn ut</button>
+        <div class="resultat" id="res-10"></div>
+      </div>
     </div>
 
   </div>
 
-  <!-- JAVASCRIPT FOR BEREGNINGENE -->
-  <script>
-    function visSvar(id, htmlTekst) {
-      const el = document.getElementById(id);
-      el.innerHTML = htmlTekst;
-      el.style.display = 'block';
-    }
+</div>
 
-    function regnTrinn1() {
-      const val = parseFloat(document.getElementById('t1-verdi').value);
-      const fra = document.getElementById('t1-fra').value;
-      const til = document.getElementById('t1-til').value;
-      if (isNaN(val)) return;
+<!-- JAVASCRIPT FOR BEREGNINGENE -->
+<script>
+  function visSvar(id, htmlTekst) {
+    const el = document.getElementById(id);
+    el.innerHTML = htmlTekst;
+    el.style.display = 'block';
+  }
 
-      let iMg = val;
-      if (fra === 'g') iMg = val * 1000;
-      if (fra === 'ug') iMg = val / 1000;
+  function regnTrinn1() {
+    const val = parseFloat(document.getElementById('t1-verdi').value);
+    const fra = document.getElementById('t1-fra').value;
+    const til = document.getElementById('t1-til').value;
+    if (isNaN(val)) return;
 
-      let resultat = iMg;
-      let enhet = 'mg';
-      if (til === 'g') { resultat = iMg / 1000; enhet = 'g'; }
-      if (til === 'ug') { resultat = iMg * 1000; enhet = 'µg'; }
+    let iMg = val;
+    if (fra === 'g') iMg = val * 1000;
+    if (fra === 'ug') iMg = val / 1000;
 
-      visSvar('res-1', `Svar: ${val} ${fra} = <strong>${resultat} ${enhet}</strong>`);
-    }
+    let resultat = iMg;
+    let enhet = 'mg';
+    if (til === 'g') { resultat = iMg / 1000; enhet = 'g'; }
+    if (til === 'ug') { resultat = iMg * 1000; enhet = 'µg'; }
 
-    function regnTrinn2() {
-      const val = parseFloat(document.getElementById('t2-verdi').value);
-      const fra = document.getElementById('t2-fra').value;
-      if (isNaN(val)) return;
+    visSvar('res-1', `Svar: ${val} ${fra} = <strong>${resultat} ${enhet}</strong>`);
+  }
 
-      const resultat = (fra === 'L') ? (val * 1000) : (val / 1000);
-      const enhet = (fra === 'L') ? 'ml' : 'L';
+  function regnTrinn2() {
+    const val = parseFloat(document.getElementById('t2-verdi').value);
+    const fra = document.getElementById('t2-fra').value;
+    if (isNaN(val)) return;
 
-      visSvar('res-2', `Svar: ${val} ${fra} = <strong>${resultat} ${enhet}</strong>`);
-    }
+    const resultat = (fra === 'L') ? (val * 1000) : (val / 1000);
+    const enhet = (fra === 'L') ? 'ml' : 'L';
 
-    function regnTrinn3() {
-      const dose = parseFloat(document.getElementById('t3-dose').value);
-      const styrke = parseFloat(document.getElementById('t3-styrke').value);
-      if (isNaN(dose) || isNaN(styrke) || styrke === 0) return;
+    visSvar('res-2', `Svar: ${val} ${fra} = <strong>${resultat} ${enhet}</strong>`);
+  }
 
-      const resultat = dose / styrke;
-      visSvar('res-3', `Svar: Du trenger <strong>${resultat} tabletter/kapsler</strong>`);
-    }
+  function regnTrinn3() {
+    const dose = parseFloat(document.getElementById('t3-dose').value);
+    const styrke = parseFloat(document.getElementById('t3-styrke').value);
+    if (isNaN(dose) || isNaN(styrke) || styrke === 0) return;
 
-    function regnTrinn4() {
-      const dose = parseFloat(document.getElementById('t4-dose').value);
-      const styrke = parseFloat(document.getElementById('t4-styrke').value);
-      if (isNaN(dose) || isNaN(styrke) || styrke === 0) return;
+    const resultat = dose / styrke;
+    visSvar('res-3', `Svar: Du trenger <strong>${resultat} tabletter/kapsler</strong>`);
+  }
 
-      const resultat = dose / styrke;
-      visSvar('res-4', `Svar: Du trenger <strong>${resultat} ml</strong>`);
-    }
+  function regnTrinn4() {
+    const dose = parseFloat(document.getElementById('t4-dose').value);
+    const styrke = parseFloat(document.getElementById('t4-styrke').value);
+    if (isNaN(dose) || isNaN(styrke) || styrke === 0) return;
 
-    function regnTrinn5() {
-      const prosent = parseFloat(document.getElementById('t5-prosent').value);
-      if (isNaN(prosent)) return;
+    const resultat = dose / styrke;
+    visSvar('res-4', `Svar: Du trenger <strong>${resultat} ml</strong>`);
+  }
 
-      const mgPerMl = prosent * 10;
-      visSvar('res-5', `Svar: ${prosent} % = <strong>${mgPerMl} mg/ml</strong> (tilsvarer ${prosent} g per 100 ml)`);
-    }
+  function regnTrinn5() {
+    const prosent = parseFloat(document.getElementById('t5-prosent').value);
+    if (isNaN(prosent)) return;
 
-    function regnTrinn6() {
-      const dose = parseFloat(document.getElementById('t6-dose').value);
-      const vekt = parseFloat(document.getElementById('t6-vekt').value);
-      if (isNaN(dose) || isNaN(vekt)) return;
+    const mgPerMl = prosent * 10;
+    visSvar('res-5', `Svar: ${prosent} % = <strong>${mgPerMl} mg/ml</strong>`);
+  }
 
-      const resultat = dose * vekt;
-      visSvar('res-6', `Svar: Totaldosen blir <strong>${resultat} mg</strong>`);
-    }
+  function regnTrinn6() {
+    const dose = parseFloat(document.getElementById('t6-dose').value);
+    const vekt = parseFloat(document.getElementById('t6-vekt').value);
+    if (isNaN(dose) || isNaN(vekt)) return;
 
-    function regnTrinn7() {
-      const dogn = parseFloat(document.getElementById('t7-dogn').value);
-      const antall = parseFloat(document.getElementById('t7-antall').value);
-      if (isNaN(dogn) || isNaN(antall) || antall === 0) return;
+    const resultat = dose * vekt;
+    visSvar('res-6', `Svar: Totaldosen blir <strong>${resultat} mg</strong>`);
+  }
 
-      const resultat = dogn / antall;
-      visSvar('res-7', `Svar: Hver enkeltdose blir <strong>${resultat} mg</strong>`);
-    }
+  function regnTrinn7() {
+    const dogn = parseFloat(document.getElementById('t7-dogn').value);
+    const antall = parseFloat(document.getElementById('t7-antall').value);
+    if (isNaN(dogn) || isNaN(antall) || antall === 0) return;
 
-    function regnTrinn8() {
-      const volum = parseFloat(document.getElementById('t8-volum').value);
-      const tid = parseFloat(document.getElementById('t8-tid').value);
-      if (isNaN(volum) || isNaN(tid) || tid === 0) return;
+    const resultat = dogn / antall;
+    visSvar('res-7', `Svar: Hver enkeltdose blir <strong>${resultat} mg</strong>`);
+  }
 
-      const resultat = volum / tid;
-      visSvar('res-8', `Svar: Infusjonshastigheten blir <strong>${resultat.toFixed(1)} ml/time</strong>`);
-    }
+  function regnTrinn8() {
+    const volum = parseFloat(document.getElementById('t8-volum').value);
+    const tid = parseFloat(document.getElementById('t8-tid').value);
+    if (isNaN(volum) || isNaN(tid) || tid === 0) return;
 
-    function regnTrinn9() {
-      const volum = parseFloat(document.getElementById('t9-volum').value);
-      const tid = parseFloat(document.getElementById('t9-tid').value);
-      const faktor = parseFloat(document.getElementById('t9-faktor').value);
-      if (isNaN(volum) || isNaN(tid) || isNaN(faktor) || tid === 0) return;
+    const resultat = volum / tid;
+    visSvar('res-8', `Svar: Infusjonshastigheten blir <strong>${resultat.toFixed(1)} ml/time</strong>`);
+  }
 
-      const mlPerMin = volum / tid;
-      const draaper = mlPerMin * faktor;
-      visSvar('res-9', `Svar: Dråpetakten blir <strong>${draaper.toFixed(0)} dråper/min</strong>`);
-    }
+  function regnTrinn9() {
+    const volum = parseFloat(document.getElementById('t9-volum').value);
+    const tid = parseFloat(document.getElementById('t9-tid').value);
+    const faktor = parseFloat(document.getElementById('t9-faktor').value);
+    if (isNaN(volum) || isNaN(tid) || isNaN(faktor) || tid === 0) return;
 
-    function regnTrinn10() {
-      const c1 = parseFloat(document.getElementById('t10-c1').value);
-      const v1 = parseFloat(document.getElementById('t10-v1').value);
-      const c2 = parseFloat(document.getElementById('t10-c2').value);
-      if (isNaN(c1) || isNaN(v1) || isNaN(c2) || c2 === 0) return;
+    const mlPerMin = volum / tid;
+    const draaper = mlPerMin * faktor;
+    visSvar('res-9', `Svar: Dråpetakten blir <strong>${draaper.toFixed(0)} dråper/min</strong>`);
+  }
 
-      const totaltVirkestoff = c1 * v1;
-      const v2 = totaltVirkestoff / c2;
-      const tilsettes = v2 - v1;
-      visSvar('res-10', `Svar: Totalvolumet må bli ${v2} ml. Du må tilsette <strong>${tilsettes} ml</strong> væske.`);
-    }
-  </script>
+  function regnTrinn10() {
+    const c1 = parseFloat(document.getElementById('t10-c1').value);
+    const v1 = parseFloat(document.getElementById('t10-v1').value);
+    const c2 = parseFloat(document.getElementById('t10-c2').value);
+    if (isNaN(c1) || isNaN(v1) || isNaN(c2) || c2 === 0) return;
+
+    const totaltVirkestoff = c1 * v1;
+    const v2 = totaltVirkestoff / c2;
+    const tilsettes = v2 - v1;
+    visSvar('res-10', `Svar: Totalvolum må bli ${v2} ml. Du må tilsette <strong>${tilsettes} ml</strong> væske.`);
+  }
+</script>
 </body>
 </html>
