@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="nb">
 <head>
@@ -38,7 +39,7 @@
     min-height: 100vh;
   }
 
-  /* --- Venstremeny (uendret) --- */
+  /* --- Venstremeny --- */
   aside.sidebar {
     width: 250px;
     flex-shrink: 0;
@@ -69,7 +70,10 @@
     gap: 3px;
   }
   .sidebar-nav a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
     padding: 8px 12px;
     border-radius: 8px;
     font-size: 0.86rem;
@@ -84,6 +88,12 @@
     color: var(--accent);
     border-color: transparent;
   }
+  .sidebar-nav a .arrow {
+    font-size: 0.85rem;
+    color: var(--accent);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
   .sidebar-nav .nav-label {
     font-size: 0.7rem;
     font-weight: 600;
@@ -93,7 +103,7 @@
     padding: 14px 12px 4px;
   }
 
-  /* --- Hovedinnhold (mer kompakt) --- */
+  /* --- Hovedinnhold --- */
   main.content {
     flex: 1;
     max-width: 720px;
@@ -139,7 +149,7 @@
     margin-bottom: 14px;
   }
 
-  /* --- Knapper (uendret plassering) --- */
+  /* --- Knapper --- */
   .btn-row {
     display: flex;
     flex-wrap: wrap;
@@ -177,7 +187,7 @@
     color: #fff;
   }
 
-  /* --- Enkle dokumentlenker (uten boks) --- */
+  /* --- Enkle dokumentlenker --- */
   .doc-link {
     display: flex;
     align-items: center;
@@ -205,7 +215,7 @@
     flex-shrink: 0;
   }
 
-  /* --- Kompakte tekstlister (uten rektangler) --- */
+  /* --- Kompakte tekstlister --- */
   ol.compact-list {
     list-style: none;
     counter-reset: item;
@@ -264,6 +274,7 @@
     }
     .sidebar-nav { flex-direction: row; flex-wrap: wrap; gap: 4px; }
     .sidebar-nav a { padding: 6px 10px; font-size: 0.82rem; }
+    .sidebar-nav a .arrow { display: none; }
     .sidebar-nav .nav-label { display: none; }
     main.content { padding: 24px 20px 48px; }
     h2 { margin-top: 24px; padding-top: 16px; }
@@ -274,17 +285,26 @@
 
 <div class="layout">
 
-  <!-- Venstremeny (uendret) -->
+  <!-- Venstremeny – peker direkte til dokumentene -->
   <aside class="sidebar">
     <div class="sidebar-brand">
       <span class="dot"></span>
       Søknad om opprykk
     </div>
     <nav class="sidebar-nav">
-      <span class="nav-label">Innhold</span>
-      <a href="#pedagogisk-mappe">Pedagogisk mappe</a>
-      <a href="#profileringsdokument">Profileringsdokument</a>
-      <a href="#vedlegg">Vedlegg</a>
+      <span class="nav-label">Dokumenter</span>
+      <a href="pdf/Pedagogiskmappe.pdf" target="_blank" rel="noopener">
+        <span>Pedagogisk mappe</span>
+        <span class="arrow">↗</span>
+      </a>
+      <a href="pdf/Profileringsdokument.pdf" target="_blank" rel="noopener">
+        <span>Profileringsdokument</span>
+        <span class="arrow">↗</span>
+      </a>
+      <a href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/" target="_blank" rel="noopener">
+        <span>Vedlegg</span>
+        <span class="arrow">↗</span>
+      </a>
     </nav>
   </aside>
 
@@ -305,10 +325,10 @@
       <a class="btn btn-primary" href="pdf/Pedagogiskmappe.pdf" target="_blank" rel="noopener">
         Åpne pedagogisk mappe
       </a>
-      <a class="btn" href="#profileringsdokument">
+      <a class="btn" href="pdf/Profileringsdokument.pdf" target="_blank" rel="noopener">
         Se profileringsdokument
       </a>
-      <a class="btn" href="#vedlegg">
+      <a class="btn" href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/" target="_blank" rel="noopener">
         Vedlegg
       </a>
     </div>
@@ -339,7 +359,7 @@
       strukturert etter HVLs krav for opprykk til dosent:
     </p>
 
-    <a class="doc-link" href="pdf/profileringsdokument.pdf" target="_blank" rel="noopener">
+    <a class="doc-link" href="pdf/Profileringsdokument.pdf" target="_blank" rel="noopener">
       <span>Profileringsdokument (PDF) <span class="meta">— faglig utvikling</span></span>
       <span class="arrow">↗</span>
     </a>
@@ -363,7 +383,7 @@
         </a>
       </li>
       <li>
-        <a class="doc-link" href="pdf/profileringsdokument.pdf" target="_blank" rel="noopener">
+        <a class="doc-link" href="pdf/Profileringsdokument.pdf" target="_blank" rel="noopener">
           <span>Profileringsdokument</span>
           <span class="arrow">↗</span>
         </a>
