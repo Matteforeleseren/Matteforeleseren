@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -20,6 +21,11 @@
     --muted: #6b7280;
     --bg: #f8fafc;
     --border: #e2e8f0;
+
+    /* Dempede farger for lenkene i teksten */
+    --link-blue: #1e40af;
+    --link-purple: #6b21a8;
+    --link-teal: #0f766e;
   }
 
   html { scroll-behavior: smooth; }
@@ -28,7 +34,7 @@
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background: var(--bg);
     color: var(--tekst);
-    line-height: 1.7;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     padding: 40px 20px 64px;
   }
@@ -50,7 +56,7 @@
 
   /* Stor hero-seksjon */
   .hero { 
-    margin-bottom: 48px; 
+    margin-bottom: 40px; 
     text-align: center;
   }
 
@@ -64,21 +70,21 @@
     background: #ccfbf1;
     padding: 6px 14px;
     border-radius: 999px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .hero h1 {
     font-family: Georgia, serif;
-    font-size: 2.8rem;
+    font-size: 2.6rem;
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.02em;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     color: #0f172a;
   }
 
   .hero p.subtitle {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     color: #4b5563;
     max-width: 700px;
     margin: 0 auto 16px auto;
@@ -87,9 +93,9 @@
   /* Grid for hovedkortene */
   .hoved-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    margin-bottom: 48px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
   }
 
   .hoved-kort {
@@ -98,7 +104,7 @@
     background: #ffffff;
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 28px;
+    padding: 24px;
     text-decoration: none;
     color: var(--tekst);
     transition: all 0.2s ease;
@@ -116,11 +122,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    font-size: 2rem;
-    margin-bottom: 20px;
+    font-size: 1.8rem;
+    margin-bottom: 16px;
     transition: transform 0.3s ease;
   }
   
@@ -138,23 +144,86 @@
   .kort-stige .icon-wrapper { background: #f3e8ff; color: #7e22ce; }
   .kort-stige:hover { border-color: #7e22ce; }
 
-  /* NYTT KORT: Medimatiker */
   .kort-medimatiker .icon-wrapper { background: #fef3c7; color: #d97706; }
   .kort-medimatiker:hover { border-color: #d97706; }
 
   .hoved-kort .kort-tittel {
     font-family: Georgia, serif;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: #0f172a;
     margin-bottom: 8px;
   }
 
   .hoved-kort .kort-beskrivelse {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--muted);
     line-height: 1.5;
   }
+
+  /* Ny innholdsseksjon */
+  .innhold-seksjon {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+    font-size: 0.95rem;
+  }
+
+  .innhold-seksjon h2 {
+    font-family: Georgia, serif;
+    font-size: 1.3rem;
+    color: #0f172a;
+    margin-bottom: 16px;
+  }
+
+  .innhold-seksjon p {
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  ul.modern-liste {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 24px;
+    color: var(--muted);
+  }
+
+  ul.modern-liste li {
+    margin-bottom: 12px;
+    padding-left: 4px;
+  }
+
+  ul.modern-liste li strong {
+    color: var(--tekst);
+  }
+
+  ol.modern-liste {
+    list-style-type: decimal;
+    margin-left: 20px;
+    margin-bottom: 16px;
+    color: var(--muted);
+  }
+
+  ol.modern-liste li {
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+
+  /* Lenker i teksten */
+  a.tekst-lenke {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+  a.tekst-lenke:hover { opacity: 0.7; }
+  
+  .c-blue { color: var(--link-blue); }
+  .c-purple { color: var(--link-purple); }
+  .c-teal { color: var(--link-teal); }
 
   /* Pedagogisk advarsel */
   .pedagogisk-advarsel {
@@ -193,8 +262,9 @@
   footer a:hover { text-decoration: underline; }
 
   @media (max-width: 720px) {
-    .hero h1 { font-size: 2.2rem; }
+    .hero h1 { font-size: 2rem; }
     .hoved-grid { grid-template-columns: 1fr; }
+    .innhold-seksjon { padding: 20px; }
   }
 </style>
 </head>
@@ -208,9 +278,8 @@
       <span class="eyebrow">Sykepleie · SYKB141</span>
       <h1>Læringsmappen<br>Medikamentregning for sykepleierstudenter</h1>
       <p class="subtitle">
-        Her finner du alt du trenger for å øve på medikamentregning. 
-        Bruk læringsmappen for teori og oppgaver, stigen for å se progresjonen, 
-        og verktøyene for å kontrollere egne utregninger.
+        Læringsmappen skal hjelpe deg å få bedre regnetrening og bevissthet på dine egne læringsprosesser. 
+        Her finner du alt du trenger for å øve, forstå og kontrollere.
       </p>
     </div>
 
@@ -218,7 +287,7 @@
     <div class="hoved-grid">
       
       <!-- Kort 1: Læringsmappe (PDF) -->
-      <a href="pdf/LM-MFH.pdf" target="_blank" class="hoved-kort kort-pdf">
+      <a href="https://matteforeleseren.github.io/Matteforeleseren/Matteassistenten/MFH/pdf/LM-MFH.pdf" target="_blank" class="hoved-kort kort-pdf">
         <div class="icon-wrapper">
           <i class="fa-solid fa-file-pdf"></i>
         </div>
@@ -229,7 +298,7 @@
       </a>
 
       <!-- Kort 2: Medikamentkalkulator -->
-      <a href="MedikamentKalkulator/index.html" class="hoved-kort kort-kalkulator">
+      <a href="https://matteforeleseren.github.io/Matteforeleseren/Matteassistenten/MFH/MedikamentKalkulator/index.html" class="hoved-kort kort-kalkulator">
         <div class="icon-wrapper">
           <i class="fa-solid fa-calculator"></i>
         </div>
@@ -240,19 +309,18 @@
       </a>
 
       <!-- Kort 3: Medikamentregning - Stige -->
-      <a href="Medikamentregning-Stige/index.html" class="hoved-kort kort-stige">
+      <a href="pdf/MediStigen/index.html" class="hoved-kort kort-stige">
         <div class="icon-wrapper">
           <i class="fa-solid fa-stairs"></i>
         </div>
-        <div class="kort-tittel">Medikamentregning - Stige</div>
+        <div class="kort-tittel">Medistigen</div>
         <div class="kort-beskrivelse">
           Visuell oversikt over de 10 trinnene. Se hva du mestrer og hva du bør øve mer på.
         </div>
       </a>
 
-      <!-- Kort 4: Medimatiker (NYTT) -->
-      <!-- HUSK: Bytt ut "#" med den faktiske lenken til Medimatiker -->
-      <a href="Medimatiker/index.html" target="_blank" class="hoved-kort kort-medimatiker">
+      <!-- Kort 4: Medimatiker -->
+      <a href="https://matteforeleseren.github.io/Matteforeleseren/Matteassistenten/MFH/Medimatiker/index.html" class="hoved-kort kort-medimatiker">
         <div class="icon-wrapper">
           <i class="fa-solid fa-laptop-medical"></i>
         </div>
@@ -264,13 +332,55 @@
 
     </div>
 
+    <!-- Innholdsseksjon -->
+    <div class="innhold-seksjon">
+      <h2>Hva inneholder læringsmappen?</h2>
+      <p>
+        Læringsmappen er satt sammen for å støtte deg i å bli en trygg og selvstendig utøver av medikamentregning. Den inneholder:
+      </p>
+
+      <ul class="modern-liste">
+        <li>
+          <strong>Arbeidshefte:</strong> <a href="https://matteforeleseren.github.io/Matteforeleseren/Matteassistenten/MFH/pdf/LM-MFH.pdf" target="_blank" class="tekst-lenke c-blue">Last ned kompendiet (PDF)</a>.<br>
+          Inneholder blant annet algoritmisk tenkning og problemløsningsmetoden.
+        </li>
+        <li>
+          <strong>Hvordan KI kan brukes som læringspartner:</strong><br>
+          Litt om prompt engineering, og hvordan KI kan brukes som læringspartner og ikke som fasitmaskin.
+        </li>
+        <li>
+          <strong>Formler og omgjøring av enheter:</strong> <a href="pdf/Formler/index.html" class="tekst-lenke c-purple">Gå til Formler og enheter</a>.
+        </li>
+        <li>
+          <strong>Medikalkulator/Medimatiker:</strong> <span style="font-size: 0.85rem;">(bare for å kontrollere svar)</span>.
+        </li>
+        <li>
+          <strong>Medistigen:</strong> <a href="pdf/MediStigen/index.html" class="tekst-lenke c-teal">Gå til Medistigen</a>.
+        </li>
+      </ul>
+
+      <h2 style="margin-top: 24px; font-size: 1.2rem;">Slik bruker du de pedagogiske komponentene</h2>
+      <p>
+        Det er viktig at de pedagogiske komponentene brukes til å lære å:
+      </p>
+      <ol class="modern-liste">
+        <li>Lese oppgaven nøye.</li>
+        <li>Sette opp opplysningene.</li>
+        <li>Dele opp problemet og sjekke enhetene. Om nødvendig, omgjør enhetene (<a href="pdf/Formler/index.html" class="tekst-lenke c-purple">her linker enhetene</a>).</li>
+        <li>Sette opp formler og relasjoner som forbinder opplysningene (<a href="pdf/Formler/index.html" class="tekst-lenke c-purple">her linker formler</a>).</li>
+        <li>Regne oppgaven og kontrollere.</li>
+        <li>Bruke Medikalkulator/Medimatiker til å kontrollere svaret.</li>
+        <li>Bruke KI til å gi utdypende forklaringer om begrepene, og gi KI din oppgave og be om å lage en lignende oppgave.</li>
+      </ol>
+    </div>
+
     <!-- Pedagogisk Advarsel -->
     <div class="pedagogisk-advarsel">
       <i class="fa-solid fa-triangle-exclamation"></i>
       <div>
         <p><strong>Viktig om verktøyene:</strong></p>
         <p>
-          Både <strong>Medikamentkalkulatoren</strong>, <strong>Medikamentregning-stigen</strong> og <strong>Medimatiker</strong> er kun ment som en <em>pedagogisk støtte for å kontrollere svarene du allerede har regnet ut selv</em>. 
+          Både <strong>Medikamentkalkulatoren</strong>, <strong>Medistigen</strong> og <strong>Medimatiker</strong> er kun ment som en <em>pedagogisk støtte for å kontrollere svarene du allerede har regnet ut selv</em>. 
           De er ikke en fasit-maskin eller en erstatning for å lære selve regnemetoden.
         </p>
         <p>
