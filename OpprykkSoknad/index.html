@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="nb">
 <head>
@@ -215,6 +214,15 @@
     flex-shrink: 0;
   }
 
+  /* --- Grønn Vedlegg-lenke (stylet som PDF-lenkene) --- */
+  .doc-link.vedlegg-link {
+    color: var(--accent);
+  }
+  .doc-link.vedlegg-link:hover {
+    color: var(--accent-hover);
+    border-bottom-color: var(--accent);
+  }
+
   /* --- Kompakte tekstlister --- */
   ol.compact-list {
     list-style: none;
@@ -237,19 +245,6 @@
     font-weight: 600;
     color: var(--accent);
     font-size: 0.85rem;
-  }
-
-  /* --- Vedlegg som enkel liste --- */
-  ul.vedlegg-list {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0;
-  }
-  ul.vedlegg-list li {
-    border-bottom: 1px solid var(--line);
-  }
-  ul.vedlegg-list li:last-child {
-    border-bottom: none;
   }
 
   /* --- Footer --- */
@@ -371,30 +366,14 @@
       <li>Høy kvalitet og relevans som viser fortrolighet med fagfeltet.</li>
     </ol>
 
-    <!-- Seksjon 3 -->
+    <!-- Seksjon 3: kun én Vedlegg-lenke -->
     <h2 id="vedlegg">Vedlegg</h2>
-    <p>De tre hoveddokumentene samlet. Alle åpnes i ny fane.</p>
+    <p>Samlet oversikt over vedlegg. Åpnes i ny fane.</p>
 
-    <ul class="vedlegg-list">
-      <li>
-        <a class="doc-link" href="pdf/Pedagogiskmappe.pdf" target="_blank" rel="noopener">
-          <span>Pedagogisk mappe</span>
-          <span class="arrow">↗</span>
-        </a>
-      </li>
-      <li>
-        <a class="doc-link" href="pdf/Profileringsdokument.pdf" target="_blank" rel="noopener">
-          <span>Profileringsdokument</span>
-          <span class="arrow">↗</span>
-        </a>
-      </li>
-      <li>
-        <a class="doc-link" href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/" target="_blank" rel="noopener">
-          <span>Øvrige vedlegg <span class="meta">— samlet oversikt</span></span>
-          <span class="arrow">↗</span>
-        </a>
-      </li>
-    </ul>
+    <a class="doc-link vedlegg-link" href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/" target="_blank" rel="noopener">
+      <span>Vedlegg</span>
+      <span class="arrow">↗</span>
+    </a>
 
     <footer>
       Søknad om opprykk til dosent · Høgskulen på Vestlandet
