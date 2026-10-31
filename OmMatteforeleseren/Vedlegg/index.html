@@ -15,12 +15,12 @@
     --bg: #fafaf7;
     --border: #e8e8e3;
 
-    --f-attest:     #B71C1C;   /* rød */
-    --f-acoustics:  #0E7490;   /* mørk teal */
-    --f-ki:         #6B2FA0;   /* lilla */
-    --f-laerebok:   #1F4E79;   /* mørk blå */
-    --f-poster:     #B8860B;   /* gull */
-    --f-kurs:       #16A34A;   /* grønn */
+    --f-attest:     #B71C1C;
+    --f-acoustics:  #0E7490;
+    --f-ki:         #6B2FA0;
+    --f-laerebok:   #1F4E79;
+    --f-poster:     #B8860B;
+    --f-kurs:       #16A34A;
   }
 
   html { scroll-behavior: smooth; }
@@ -80,7 +80,6 @@
     max-width: 680px;
   }
 
-  /* Oversikt */
   .oversikt {
     padding: 24px 28px;
     background: #ffffff;
@@ -116,7 +115,6 @@
   }
   .oversikt-liste a:hover { opacity: 0.7; }
 
-  /* Seksjoner */
   section { margin-bottom: 48px; }
 
   .seksjon-header {
@@ -139,7 +137,6 @@
     color: var(--muted);
   }
 
-  /* Lenkeliste */
   .lenke-liste { list-style: none; }
 
   .lenke-liste li {
@@ -184,7 +181,6 @@
     margin-top: 3px;
   }
 
-  /* Fargeklasser */
   .f-attest      { color: var(--f-attest); }
   .f-acoustics   { color: var(--f-acoustics); }
   .f-ki          { color: var(--f-ki); }
@@ -192,7 +188,6 @@
   .f-poster      { color: var(--f-poster); }
   .f-kurs        { color: var(--f-kurs); }
 
-  /* Info-boks */
   .info-boks {
     padding: 20px 24px;
     background: #f0f9ec;
@@ -203,6 +198,17 @@
     color: #2c4a2c;
   }
   .info-boks strong { color: var(--mørkegrønn); }
+
+  .notat {
+    padding: 20px 24px;
+    background: #fdf8e8;
+    border-left: 4px solid var(--f-poster);
+    border-radius: 10px;
+    margin-bottom: 40px;
+    font-size: 0.92rem;
+    color: #4a3f1a;
+  }
+  .notat strong { color: #7a5c0a; }
 
   footer {
     border-top: 1px solid var(--border);
@@ -235,7 +241,8 @@
       <h1>Vedlegg</h1>
       <p>
         Samling av attester og anbefalinger, forskningsarbeid, rapporter,
-        lærebøker, postere og kurs – alle som nedlastbare PDF-er.
+        lærebøker, postere, priser og kurs – alle som nedlastbare PDF-er.
+        Til sammen 17 vedleggsnumre (V1–V15, med V7 delt i V7a/V7b og V14 delt i V14a/V14b).
       </p>
     </div>
 
@@ -247,7 +254,7 @@
         <li><a href="#acoustics" class="f-acoustics">Underwater acoustics</a></li>
         <li><a href="#ki" class="f-ki">Reports and presentations</a></li>
         <li><a href="#laereboker" class="f-laerebok">Lærebøker</a></li>
-        <li><a href="#forskningsfelt" class="f-poster">Forskningsfelt: Førsteårsstudenter</a></li>
+        <li><a href="#postere" class="f-poster">Postere og anerkjennelser</a></li>
         <li><a href="#kurs" class="f-kurs">Kurs</a></li>
       </ul>
     </nav>
@@ -271,7 +278,7 @@
             <a href="pdf/V1.pdf" target="_blank" class="f-attest">
               Instituttleder, Matematisk institutt ved UiB
             </a>
-            <div class="beskrivelse">Attest</div>
+            <div class="beskrivelse">Attest · V1</div>
           </div>
         </li>
         <li>
@@ -280,7 +287,7 @@
             <a href="pdf/V2.pdf" target="_blank" class="f-attest">
               Anbefaling fra leder ved HVL
             </a>
-            <div class="beskrivelse">Attest</div>
+            <div class="beskrivelse">Attest · V2</div>
           </div>
         </li>
         <li>
@@ -289,7 +296,7 @@
             <a href="pdf/V3.pdf" target="_blank" class="f-attest">
               Matematisk institutt, UiB
             </a>
-            <div class="beskrivelse">Anbefaling</div>
+            <div class="beskrivelse">Anbefaling · V3</div>
           </div>
         </li>
         <li>
@@ -298,7 +305,7 @@
             <a href="pdf/V4.pdf" target="_blank" class="f-attest">
               NTNU-samarbeid
             </a>
-            <div class="beskrivelse">Anbefaling</div>
+            <div class="beskrivelse">Anbefaling · V4</div>
           </div>
         </li>
         <li>
@@ -307,7 +314,7 @@
             <a href="pdf/V5.pdf" target="_blank" class="f-attest">
               Fra seminarleder ved MAT101 og fra ENT3R-prosjektleder
             </a>
-            <div class="beskrivelse">Anbefaling</div>
+            <div class="beskrivelse">Anbefaling · V5</div>
           </div>
         </li>
         <li>
@@ -316,16 +323,25 @@
             <a href="pdf/V6.pdf" target="_blank" class="f-attest">
               Fra Universitetet i Innlandet
             </a>
-            <div class="beskrivelse">Anbefaling</div>
+            <div class="beskrivelse">Anbefaling · V6</div>
           </div>
         </li>
         <li>
           <span class="nr">7)</span>
           <div class="innhold">
-            <a href="pdf/V7.pdf" target="_blank" class="f-attest">
+            <a href="pdf/V7a.pdf" target="_blank" class="f-attest">
               Erasmus – Universidad Politécnica de Valencia
             </a>
-            <div class="beskrivelse">Anbefaling</div>
+            <div class="beskrivelse">Anbefaling · V7a</div>
+          </div>
+        </li>
+        <li>
+          <span class="nr">8)</span>
+          <div class="innhold">
+            <a href="pdf/V7b.pdf" target="_blank" class="f-attest">
+              BIHE-samarbeid
+            </a>
+            <div class="beskrivelse">Anbefaling · V7b</div>
           </div>
         </li>
       </ul>
@@ -340,12 +356,12 @@
 
       <ul class="lenke-liste">
         <li>
-          <span class="nr">8)</span>
+          <span class="nr">9)</span>
           <div class="innhold">
             <a href="pdf/V8.pdf" target="_blank" class="f-acoustics">
               Underwater acoustics (Tomography)
             </a>
-            <div class="beskrivelse">Forskningsarbeid</div>
+            <div class="beskrivelse">Forskningsarbeid · V8</div>
           </div>
         </li>
       </ul>
@@ -360,30 +376,30 @@
 
       <ul class="lenke-liste">
         <li>
-          <span class="nr">9)</span>
+          <span class="nr">10)</span>
           <div class="innhold">
             <a href="pdf/V9.pdf" target="_blank" class="f-ki">
               KI i matematikkundervisning
             </a>
-            <div class="beskrivelse">Rapport</div>
-          </div>
-        </li>
-        <li>
-          <span class="nr">10)</span>
-          <div class="innhold">
-            <a href="pdf/V10.pdf" target="_blank" class="f-ki">
-              KI som læringspartner i medikamentregning
-            </a>
-            <div class="beskrivelse">Rapport</div>
+            <div class="beskrivelse">Rapport · V9</div>
           </div>
         </li>
         <li>
           <span class="nr">11)</span>
           <div class="innhold">
+            <a href="pdf/V10.pdf" target="_blank" class="f-ki">
+              KI som læringspartner i medikamentregning
+            </a>
+            <div class="beskrivelse">Rapport · V10</div>
+          </div>
+        </li>
+        <li>
+          <span class="nr">12)</span>
+          <div class="innhold">
             <a href="pdf/V11.pdf" target="_blank" class="f-ki">
               KI som læringsverktøy og læringspartner for lærerstudenter
             </a>
-            <div class="beskrivelse">Rapport</div>
+            <div class="beskrivelse">Rapport · V11</div>
           </div>
         </li>
       </ul>
@@ -398,50 +414,50 @@
 
       <ul class="lenke-liste">
         <li>
-          <span class="nr">12)</span>
+          <span class="nr">13)</span>
           <div class="innhold">
             <a href="pdf/V12.pdf" target="_blank" class="f-laerebok">
-              Støttebok
+              Støttebok for Matematikk 1, 2 og 3 for ingeniørstudenter
             </a>
-            <div class="beskrivelse">Lærebok</div>
+            <div class="beskrivelse">Lærebok · V12</div>
           </div>
         </li>
         <li>
-          <span class="nr">13)</span>
+          <span class="nr">14)</span>
           <div class="innhold">
             <a href="pdf/V13.pdf" target="_blank" class="f-laerebok">
               Matematikk 1, 2 og 3 for ingeniørstudenter
             </a>
-            <div class="beskrivelse">Lærebok</div>
+            <div class="beskrivelse">Lærebok · V13</div>
           </div>
         </li>
       </ul>
     </section>
 
-    <!-- Forskningsfelt: Førsteårsstudenter -->
-    <section id="forskningsfelt">
+    <!-- Postere og anerkjennelser -->
+    <section id="postere">
       <div class="seksjon-header">
-        <h2 class="f-poster">🎓 Forskningsfelt: Førsteårsstudenter</h2>
-        <p>Forskning på førsteårsstudenter og postere fra konferanser og prosjekter.</p>
+        <h2 class="f-poster">🎓 Postere og anerkjennelser</h2>
+        <p>Postere fra konferanser og prosjekter, samt priser, anerkjennelser og diplom.</p>
       </div>
 
       <ul class="lenke-liste">
         <li>
-          <span class="nr">14a)</span>
+          <span class="nr">15)</span>
           <div class="innhold">
             <a href="pdf/V14a.pdf" target="_blank" class="f-poster">
-              Forskning på førsteårsstudenter
+              Postere
             </a>
-            <div class="beskrivelse">Artikler og rapport</div>
+            <div class="beskrivelse">Postere · V14a</div>
           </div>
         </li>
         <li>
-          <span class="nr">14b)</span>
+          <span class="nr">16)</span>
           <div class="innhold">
             <a href="pdf/V14b.pdf" target="_blank" class="f-poster">
-              Postere
+              Priser, anerkjennelser og diplom
             </a>
-            <div class="beskrivelse">Postere</div>
+            <div class="beskrivelse">Priser og diplom · V14b</div>
           </div>
         </li>
       </ul>
@@ -456,16 +472,25 @@
 
       <ul class="lenke-liste">
         <li>
-          <span class="nr">15)</span>
+          <span class="nr">17)</span>
           <div class="innhold">
             <a href="pdf/V15.pdf" target="_blank" class="f-kurs">
-              Pedagogiske og kompetansehevingsmoduler
+              Pedagogiske og kompetansehevingmoduler
             </a>
-            <div class="beskrivelse">Kurs</div>
+            <div class="beskrivelse">Kurs · V15</div>
           </div>
         </li>
       </ul>
     </section>
+
+    <div class="notat">
+      <strong>Om nummereringen:</strong> Vedleggene er merket med V-nummer (V1, V2, … , V15),
+      men der det er hensiktsmessig er enkelte vedlegg delt i undergrupper:
+      <em>V7</em> er delt i <em>V7a</em> og <em>V7b</em> (Erasmus/UPV og BIHE), og
+      <em>V14</em> er delt i <em>V14a</em> (Postere) og <em>V14b</em> (Priser, anerkjennelser og diplom).
+      Til sammen gir dette 17 vedleggsnumre. Inndelingen følger samme logikk som i den
+      pedagogiske mappen, slik at kryssreferanser mellom dokumentene blir entydige.
+    </div>
 
     <footer>
       <p>© Matteforeleseren · <a href="https://github.com/Matteforeleseren/Matteforeleseren">GitHub</a></p>
