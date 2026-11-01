@@ -80,6 +80,27 @@
     max-width: 680px;
   }
 
+  .fullside-lenke {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 10px 18px;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--mørkegrønn);
+    text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    word-break: break-all;
+  }
+  .fullside-lenke:hover {
+    border-color: var(--lysegrønn);
+    box-shadow: 0 2px 8px rgba(107, 191, 89, 0.12);
+  }
+
   .oversikt {
     padding: 24px 28px;
     background: #ffffff;
@@ -209,6 +230,22 @@
     color: #4a3f1a;
   }
   .notat strong { color: #7a5c0a; }
+  .notat ul {
+    list-style: none;
+    margin: 12px 0 12px 4px;
+  }
+  .notat ul li {
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .notat ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--f-poster);
+    font-weight: 700;
+  }
 
   footer {
     border-top: 1px solid var(--border);
@@ -238,12 +275,17 @@
 
     <div class="hero">
       <span class="eyebrow">Vedlegg · Attester · Publikasjoner</span>
-      <h1>Vedlegg</h1>
+      <h1>Vedlegg – fullstendig oversikt</h1>
       <p>
         Samling av attester og anbefalinger, forskningsarbeid, rapporter,
-        lærebøker, postere, priser og kurs – alle som nedlastbare PDF-er.
-        Til sammen 17 vedleggsnumre (V1–V15, med V7 delt i V7a/V7b og V14 delt i V14a/V14b).
+        lærebøker, postere, kurs og anerkjennelser – alle som nedlastbare PDF-er.
+        Til sammen 15 hovednumre og 18 enkeltvedlegg/lenker
+        (V7 delt i V7a/V7b, V14 i V14a/V14b og V15 i V15a/V15b).
       </p>
+      <a href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/"
+         class="fullside-lenke" target="_blank" rel="noopener">
+        🔗 matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/
+      </a>
     </div>
 
     <!-- Oversikt øverst med farger -->
@@ -254,8 +296,8 @@
         <li><a href="#acoustics" class="f-acoustics">Underwater acoustics</a></li>
         <li><a href="#ki" class="f-ki">Reports and presentations</a></li>
         <li><a href="#laereboker" class="f-laerebok">Lærebøker</a></li>
-        <li><a href="#postere" class="f-poster">Postere og anerkjennelser</a></li>
-        <li><a href="#kurs" class="f-kurs">Kurs</a></li>
+        <li><a href="#forskningsfelt" class="f-poster">Forskningsfelt: Førsteårsstudenter</a></li>
+        <li><a href="#kurs" class="f-kurs">Kurs og anerkjennelser</a></li>
       </ul>
     </nav>
 
@@ -417,7 +459,8 @@
           <span class="nr">12)</span>
           <div class="innhold">
             <a href="pdf/V12.pdf" target="_blank" class="f-laerebok">
-              Støttebok for Matematikk 1, 2 og 3 for ingeniørstudenter
+              Støttebok for matematikk 1 og 2, og Precalculus Compendium,
+              mine forkursnotater oversatt av leder til norsk matematikkråd
             </a>
             <div class="beskrivelse">Lærebok · V12</div>
           </div>
@@ -434,11 +477,11 @@
       </ul>
     </section>
 
-    <!-- Postere og anerkjennelser -->
-    <section id="postere">
+    <!-- Forskningsfelt: Førsteårsstudenter (V14a/V14b) -->
+    <section id="forskningsfelt">
       <div class="seksjon-header">
-        <h2 class="f-poster">🎓 Postere og anerkjennelser</h2>
-        <p>Postere fra konferanser og prosjekter, samt priser, anerkjennelser og diplom.</p>
+        <h2 class="f-poster">🎓 Forskningsfelt: Førsteårsstudenter</h2>
+        <p>Forskning på førsteårsstudenter og postere fra konferanser og prosjekter.</p>
       </div>
 
       <ul class="lenke-liste">
@@ -446,38 +489,47 @@
           <span class="nr">14a)</span>
           <div class="innhold">
             <a href="pdf/V14a.pdf" target="_blank" class="f-poster">
-              Postere
+              Forskning på førsteårsstudenter
             </a>
-            <div class="beskrivelse">Postere · V14a</div>
+            <div class="beskrivelse">Forskning om førsteårsstudenter i matematikk · V14a</div>
           </div>
         </li>
         <li>
           <span class="nr">14b)</span>
           <div class="innhold">
             <a href="pdf/V14b.pdf" target="_blank" class="f-poster">
-              Priser, anerkjennelser og diplom
+              Postere
             </a>
-            <div class="beskrivelse">Priser og diplom · V14b</div>
+            <div class="beskrivelse">Postere · V14b</div>
           </div>
         </li>
       </ul>
     </section>
 
-    <!-- Kurs -->
+    <!-- Kurs og anerkjennelser (V15a/V15b) -->
     <section id="kurs">
       <div class="seksjon-header">
-        <h2 class="f-kurs">🎓 Kurs</h2>
-        <p>Pedagogiske og kompetansehevingsmoduler.</p>
+        <h2 class="f-kurs">🎓 Kurs og anerkjennelser</h2>
+        <p>Pedagogiske og kompetansehevingsmoduler, samt priser, anerkjennelser og diplom.</p>
       </div>
 
       <ul class="lenke-liste">
         <li>
-          <span class="nr">15)</span>
+          <span class="nr">15a)</span>
           <div class="innhold">
-            <a href="pdf/V15.pdf" target="_blank" class="f-kurs">
+            <a href="pdf/V15a.pdf" target="_blank" class="f-kurs">
               Pedagogiske og kompetansehevingmoduler
             </a>
-            <div class="beskrivelse">Kurs · V15</div>
+            <div class="beskrivelse">Kurs · V15a</div>
+          </div>
+        </li>
+        <li>
+          <span class="nr">15b)</span>
+          <div class="innhold">
+            <a href="pdf/V15b.pdf" target="_blank" class="f-kurs">
+              Priser, anerkjennelser og diplom
+            </a>
+            <div class="beskrivelse">Priser og diplom · V15b</div>
           </div>
         </li>
       </ul>
@@ -486,10 +538,17 @@
     <div class="notat">
       <strong>Om nummereringen:</strong> Vedleggene er merket med V-nummer (V1, V2, … , V15),
       men der det er hensiktsmessig er enkelte vedlegg delt i undergrupper:
-      <em>V7</em> er delt i <em>V7a</em> og <em>V7b</em> (Erasmus/UPV og BIHE), og
-      <em>V14</em> er delt i <em>V14a</em> (Postere) og <em>V14b</em> (Priser, anerkjennelser og diplom).
-      Til sammen gir dette 17 vedleggsnumre. Inndelingen følger samme logikk som i den
-      pedagogiske mappen, slik at kryssreferanser mellom dokumentene blir entydige.
+      <ul>
+        <li><strong>V7</strong> er delt i <strong>V7a</strong> (Erasmus/UPV-dokumentasjon) og <strong>V7b</strong> (BIHE-samarbeid).</li>
+        <li><strong>V14</strong> er delt i <strong>V14a</strong> (Forskning om førsteårsstudenter i matematikk) og <strong>V14b</strong> (Postere).</li>
+        <li><strong>V15</strong> er delt i <strong>V15a</strong> (Pedagogiske og kompetansehevingsmoduler) og <strong>V15b</strong> (Priser, anerkjennelser og diplom).</li>
+      </ul>
+      Til sammen gir dette <strong>15 hovednumre</strong> og <strong>18 enkeltvedlegg/lenker</strong>.
+      Vedleggene består hovedsakelig av anbefalinger og tilbakemeldinger fra ledere og
+      samarbeidspartnere, samt postere, priser/diplomer og dokumentasjon av faglige arbeider.
+      Inndelingen i V7a/V7b, V14a/V14b og V15a/V15b følger samme logikk som i den
+      pedagogiske mappen, slik at kryssreferanser mellom de to dokumentene blir entydige.
+      Lenkene kan åpnes ved å klikke på lenketeksten.
     </div>
 
     <footer>
