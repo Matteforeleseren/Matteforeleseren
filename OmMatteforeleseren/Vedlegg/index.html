@@ -36,11 +36,19 @@
 
   .container { max-width: 900px; margin: 0 auto; }
 
+  .topp {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
   .tilbake {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-bottom: 32px;
     color: var(--mørkegrønn);
     text-decoration: none;
     font-weight: 500;
@@ -48,6 +56,25 @@
     transition: gap 0.2s;
   }
   .tilbake:hover { gap: 10px; }
+
+  .hefte-knapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--mørkegrønn);
+    color: #ffffff;
+    border: 1px solid var(--mørkegrønn);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .hefte-knapp:hover {
+    background: #17491f;
+    box-shadow: 0 2px 8px rgba(30, 95, 46, 0.25);
+  }
 
   .hero { margin-bottom: 40px; }
 
@@ -271,7 +298,13 @@
 <body>
   <div class="container">
 
-    <a href="../../" class="tilbake">← Tilbake til Matteforeleseren</a>
+    <div class="topp">
+      <a href="../../" class="tilbake">← Tilbake til Matteforeleseren</a>
+      <a href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/pdf/Vedlegg-PedMappe-AmirHashemi.pdf"
+         class="hefte-knapp" target="_blank" rel="noopener">
+        📘 Vedlegg-hefte
+      </a>
+    </div>
 
     <div class="hero">
       <span class="eyebrow">Vedlegg · Attester · Publikasjoner</span>
@@ -303,7 +336,8 @@
 
     <div class="info-boks">
       <strong>Tips:</strong> Alle vedlegg åpnes som PDF i en ny fane. Du kan laste
-      dem ned eller skrive dem ut etter behov.
+      dem ned eller skrive dem ut etter behov. Alle vedleggene finnes også samlet i
+      <a href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/pdf/Vedlegg-PedMappe-AmirHashemi.pdf" target="_blank" rel="noopener"><strong>Vedlegg-heftet</strong></a>.
     </div>
 
     <!-- Attester og anbefalinger -->
@@ -336,9 +370,9 @@
           <span class="nr">3)</span>
           <div class="innhold">
             <a href="pdf/V3.pdf" target="_blank" class="f-attest">
-              Matematisk institutt, UiB
+              Matematisk institutt, UiB, og et utdrag av Precalculus Compendium
             </a>
-            <div class="beskrivelse">Anbefaling · V3</div>
+            <div class="beskrivelse">Anbefaling · Utdrag av Precalculus Compendium (mine forkursnotater, oversatt av leder til norsk matematikkråd) · V3</div>
           </div>
         </li>
         <li>
@@ -459,10 +493,9 @@
           <span class="nr">12)</span>
           <div class="innhold">
             <a href="pdf/V12.pdf" target="_blank" class="f-laerebok">
-              Støttebok for matematikk 1 og 2, og Precalculus Compendium,
-              mine forkursnotater oversatt av leder til norsk matematikkråd
+              Støttebok i Matematikk 1 og 2 for ingeniørstudenter
             </a>
-            <div class="beskrivelse">Lærebok · V12</div>
+            <div class="beskrivelse">Lærebok · Et utdrag fra støtteboken (Fagbokforlaget) · V12</div>
           </div>
         </li>
         <li>
