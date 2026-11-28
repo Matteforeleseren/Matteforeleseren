@@ -247,6 +247,18 @@
     font-size: 0.85rem;
   }
 
+  /* --- Merknadsboks --- */
+  .note {
+    background: var(--accent-soft);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 12px 0 0;
+    font-size: 0.86rem;
+    color: var(--ink);
+  }
+  .note strong { color: var(--accent); }
+
   /* --- Footer --- */
   footer {
     border-top: 1px solid var(--line);
@@ -288,20 +300,25 @@
     </div>
     <nav class="sidebar-nav">
       <span class="nav-label">Dokumenter</span>
-      <a href="pdf/Pedagogiskmappe-AmirHashemi.pdf" target="_blank" rel="noopener">
-        <span>Pedagogisk mappe</span>
-        <span class="arrow">↗</span>
-      </a>
       <a href="pdf/Profileringsdokument-AmirHashemi.pdf" target="_blank" rel="noopener">
         <span>Profileringsdokument</span>
         <span class="arrow">↗</span>
       </a>
+      <a href="pdf/Pedagogiskmappe-AmirHashemi.pdf" target="_blank" rel="noopener">
+        <span>Pedagogisk mappe</span>
+        <span class="arrow">↗</span>
+      </a>
       <a href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/" target="_blank" rel="noopener">
-        <span>Vedlegg</span>
+        <span>Vedleggsoversikt</span>
         <span class="arrow">↗</span>
       </a>
       <a href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/pdf/Vedlegg-PedMappe-AmirHashemi.pdf" target="_blank" rel="noopener">
         <span>Vedleggshefte</span>
+        <span class="arrow">↗</span>
+      </a>
+      <span class="nav-label">Digitalt</span>
+      <a href="https://matteforeleseren.github.io/Matteforeleseren/OpprykkSoknad" target="_blank" rel="noopener">
+        <span>Samlet søknad</span>
         <span class="arrow">↗</span>
       </a>
     </nav>
@@ -314,21 +331,23 @@
     <h1>Søknad om opprykk til dosent</h1>
     <p>
       Jeg søker med dette om opprykk til dosent ved Høgskulen på Vestlandet (HVL),
-      i samsvar med § 2-3 i
+      i samsvar med § 3-5 og § 3-8 i
       <a href="https://lovdata.no/dokument/SFO/forskrift/2006-02-09-129" target="_blank" rel="noopener">Forskrift om ansettelse og opprykk i undervisnings- og forskerstillinger</a>.
-      Søknaden gjelder opprykk fra min nåværende stilling som førstelektor
-      innenfor fagområdet jeg er ansatt i.
+      Søknaden gjelder opprykk fra min nåværende stilling som førstelektor innenfor
+      fagområdet jeg er ansatt i. § 3-5 regulerer vilkårene for opprykk, mens § 3-8
+      stiller krav om utdanningsfaglig kompetanse, som dokumenteres gjennom den
+      pedagogiske mappen.
     </p>
 
     <div class="btn-row">
-      <a class="btn btn-primary" href="pdf/Pedagogiskmappe.pdf" target="_blank" rel="noopener">
+      <a class="btn btn-primary" href="pdf/Profileringsdokument-AmirHashemi.pdf" target="_blank" rel="noopener">
+        Åpne profileringsdokument
+      </a>
+      <a class="btn" href="pdf/Pedagogiskmappe-AmirHashemi.pdf" target="_blank" rel="noopener">
         Åpne pedagogisk mappe
       </a>
-      <a class="btn" href="pdf/Profileringsdokument.pdf" target="_blank" rel="noopener">
-        Se profileringsdokument
-      </a>
       <a class="btn" href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/" target="_blank" rel="noopener">
-        Vedlegg
+        Vedleggsoversikt
       </a>
       <a class="btn" href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/pdf/Vedlegg-PedMappe-AmirHashemi.pdf" target="_blank" rel="noopener">
         Vedleggshefte
@@ -336,32 +355,15 @@
     </div>
 
     <!-- Seksjon 1 -->
-    <h2 id="pedagogisk-mappe">Pedagogisk mappe</h2>
-    <p>
-      Mappen dokumenterer min <em>utdanningsfaglige kompetanse</em> og min utvikling
-      som underviser, veileder og faglig bidragsyter gjennom mer enn 30 år.
-      Den er strukturert rundt tre hovedområder:
-    </p>
-
-    <a class="doc-link" href="pdf/Pedagogiskmappe.pdf" target="_blank" rel="noopener">
-      <span>Pedagogisk mappe (PDF) <span class="meta">— utdanningsfaglig kompetanse</span></span>
-      <span class="arrow">↗</span>
-    </a>
-
-    <ol class="compact-list">
-      <li><strong>Område I:</strong> Kvalitetsutvikling i egen undervisning.</li>
-      <li><strong>Område II:</strong> Bred erfaring med pedagogisk veiledning.</li>
-      <li><strong>Område III:</strong> Bidrag til utvikling av utdanningskvalitet i fagfellesskap.</li>
-    </ol>
-
-    <!-- Seksjon 2 -->
     <h2 id="profileringsdokument">Profileringsdokument</h2>
     <p>
-      Dokumentet viser min <em>faglige utvikling</em> over 30 år i høyere utdanning,
-      strukturert etter HVLs krav for opprykk til dosent:
+      Vedlagt følger profileringsdokument og pedagogisk mappe. Profileringsdokumentet
+      dokumenterer min <em>faglige utvikling</em> gjennom mer enn tre tiår innen høyere
+      utdanning og forskning, og er strukturert etter HVLs fire kriterier for opprykk
+      til dosent:
     </p>
 
-    <a class="doc-link" href="pdf/Profileringsdokument.pdf" target="_blank" rel="noopener">
+    <a class="doc-link" href="pdf/Profileringsdokument-AmirHashemi.pdf" target="_blank" rel="noopener">
       <span>Profileringsdokument (PDF) <span class="meta">— faglig utvikling</span></span>
       <span class="arrow">↗</span>
     </a>
@@ -373,12 +375,70 @@
       <li>Høy kvalitet og relevans som viser fortrolighet med fagfeltet.</li>
     </ol>
 
-    <!-- Seksjon 3: kun én Vedlegg-lenke -->
-    <h2 id="vedlegg">Vedlegg</h2>
-    <p>Samlet oversikt over vedlegg. Åpnes i ny fane.</p>
+    <!-- Seksjon 2 -->
+    <h2 id="pedagogisk-mappe">Pedagogisk mappe</h2>
+    <p>
+      Den pedagogiske mappen dokumenterer min <em>utdanningsfaglige kompetanse</em>
+      etter § 3-8 gjennom undervisning, veiledning, pedagogisk utviklingsarbeid og
+      bidrag til utdanningskvalitet. Mappen er organisert i tre deler:
+    </p>
+
+    <a class="doc-link" href="pdf/Pedagogiskmappe-AmirHashemi.pdf" target="_blank" rel="noopener">
+      <span>Pedagogisk mappe (PDF) <span class="meta">— utdanningsfaglig kompetanse</span></span>
+      <span class="arrow">↗</span>
+    </a>
+
+    <ol class="compact-list">
+      <li><strong>Del 1 – Sammenbindende fremstilling,</strong> som drøfter min pedagogiske utvikling og kompetanse i lys av HVLs Område I, II og III.</li>
+      <li><strong>Del 2 – Pedagogisk CV,</strong> som gir en samlet oversikt over relevant utdanning, erfaring og pedagogisk virksomhet.</li>
+      <li><strong>Del 3 – Vedlegg,</strong> som inneholder dokumentasjonen som underbygger fremstillingen og CV-en.</li>
+    </ol>
+
+    <p>
+      Helt til slutt i mappen følger også en tabell med inntil 15 utvalgte
+      vitenskapelige og faglige arbeider med særlig relevans for den
+      utdanningsfaglige kompetansen.
+    </p>
+
+    <!-- Seksjon 3 -->
+    <h2 id="vedleggshefte">Vedlegg og vedleggshefte</h2>
+    <p>
+      Vedleggene er i tillegg samlet i et eget dokumentasjonshefte.
+      Profileringsdokumentet og den pedagogiske mappen har komplementære funksjoner
+      og gir samlet et bilde av hvordan min faglige kompetanse, utdanningsfaglige
+      praksis og utviklingsarbeid har virket sammen og utviklet seg over tid.
+    </p>
 
     <a class="doc-link vedlegg-link" href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/" target="_blank" rel="noopener">
-      <span>Vedlegg</span>
+      <span>Vedleggsoversikt <span class="meta">— alle vedlegg (V1–V11)</span></span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="doc-link vedlegg-link" href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/pdf/Vedlegg-PedMappe-AmirHashemi.pdf" target="_blank" rel="noopener">
+      <span>Vedleggshefte (PDF) <span class="meta">— samlet dokumentasjon</span></span>
+      <span class="arrow">↗</span>
+    </a>
+
+    <div class="note">
+      <strong>Merknad om Vedleggsheftet:</strong> For at Vedleggsheftet ikke skal bli
+      for stort, er det bare lagt inn noen få sider av <em>Precalculus</em>,
+      læremappen til <em>SYKB141</em> og kursheftet til <em>MGUMAT402</em>.
+      For å se hele disse dokumentene, se vedlegg <strong>V3</strong>,
+      <strong>V10</strong> og <strong>V11</strong> i vedleggsoversikten.
+    </div>
+
+    <!-- Seksjon 4 -->
+    <h2 id="digitalt">Digital tilgjengelighet</h2>
+    <p>
+      Både hele søknaden og dokumentasjonen er tilgjengelig digitalt på følgende
+      nettsider:
+    </p>
+
+    <a class="doc-link" href="https://matteforeleseren.github.io/Matteforeleseren/OpprykkSoknad" target="_blank" rel="noopener">
+      <span>Samlet søknad og profileringsdokument <span class="meta">— OpprykkSoknad</span></span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="doc-link" href="https://matteforeleseren.github.io/Matteforeleseren/OmMatteforeleseren/Vedlegg/" target="_blank" rel="noopener">
+      <span>Vedleggsoversikt og dokumentasjon <span class="meta">— Vedlegg</span></span>
       <span class="arrow">↗</span>
     </a>
 
